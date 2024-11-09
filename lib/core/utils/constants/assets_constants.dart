@@ -22,4 +22,8 @@ class AssetsConstants {
   static const category3 = "assets/images/category3.jpeg";
   static const category4 = "assets/images/category4.jpeg";
   static const category5 = "assets/images/category5.jpeg";
+
+  // jsons
+  static const lottieAnimationLogo =
+      "assets/jsons/Supplier Logo Final333-01.json";
 }

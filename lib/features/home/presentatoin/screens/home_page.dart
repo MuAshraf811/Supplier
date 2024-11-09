@@ -18,30 +18,33 @@ class HomePageView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const FloatingButton(),
       bottomNavigationBar: const AppBottomBar(),
-      body: Column(
-        children: [
-          const CustomAppBar(),
-          const CustomCarousel(),
-          const VerticalSpacer(space: 18),
-          const CategorySection(),
-          const VerticalSpacer(space: 12),
-          Expanded(
-            child: GridView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 20.h),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16.w,
-                mainAxisSpacing: 16.h,
-                childAspectRatio: 1 / 1.2,
-              ),
-              itemCount: 8,
-              itemBuilder: (context, index) => const SectionGridItem(
+      body: SafeArea(
+        child: Column(
+          children: [
+            const CustomAppBar(),
+            const CustomCarousel(),
+            const VerticalSpacer(space: 14),
+            const CategorySection(),
+            const VerticalSpacer(space: 8),
+            Expanded(
+              child: GridView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 20.h),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 14.w,
+                  mainAxisSpacing: 14.h,
+                  childAspectRatio: 1 / 1.3,
+                ),
+                itemCount: 8,
+                itemBuilder: (context, index) => const SectionGridItem(
                   imagePath: AssetsConstants.category1,
                   title: "Printing",
-                  descrption: "this is Section descrption"),
+                  descrption: "this is Section descrption",
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

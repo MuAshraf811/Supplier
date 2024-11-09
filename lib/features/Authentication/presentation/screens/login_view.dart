@@ -19,7 +19,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorConsatnts.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
@@ -51,11 +51,16 @@ class LoginView extends StatelessWidget {
               padding: EdgeInsets.only(left: 8.0.w),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  "Forget Password?",
-                  textAlign: TextAlign.left,
-                  style: applySemiBoldStyle(
-                      fontSize: 14, fontColor: ColorConsatnts.primary),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                        context, RouteConstants.forgetPasswordView);
+                  },
+                  child: Text(
+                    "Forget Password?",
+                    style: applySemiBoldStyle(
+                        fontSize: 14, fontColor: ColorConsatnts.primary),
+                  ),
                 ),
               ),
             ),

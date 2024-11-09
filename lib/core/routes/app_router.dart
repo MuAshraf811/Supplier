@@ -1,4 +1,5 @@
 import 'package:e_printer/core/utils/constants/route_constants.dart';
+import 'package:e_printer/features/Authentication/presentation/screens/forget_password_view.dart';
 import 'package:e_printer/features/Authentication/presentation/screens/login_view.dart';
 import 'package:e_printer/features/Authentication/presentation/screens/register_view.dart';
 import 'package:e_printer/features/home/presentatoin/screens/home_page.dart';
@@ -19,6 +20,10 @@ class AppRouter {
       case RouteConstants.registerView:
         return MaterialPageRoute(
           builder: (context) => const RegisterView(),
+        );
+      case RouteConstants.forgetPasswordView:
+        return MaterialPageRoute(
+          builder: (context) => const ForgetPasswordView(),
         );
       case RouteConstants.userTypeView:
         return MaterialPageRoute(

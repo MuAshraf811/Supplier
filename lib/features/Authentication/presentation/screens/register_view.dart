@@ -24,8 +24,8 @@ class RegisterView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 14.w),
           child: ListView(
             children: [
-              const VerticalSpacer(space: 12),
-              const CustomAppBar(title: "Register Page"),
+              const VerticalSpacer(space: 18),
+              const GeneralAppBar(title: "Register Page"),
               const VerticalSpacer(space: 20),
               const Row(
                 children: [

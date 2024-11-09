@@ -2,10 +2,10 @@ import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:flutter/foundation.dart';
+import 'package:e_printer/features/onboarding&splash/widgets/logo_animation.dart';
+import 'package:e_printer/features/onboarding&splash/widgets/role_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 
 class UserTypeView extends StatelessWidget {
   const UserTypeView({super.key});
@@ -13,6 +13,7 @@ class UserTypeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConsatnts.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14.w),
@@ -48,7 +49,7 @@ class UserTypeView extends StatelessWidget {
                   fontColor: ColorConsatnts.black,
                 ),
               ),
-              const VerticalSpacer(space: 24),
+              const VerticalSpacer(space: 18),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -61,7 +62,7 @@ class UserTypeView extends StatelessWidget {
                     discription: 'I\'m looking for people to do me a Service.',
                     imagePath: 'assets/images/icons8-search-64.png',
                   ),
-                  const HorizontalSpacer(space: 22),
+                  const HorizontalSpacer(space: 18),
                   RoleContainer(
                     onTap: () {},
                     title: 'Selling Service\n (Company)',
@@ -72,114 +73,6 @@ class UserTypeView extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class LogoAnimation extends StatefulWidget {
-  const LogoAnimation({
-    super.key,
-  });
-
-  @override
-  State<LogoAnimation> createState() => _LogoAnimationState();
-}
-
-class _LogoAnimationState extends State<LogoAnimation>
-    with TickerProviderStateMixin {
-  late AnimationController _logoAnimationController;
-  @override
-  void initState() {
-    super.initState();
-    _logoAnimationController = AnimationController(vsync: this)
-      ..duration = const Duration(seconds: 2)
-      ..forward()
-      ..repeat();
-  }
-
-  @override
-  void dispose() {
-    _logoAnimationController.dispose();
-    if (kDebugMode) {
-      print("Logo Animation controller has been disposed");
-    }
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 280.w,
-      child: LottieBuilder.asset(
-        "assets/jsons/Supplier Logo Final333-01.json",
-        height: 300.h,
-        width: 300.w,
-        controller: _logoAnimationController,
-        frameRate: FrameRate.composition,
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-}
-
-class RoleContainer extends StatelessWidget {
-  const RoleContainer({
-    super.key,
-    required this.imagePath,
-    required this.title,
-    required this.discription,
-    required this.onTap,
-  });
-  final String imagePath;
-  final String title;
-  final String discription;
-  final VoidCallback onTap;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 140.w,
-        height: 160.h,
-        decoration: BoxDecoration(
-          border: Border.all(color: ColorConsatnts.primary),
-          borderRadius: BorderRadius.circular(6.r),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                    imagePath,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              title,
-              style: applySemiBoldStyle(
-                  fontSize: 15, fontColor: ColorConsatnts.black),
-            ),
-            const SizedBox(height: 3),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: Text(
-                discription,
-                maxLines: 3,
-                textAlign: TextAlign.center,
-                style: applySemiBoldStyle(
-                    fontSize: 13, fontColor: ColorConsatnts.lightBlack),
-              ),
-            ),
-          ],
         ),
       ),
     );

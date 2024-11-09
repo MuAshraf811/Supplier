@@ -5,8 +5,8 @@ import 'package:e_printer/core/utils/widgets/svg_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({
+class GeneralAppBar extends StatelessWidget {
+  const GeneralAppBar({
     super.key,
     required this.title,
   });
@@ -31,7 +31,7 @@ class CustomAppBar extends StatelessWidget {
         const Spacer(),
         Text(
           title,
-          style: applyBoldStyle(fontSize: 18, fontColor: ColorConsatnts.black),
+          style: applyBoldStyle(fontSize: 16, fontColor: ColorConsatnts.black),
         ),
         const Spacer(),
       ],

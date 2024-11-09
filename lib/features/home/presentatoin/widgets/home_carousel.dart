@@ -25,7 +25,7 @@ class CustomCarousel extends StatelessWidget {
             image: AssetImage(
               _offerImages[index],
             ),
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
           borderRadius: BorderRadius.circular(14.r),
         ),
@@ -37,7 +37,7 @@ class CustomCarousel extends StatelessWidget {
         reverse: true,
         enableInfiniteScroll: true,
         enlargeCenterPage: true,
-        enlargeFactor: 0.25,
+        enlargeFactor: 0.2,
         autoPlayInterval: const Duration(seconds: 4),
         autoPlayAnimationDuration: const Duration(milliseconds: 900),
         autoPlayCurve: Curves.fastOutSlowIn,
