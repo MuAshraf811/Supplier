@@ -34,7 +34,7 @@ class CategorySection extends StatelessWidget {
                 AppConst.homeCategoryStrings[index],
                 style: applyMediumStyle(
                   fontColor: ColorConsatnts.white,
-                  fontSize: 15,
+                  fontSize: 14,
                 ),
               ),
             ),

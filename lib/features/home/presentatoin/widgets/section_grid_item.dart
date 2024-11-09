@@ -19,7 +19,7 @@ class SectionGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 150.w,
-      height: 200.h,
+      // height: 200.h,
       decoration: BoxDecoration(
           border: Border.all(
             color: ColorConsatnts.primary,

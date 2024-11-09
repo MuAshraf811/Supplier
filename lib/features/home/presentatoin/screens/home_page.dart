@@ -32,6 +32,7 @@ class HomePageView extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 16.w,
                 mainAxisSpacing: 16.h,
+                childAspectRatio: 1 / 1.2,
               ),
               itemCount: 8,
               itemBuilder: (context, index) => const SectionGridItem(

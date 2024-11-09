@@ -9,6 +9,8 @@ class AssetsConstants {
   static const profileIcon = "assets/svgs/person-svgrepo-com.svg";
   static const categoryIcon = "assets/svgs/category-svgrepo-com.svg";
   static const wrongIcon = "assets/svgs/wrong 1.svg";
+  static const gmailIcon = "assets/svgs/google-mail-svgrepo-com.svg";
+  static const iosIcon = "assets/svgs/apple-173-svgrepo-com.svg";
 
   // images
   static const appLogo = "assets/images/logo.jpeg";

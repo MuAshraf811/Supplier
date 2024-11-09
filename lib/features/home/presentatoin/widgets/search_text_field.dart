@@ -1,4 +1,5 @@
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
+import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,9 +18,14 @@ class CustomAppBar extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
       child: Row(
         children: [
-          Icon(
-            Icons.list_rounded,
-            size: 28.h,
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, RouteConstants.logInView);
+            },
+            child: Icon(
+              Icons.list_rounded,
+              size: 28.h,
+            ),
           ),
           const HorizontalSpacer(space: 18),
           const Expanded(
