@@ -8,7 +8,6 @@ import 'package:e_printer/features/Authentication/presentation/widgets/or_divide
 import 'package:e_printer/features/Authentication/presentation/widgets/register_question.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/utils/widgets/app_button.dart';
 import '../../../../core/utils/widgets/app_text_field.dart';
 

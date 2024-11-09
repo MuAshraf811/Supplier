@@ -89,8 +89,10 @@ class RegisterView extends StatelessWidget {
                   color: Colors.red,
                   imagePath: AssetsConstants.gmailIcon),
               const LogInWithContainer(
-                  label: "Register With IOS",
-                  imagePath: AssetsConstants.iosIcon)
+                label: "Register With IOS",
+                imagePath: AssetsConstants.iosIcon,
+              ),
+              const VerticalSpacer(space: 12),
             ],
           ),
         ),
