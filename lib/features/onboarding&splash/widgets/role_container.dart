@@ -24,8 +24,8 @@ class RoleContainer extends StatelessWidget {
         width: 140.w,
         height: 160.h,
         decoration: BoxDecoration(
-          border: Border.all(color: ColorConsatnts.primary),
-          borderRadius: BorderRadius.circular(6.r),
+          border: Border.all(color: ColorConsatnts.black),
+          borderRadius: BorderRadius.circular(14.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,10 +45,10 @@ class RoleContainer extends StatelessWidget {
             const SizedBox(height: 6),
             Text(
               title,
-              style: applySemiBoldStyle(
-                  fontSize: 15, fontColor: ColorConsatnts.black),
+              style:
+                  applyBoldStyle(fontSize: 16, fontColor: ColorConsatnts.black),
             ),
-            const SizedBox(height: 3),
+            const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: Text(
@@ -56,7 +56,7 @@ class RoleContainer extends StatelessWidget {
                 maxLines: 3,
                 textAlign: TextAlign.center,
                 style: applySemiBoldStyle(
-                    fontSize: 13, fontColor: ColorConsatnts.lightBlack),
+                    fontSize: 12, fontColor: ColorConsatnts.black),
               ),
             ),
           ],

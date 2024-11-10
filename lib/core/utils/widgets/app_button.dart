@@ -8,15 +8,17 @@ class AppButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onTap,
+    this.width,
   });
   final String text;
   final VoidCallback onTap;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: double.infinity,
+        width: width ?? double.infinity,
         alignment: Alignment.center,
         height: 40.h,
         decoration: BoxDecoration(

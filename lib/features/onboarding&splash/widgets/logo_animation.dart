@@ -39,7 +39,6 @@ class _LogoAnimationState extends State<LogoAnimation>
       height: 280.w,
       child: LottieBuilder.asset(
         AssetsConstants.lottieAnimationLogo,
-        height: 300.h,
         width: 300.w,
         controller: _logoAnimationController,
         frameRate: FrameRate.composition,

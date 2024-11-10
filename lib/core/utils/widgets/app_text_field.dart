@@ -12,6 +12,8 @@ class AppTextField extends StatelessWidget {
     this.validator,
     this.prefixIcon,
     this.type,
+    this.maxLines,
+    this.minLines,
   });
   final String label;
   final IconData suffixIcon;
@@ -19,12 +21,17 @@ class AppTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Widget? prefixIcon;
   final TextInputType? type;
+  final int? maxLines;
+  final int? minLines;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       validator: validator,
       keyboardType: type,
+      maxLines: maxLines,
+      minLines: minLines,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: Padding(

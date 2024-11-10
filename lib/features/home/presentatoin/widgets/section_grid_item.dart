@@ -10,53 +10,45 @@ class SectionGridItem extends StatelessWidget {
     super.key,
     required this.imagePath,
     required this.title,
-    required this.descrption,
+    required this.onTap,
   });
   final String imagePath;
   final String title;
-  final String descrption;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 150.w,
-      // height: 200.h,
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: ColorConsatnts.primary,
-          ),
-          borderRadius: BorderRadius.circular(10.r)),
-      child: Column(
-        children: [
-          Container(
-            height: 100.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.r),
-                  topRight: Radius.circular(10.r)),
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage(imagePath),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: 150.w,
+        // height: 200.h,
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: ColorConsatnts.primary.withOpacity(0.5),
+            ),
+            borderRadius: BorderRadius.circular(10.r)),
+        child: Column(
+          children: [
+            Container(
+              height: 130.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10.r),
+                    topRight: Radius.circular(10.r)),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(imagePath),
+                ),
               ),
             ),
-          ),
-          const VerticalSpacer(space: 6),
-          Text(
-            title,
-            style: applySemiBoldStyle(
-                fontSize: 17, fontColor: ColorConsatnts.black),
-          ),
-          Divider(
-            color: ColorConsatnts.primary,
-            endIndent: 24.w,
-            indent: 20.w,
-            thickness: 1,
-            height: 12,
-          ),
-          Text(
-            descrption,
-            textAlign: TextAlign.center,
-          )
-        ],
+            const VerticalSpacer(space: 26),
+            Text(
+              title,
+              style: applySemiBoldStyle(
+                  fontSize: 16, fontColor: ColorConsatnts.black),
+            ),
+          ],
+        ),
       ),
     );
   }

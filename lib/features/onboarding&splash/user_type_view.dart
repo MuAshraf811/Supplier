@@ -17,39 +17,22 @@ class UserTypeView extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: [
               Transform.translate(
                 offset: Offset(0, -72.h),
                 child: const LogoAnimation(),
               ),
-              Text(
-                "Supplier.",
-                style: applyBoldStyle(
-                  fontSize: 20,
-                  fontColor: ColorConsatnts.primary,
-                ),
-              ),
-              const VerticalSpacer(space: 6),
-              Text(
-                "Your Wanted Services On Demand.",
-                textAlign: TextAlign.center,
-                style: applyBoldStyle(
-                  fontSize: 16,
-                  fontColor: ColorConsatnts.grey,
-                ),
-              ),
               const VerticalSpacer(space: 30),
               Text(
-                "Choose Your Role :",
+                "REGISTRATION ROLE",
                 textAlign: TextAlign.center,
-                style: applyBoldStyle(
+                style: applySemiBoldStyle(
                   fontSize: 16,
                   fontColor: ColorConsatnts.black,
                 ),
               ),
-              const VerticalSpacer(space: 18),
+              const VerticalSpacer(space: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -58,15 +41,15 @@ class UserTypeView extends StatelessWidget {
                       Navigator.popAndPushNamed(
                           context, RouteConstants.logInView);
                     },
-                    title: 'Find a Service',
-                    discription: 'I\'m looking for people to do me a Service.',
+                    title: 'FIND SUPPLIER',
+                    discription: '(Person / Company)',
                     imagePath: 'assets/images/icons8-search-64.png',
                   ),
                   const HorizontalSpacer(space: 18),
                   RoleContainer(
                     onTap: () {},
-                    title: 'Selling Service\n (Company)',
-                    discription: 'I\'d like to offer my Services.',
+                    title: "I AM A SUPPLIER",
+                    discription: '(Printing Press / Company / Agency).',
                     imagePath: 'assets/images/icons8-task-48.png',
                   ),
                 ],
