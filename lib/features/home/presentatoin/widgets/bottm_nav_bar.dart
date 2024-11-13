@@ -1,7 +1,8 @@
+import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/utils/constants/color_consatnts.dart';
 import '../../../../core/utils/widgets/svg_handler.dart';
 
@@ -17,6 +18,10 @@ class AppBottomBar extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(6.r),
         child: BottomNavigationBar(
+          currentIndex: context.read<NavBarCubit>().state,
+          onTap: (value) {
+            context.read<NavBarCubit>().changeNavBarPages(value);
+          },
           type: BottomNavigationBarType.fixed,
           backgroundColor: ColorConsatnts.primary,
           unselectedItemColor: Colors.white70,
@@ -25,20 +30,20 @@ class AppBottomBar extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(
                 icon: SvgHandler(
-                  imagePath: AssetsConstants.categoryIcon,
+                  imagePath: AssetsConstants.homeIcon,
                   height: 20,
                   width: 20,
                   color: ColorConsatnts.white,
                 ),
-                label: "Category"),
+                label: "Home"),
             BottomNavigationBarItem(
                 icon: SvgHandler(
-                  imagePath: AssetsConstants.chatIcon,
+                  imagePath: "assets/svgs/order-nav.svg",
                   height: 20,
                   width: 20,
                   color: ColorConsatnts.white,
                 ),
-                label: "Chat"),
+                label: "Orders"),
             BottomNavigationBarItem(
                 icon: SvgHandler(
                   imagePath: AssetsConstants.mailIcon,
@@ -46,7 +51,7 @@ class AppBottomBar extends StatelessWidget {
                   width: 20,
                   color: ColorConsatnts.white,
                 ),
-                label: "Message"),
+                label: "Notifications"),
             BottomNavigationBarItem(
               icon: SvgHandler(
                 imagePath: AssetsConstants.profileIcon,

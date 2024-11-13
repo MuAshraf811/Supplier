@@ -1,3 +1,4 @@
+import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/features/Authentication/presentation/screens/forget_password_view.dart';
 import 'package:e_printer/features/Authentication/presentation/screens/login_view.dart';
@@ -5,6 +6,7 @@ import 'package:e_printer/features/Authentication/presentation/screens/register_
 import 'package:e_printer/features/home/presentatoin/cubit/main_home_cubit.dart';
 import 'package:e_printer/features/home/presentatoin/screens/detailed_category_item_view.dart';
 import 'package:e_printer/features/home/presentatoin/screens/home_page.dart';
+import 'package:e_printer/features/onboarding&splash/on_boarding_view.dart';
 import 'package:e_printer/features/onboarding&splash/user_type_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,14 +16,25 @@ class AppRouter {
     switch (settings.name) {
       case RouteConstants.homePage:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<MainHomeCubit>(
-            create: (context) => MainHomeCubit(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<MainHomeCubit>(
+                create: (context) => MainHomeCubit(),
+              ),
+              BlocProvider(
+                create: (context) => NavBarCubit(),
+              ),
+            ],
             child: const HomePageView(),
           ),
         );
       case RouteConstants.logInView:
         return MaterialPageRoute(
           builder: (context) => const LoginView(),
+        );
+      case RouteConstants.onBoardingView:
+        return MaterialPageRoute(
+          builder: (context) => const OnBoardingView(),
         );
       case RouteConstants.detailedItemCategoryView:
         return MaterialPageRoute(

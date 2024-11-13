@@ -4,5 +4,6 @@ class RouteConstants {
   static const registerView = "/RegisterView";
   static const forgetPasswordView = "/ForgetPasswordView";
   static const detailedItemCategoryView = "/DetailedItemCategoryView";
-  static const userTypeView = "/";
+  static const userTypeView = "/UserTypeView";
+  static const onBoardingView = "/";
 }

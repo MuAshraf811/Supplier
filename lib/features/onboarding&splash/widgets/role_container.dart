@@ -24,6 +24,7 @@ class RoleContainer extends StatelessWidget {
         width: 140.w,
         height: 160.h,
         decoration: BoxDecoration(
+          color: ColorConsatnts.grey.withOpacity(0.1),
           border: Border.all(color: ColorConsatnts.black),
           borderRadius: BorderRadius.circular(14.r),
         ),
@@ -31,18 +32,19 @@ class RoleContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 70,
-              height: 70,
+              width: 60,
+              height: 60,
+              margin: EdgeInsets.only(top: 4.h),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                   image: AssetImage(
                     imagePath,
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 10),
             Text(
               title,
               style:

@@ -20,7 +20,7 @@ class FloatingButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: const SvgHandler(
-        imagePath: AssetsConstants.homeIcon,
+        imagePath: AssetsConstants.chatIcon,
         height: 18,
         width: 16,
         color: ColorConsatnts.white,

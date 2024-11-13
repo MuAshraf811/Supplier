@@ -1,4 +1,7 @@
+import 'package:e_printer/core/utils/constants/assets_constants.dart';
+import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/models/category_model.dart';
+import 'package:flutter/material.dart';
 
 class AppConst {
   static const homeCategoryStrings = [
@@ -20,6 +23,27 @@ class AppConst {
     'Al Ain',
     'Khor Fakkan',
     'Dibba Al-Fujairah',
+  ];
+  static List<String> settingsText = [
+    'Account',
+    'Terms & Conditions',
+    'Our Website',
+    'Delete Account',
+    'Log Out',
+  ];
+  static List<String> settingsIcon = [
+    AssetsConstants.profileIcon,
+    AssetsConstants.termsIcon,
+    AssetsConstants.websiteIcon,
+    AssetsConstants.deleteIcon,
+    AssetsConstants.logOutIcon,
+  ];
+  static List<Color> settingsIconColor = [
+    ColorConsatnts.primary,
+    ColorConsatnts.black,
+    const Color.fromARGB(255, 8, 79, 138),
+    Colors.red,
+    const Color.fromARGB(255, 43, 136, 212),
   ];
   static List<List<CategoryModel>> categoryModel = [
     [

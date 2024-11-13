@@ -29,6 +29,11 @@ class DetailedCategoryItemView extends StatelessWidget {
               const VerticalSpacer(space: 12),
               const RadioGroupItems(),
               const VerticalSpacer(space: 12),
+              const CustomDropDown(
+                entries: [25, 30, 35, 40, 45],
+                text: "Paper",
+              ),
+              const VerticalSpacer(space: 8),
               const AppTextField(
                 label: "Add some description",
                 minLines: 3,
@@ -47,6 +52,54 @@ class DetailedCategoryItemView extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomDropDown extends StatelessWidget {
+  const CustomDropDown({
+    super.key,
+    required this.text,
+    required this.entries,
+  });
+  final String text;
+  final List entries;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          text,
+          style:
+              applySemiBoldStyle(fontSize: 14, fontColor: ColorConsatnts.black),
+        ),
+        const HorizontalSpacer(space: 16),
+        Transform.scale(
+          scaleY: 0.8,
+          child: DropdownMenu(
+              width: 110.w,
+              trailingIcon: const Icon(
+                Icons.arrow_drop_down,
+                size: 24,
+              ),
+              inputDecorationTheme: InputDecorationTheme(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6.r)),
+              ),
+              menuStyle: const MenuStyle(
+                  backgroundColor:
+                      WidgetStatePropertyAll(ColorConsatnts.white)),
+              initialSelection: entries[0],
+              dropdownMenuEntries: entries
+                  .map(
+                    (e) => DropdownMenuEntry(
+                      value: e,
+                      label: "$e",
+                    ),
+                  )
+                  .toList()),
+        ),
+      ],
     );
   }
 }
@@ -177,10 +230,11 @@ class CustomRadioButton extends StatelessWidget {
       children: [
         Transform.scale(
           scale: 0.85,
-          child: Radio<String>(
+          child: Radio<String>.adaptive(
             value: value,
             groupValue: groupValue,
             onChanged: onChanged,
+            useCupertinoCheckmarkStyle: true,
             activeColor: ColorConsatnts.primary,
           ),
         ),

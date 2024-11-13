@@ -3,14 +3,28 @@ class AssetsConstants {
 
   static const searchIcon = "assets/svgs/Search.svg";
   static const arrowLeftIcon = "assets/svgs/arrow-left.svg";
-  static const homeIcon = "assets/svgs/home-svgrepo-com.svg";
+  static const homeIcon = "assets/svgs/homeNavv.svg";
   static const chatIcon = "assets/svgs/messanger-svgrepo-com.svg";
-  static const mailIcon = "assets/svgs/mail-5-svgrepo-com.svg";
-  static const profileIcon = "assets/svgs/person-svgrepo-com.svg";
+  static const mailIcon = "assets/svgs/notification-bell-svgrepo-com.svg";
+  static const profileIcon = "assets/svgs/profilee.svg";
   static const categoryIcon = "assets/svgs/category-svgrepo-com.svg";
   static const wrongIcon = "assets/svgs/wrong 1.svg";
   static const gmailIcon = "assets/svgs/google-mail-svgrepo-com.svg";
   static const iosIcon = "assets/svgs/apple-173-svgrepo-com.svg";
+  static const editIcon = "assets/svgs/Frame.svg";
+  static const accountIcon = "assets/svgs/account-avatar-man-svgrepo-com.svg";
+  static const deleteIcon = "assets/svgs/delete-svgrepo-com.svg";
+  static const logOutIcon = "assets/svgs/log-out-circle-svgrepo-com.svg";
+  static const websiteIcon = "assets/svgs/website-click-svgrepo-com.svg";
+  static const languageIcon = "assets/svgs/language-alt-svgrepo-com.svg";
+  static const contactIcon = "assets/svgs/mobile-svgrepo-com.svg";
+  static const abouttIcon = "assets/svgs/about-svgrepo-com.svg";
+  static const termsIcon = "assets/svgs/bank-building-finance-svgrepo-com.svg";
+  static const facebookIcon = "assets/svgs/facebook-svgrepo-com (1).svg";
+  static const instagramIcon = "assets/svgs/instagram-svgrepo-com.svg";
+  static const whatsupIcon = "assets/svgs/whatsapp-svgrepo-com.svg";
+  static const linkedInIcon =
+      "assets/svgs/linked-in-logo-of-two-letters-svgrepo-com.svg";
 
   // images
   static const appLogo = "assets/images/logo.jpeg";
