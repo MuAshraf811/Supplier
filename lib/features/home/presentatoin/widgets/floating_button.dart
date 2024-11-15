@@ -1,5 +1,6 @@
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
+import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,7 +14,9 @@ class FloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, RouteConstants.chatView);
+      },
       mini: true,
       backgroundColor: ColorConsatnts.primary,
       shape: RoundedRectangleBorder(

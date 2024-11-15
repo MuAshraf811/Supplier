@@ -3,6 +3,8 @@ import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/features/Authentication/presentation/screens/forget_password_view.dart';
 import 'package:e_printer/features/Authentication/presentation/screens/login_view.dart';
 import 'package:e_printer/features/Authentication/presentation/screens/register_view.dart';
+import 'package:e_printer/features/chat/presentation/cubit/chat_cubit.dart';
+import 'package:e_printer/features/chat/presentation/views/chat_view.dart';
 import 'package:e_printer/features/home/presentatoin/cubit/main_home_cubit.dart';
 import 'package:e_printer/features/home/presentatoin/screens/detailed_category_item_view.dart';
 import 'package:e_printer/features/home/presentatoin/screens/home_page.dart';
@@ -35,6 +37,13 @@ class AppRouter {
       case RouteConstants.onBoardingView:
         return MaterialPageRoute(
           builder: (context) => const OnBoardingView(),
+        );
+      case RouteConstants.chatView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<ChatCubit>(
+            create: (context) => ChatCubit()..setUpScrollControllerConfigs(),
+            child: const ChatView(),
+          ),
         );
       case RouteConstants.detailedItemCategoryView:
         return MaterialPageRoute(

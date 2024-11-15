@@ -14,6 +14,9 @@ class AppTextField extends StatelessWidget {
     this.type,
     this.maxLines,
     this.minLines,
+    this.maxHeight,
+    this.suffixColor,
+    this.suffixSize,
   });
   final String label;
   final IconData suffixIcon;
@@ -23,7 +26,10 @@ class AppTextField extends StatelessWidget {
   final TextInputType? type;
   final int? maxLines;
   final int? minLines;
+  final double? maxHeight;
+  final double? suffixSize;
 
+  final Color? suffixColor;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -32,30 +38,52 @@ class AppTextField extends StatelessWidget {
       keyboardType: type,
       maxLines: maxLines,
       minLines: minLines,
+      autocorrect: true,
+      scribbleEnabled: true,
+      style: applySemiBoldStyle(
+        fontSize: 16,
+        fontColor: ColorConsatnts.black,
+      ),
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(top: 10.h, left: 8.w),
+        constraints: BoxConstraints(maxHeight: maxHeight ?? 48.h),
         prefixIcon: prefixIcon,
         suffixIcon: Padding(
           padding: EdgeInsets.only(right: 12.w),
           child: Icon(
             suffixIcon,
-            color: ColorConsatnts.primary,
+            size: suffixSize ?? 24,
+            color: suffixColor ?? ColorConsatnts.primary,
           ),
         ),
         label: Padding(
           padding: EdgeInsets.only(left: 8.w),
           child: Text(
             label,
-            style: applySemiBoldStyle(
-              fontSize: 15,
-              fontColor: ColorConsatnts.lightBlack,
+            style: applyMediumStyle(
+              fontSize: 14,
+              fontColor: ColorConsatnts.grey,
             ),
           ),
         ),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: const BorderSide(
-              color: ColorConsatnts.grey,
-            )),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(
+            color: ColorConsatnts.grey,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(
+            color: ColorConsatnts.grey,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(
+            color: ColorConsatnts.primary,
+          ),
+        ),
       ),
     );
   }

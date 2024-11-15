@@ -1,8 +1,10 @@
+import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/app_button.dart';
 import 'package:e_printer/core/utils/widgets/app_text_field.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
+import 'package:e_printer/core/utils/widgets/svg_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,9 +18,22 @@ class DetailedCategoryItemView extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(left: 14.w, right: 14.w, top: 16.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const SvgHandler(
+                    imagePath: AssetsConstants.arrowLeftIcon,
+                    height: 20,
+                    width: 20,
+                  ),
+                ),
+              ),
+              const VerticalSpacer(space: 18),
               Text(
                 "Wrapping Paper",
                 style: applySemiBoldStyle(
@@ -29,16 +44,74 @@ class DetailedCategoryItemView extends StatelessWidget {
               const VerticalSpacer(space: 12),
               const RadioGroupItems(),
               const VerticalSpacer(space: 12),
-              const CustomDropDown(
-                entries: [25, 30, 35, 40, 45],
-                text: "Paper",
+              const Row(
+                children: [
+                  CustomDropDown(
+                    entries: [25, 30, 35, 40, 45],
+                    text: "height",
+                  ),
+                  Spacer(),
+                  CustomDropDown(
+                    entries: [25, 30, 35, 40, 45],
+                    text: "width",
+                  ),
+                ],
+              ),
+              const Row(
+                children: [
+                  CustomDropDown(
+                    entries: [25, 30, 35, 40, 45],
+                    text: "paper",
+                  ),
+                  Spacer(),
+                  CustomDropDown(
+                    entries: [25, 30, 35, 40, 45],
+                    text: "printing",
+                  ),
+                ],
+              ),
+              const Row(
+                children: [
+                  CustomDropDown(
+                    entries: [25, 30, 35, 40, 45],
+                    text: "cutting",
+                  ),
+                  Spacer(),
+                  CustomDropDown(
+                    entries: [25, 30, 35, 40, 45],
+                    text: "quantity",
+                  ),
+                ],
               ),
               const VerticalSpacer(space: 8),
-              const AppTextField(
-                label: "Add some description",
-                minLines: 3,
-                maxLines: 5,
-                suffixIcon: Icons.note_alt,
+              Text(
+                "Additional",
+                style: applySemiBoldStyle(
+                    fontSize: 18, fontColor: ColorConsatnts.black),
+              ),
+              const VerticalSpacer(space: 16),
+              const Row(
+                children: [
+                  CustomDropDown(
+                    entries: [25, 30, 35, 40, 45],
+                    text: "cutting",
+                  ),
+                  Spacer(),
+                  CustomDropDown(
+                    entries: [25, 30, 35, 40, 45],
+                    text: "quantity",
+                  ),
+                ],
+              ),
+              const VerticalSpacer(space: 16),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: const AppTextField(
+                  label: "Add some description",
+                  minLines: 3,
+                  maxLines: 5,
+                  suffixIcon: Icons.note_alt,
+                ),
               ),
               const VerticalSpacer(space: 12),
               const CustomCheck(),
@@ -47,7 +120,8 @@ class DetailedCategoryItemView extends StatelessWidget {
                 text: "Add Order",
                 onTap: () {},
                 width: 120,
-              )
+              ),
+              const VerticalSpacer(space: 16),
             ],
           ),
         ),
@@ -75,9 +149,9 @@ class CustomDropDown extends StatelessWidget {
         ),
         const HorizontalSpacer(space: 16),
         Transform.scale(
-          scaleY: 0.8,
+          scale: 0.8,
           child: DropdownMenu(
-              width: 110.w,
+              width: 90.w,
               trailingIcon: const Icon(
                 Icons.arrow_drop_down,
                 size: 24,

@@ -5,5 +5,6 @@ class RouteConstants {
   static const forgetPasswordView = "/ForgetPasswordView";
   static const detailedItemCategoryView = "/DetailedItemCategoryView";
   static const userTypeView = "/UserTypeView";
+  static const chatView = "/ChatView";
   static const onBoardingView = "/";
 }

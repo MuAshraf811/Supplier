@@ -1,6 +1,7 @@
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/models/category_model.dart';
+import 'package:e_printer/features/chat/model/message_model.dart';
 import 'package:flutter/material.dart';
 
 class AppConst {
@@ -11,6 +12,29 @@ class AppConst {
     "Signage",
     "UniForm",
     "Gift Items"
+  ];
+
+  static final chatMessagesExamples = [
+    MessageModel(
+        message: "Hello This is Test Message", time: "2:13", isSender: true),
+    MessageModel(message: "I'm Muhammed Ashraf", time: "2:09", isSender: true),
+    MessageModel(message: "Test ", time: "9:00", isSender: false),
+    MessageModel(message: "This is Message", time: "2:13", isSender: true),
+    MessageModel(
+        message: "Hello This is Test Message", time: "4:44", isSender: false),
+    MessageModel(
+        message: "Hello Hello Hello Hello ", time: "3:11", isSender: true),
+    MessageModel(
+        message: " is this Test Message?", time: "2:13", isSender: false),
+    MessageModel(
+        message: "Test me Test Me Test  ", time: "2:13", isSender: false),
+    MessageModel(
+        message: "Dummy Dummy Dummy Dummy Dummy Dummy ",
+        time: "5:22",
+        isSender: true),
+    MessageModel(message: "01002011850", time: "10:45", isSender: false),
+    MessageModel(
+        message: "Text Message Message Message ", time: "6:20", isSender: true),
   ];
   static List<String> uaeCities = [
     'Abu Dhabi',
