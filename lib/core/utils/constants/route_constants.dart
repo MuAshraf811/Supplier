@@ -7,4 +7,7 @@ class RouteConstants {
   static const userTypeView = "/UserTypeView";
   static const chatView = "/ChatView";
   static const onBoardingView = "/";
+  static const termsAndConditionsView = "/TermsAndConditionsView";
+  static const supplierHomeView = "/SupplierHomeView";
+  static const supplierFilterView = "/SupplierFilterView";
 }

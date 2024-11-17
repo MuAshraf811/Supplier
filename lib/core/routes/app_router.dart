@@ -1,17 +1,21 @@
 import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
-import 'package:e_printer/features/Authentication/presentation/screens/forget_password_view.dart';
-import 'package:e_printer/features/Authentication/presentation/screens/login_view.dart';
-import 'package:e_printer/features/Authentication/presentation/screens/register_view.dart';
-import 'package:e_printer/features/chat/presentation/cubit/chat_cubit.dart';
-import 'package:e_printer/features/chat/presentation/views/chat_view.dart';
-import 'package:e_printer/features/home/presentatoin/cubit/main_home_cubit.dart';
-import 'package:e_printer/features/home/presentatoin/screens/detailed_category_item_view.dart';
-import 'package:e_printer/features/home/presentatoin/screens/home_page.dart';
 import 'package:e_printer/features/onboarding&splash/on_boarding_view.dart';
 import 'package:e_printer/features/onboarding&splash/user_type_view.dart';
+import 'package:e_printer/features/supplier/home/presentation/cubit/supplier_nav_bar_cubit.dart';
+import 'package:e_printer/features/supplier/home/presentation/screens/filter_view.dart';
+import 'package:e_printer/features/supplier/home/presentation/screens/supplier_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/client/Authentication/presentation/screens/login_view.dart';
+import '../../features/client/Authentication/presentation/screens/register_view.dart';
+import '../../features/client/chat/presentation/cubit/chat_cubit.dart';
+import '../../features/client/chat/presentation/views/chat_view.dart';
+import '../../features/client/home/presentatoin/cubit/main_home_cubit.dart';
+import '../../features/client/home/presentatoin/screens/detailed_category_item_view.dart';
+import '../../features/client/home/presentatoin/screens/home_page.dart';
+import '../../features/supplier/Authentication/presentation/screens/forget_password_view.dart';
+import '../../features/supplier/settings/presentation/views/terms_conditions.dart';
 
 class AppRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -34,6 +38,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const LoginView(),
         );
+      case RouteConstants.termsAndConditionsView:
+        return MaterialPageRoute(
+          builder: (context) => const TermsAndConditionsView(),
+        );
       case RouteConstants.onBoardingView:
         return MaterialPageRoute(
           builder: (context) => const OnBoardingView(),
@@ -48,6 +56,17 @@ class AppRouter {
       case RouteConstants.detailedItemCategoryView:
         return MaterialPageRoute(
           builder: (context) => const DetailedCategoryItemView(),
+        );
+      case RouteConstants.supplierFilterView:
+        return MaterialPageRoute(
+          builder: (context) => const FilterView(),
+        );
+      case RouteConstants.supplierHomeView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<SupplierNavBarCubit>(
+            create: (context) => SupplierNavBarCubit(),
+            child: const SupplierHomeView(),
+          ),
         );
       case RouteConstants.registerView:
         return MaterialPageRoute(

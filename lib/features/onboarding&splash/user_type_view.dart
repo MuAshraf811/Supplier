@@ -47,7 +47,10 @@ class UserTypeView extends StatelessWidget {
                   ),
                   const HorizontalSpacer(space: 18),
                   RoleContainer(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.popAndPushNamed(
+                          context, RouteConstants.supplierHomeView);
+                    },
                     title: "I AM A SUPPLIER",
                     discription: '(Printing Press / Company / Agency).',
                     imagePath: 'assets/images/role2.jpeg',

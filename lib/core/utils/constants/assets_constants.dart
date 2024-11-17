@@ -25,7 +25,7 @@ class AssetsConstants {
   static const whatsupIcon = "assets/svgs/whatsapp-svgrepo-com.svg";
   static const linkedInIcon =
       "assets/svgs/linked-in-logo-of-two-letters-svgrepo-com.svg";
-
+  static const filterIcon = "assets/svgs/filter.svg";
   // images
   static const appLogo = "assets/images/logo.jpeg";
   static const offer0 = "assets/images/offers0.jpeg";

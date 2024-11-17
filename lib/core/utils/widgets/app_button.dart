@@ -9,10 +9,12 @@ class AppButton extends StatelessWidget {
     required this.text,
     required this.onTap,
     this.width,
+    this.fontSize,
   });
   final String text;
   final VoidCallback onTap;
   final double? width;
+  final double? fontSize;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -28,7 +30,7 @@ class AppButton extends StatelessWidget {
         child: Text(
           text,
           style: applySemiBoldStyle(
-            fontSize: 16,
+            fontSize: fontSize ?? 16,
             fontColor: ColorConsatnts.white,
           ),
         ),
