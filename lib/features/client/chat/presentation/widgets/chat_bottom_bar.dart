@@ -57,6 +57,7 @@ class ChatBottomBar extends StatelessWidget {
                                   .text =
                               context.read<ChatCubit>().imagepath ??
                                   "No Path Found";
+                          Navigator.pop(context);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -89,6 +90,7 @@ class ChatBottomBar extends StatelessWidget {
                                   .text =
                               context.read<ChatCubit>().imagepath ??
                                   "No Path Found";
+                          Navigator.pop(context);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
