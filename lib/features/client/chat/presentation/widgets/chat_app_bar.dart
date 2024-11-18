@@ -1,7 +1,6 @@
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../core/utils/constants/assets_constants.dart';
 import '../../../../../core/utils/styles/text_styles.dart';
 import '../../../../../core/utils/widgets/svg_handler.dart';

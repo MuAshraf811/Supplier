@@ -228,7 +228,7 @@ class ProfileInformation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Muhammed Ashraf Alarabi",
+                "Muhammed Ashraf ",
                 style: applyBoldStyle(
                   fontSize: 16,
                   fontColor: ColorConsatnts.black,

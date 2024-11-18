@@ -37,7 +37,7 @@ class ChatBottomBar extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 context: context,
                 useSafeArea: true,
-                builder: (context) => Container(
+                builder: (_) => Container(
                   margin:
                       EdgeInsets.only(left: 20.w, right: 20.h, bottom: 36.h),
                   padding: EdgeInsets.only(right: 10.w, top: 14.h, left: 10.w),
@@ -47,40 +47,65 @@ class ChatBottomBar extends StatelessWidget {
                   height: 160.h,
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.camera_alt_outlined,
-                            color: ColorConsatnts.primary,
-                          ),
-                          const HorizontalSpacer(space: 18),
-                          Text(
-                            "Camera",
-                            style: applyBoldStyle(
-                                fontSize: 16, fontColor: ColorConsatnts.black),
-                          )
-                        ],
+                      InkWell(
+                        onTap: () {
+                          BlocProvider.of<ChatCubit>(context)
+                              .pickImage(isFromCamera: true);
+
+                          BlocProvider.of<ChatCubit>(context)
+                                  .messageController
+                                  .text =
+                              context.read<ChatCubit>().imagepath ??
+                                  "No Path Found";
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.camera_alt_outlined,
+                              color: ColorConsatnts.primary,
+                            ),
+                            const HorizontalSpacer(space: 18),
+                            Text(
+                              "Camera",
+                              style: applyBoldStyle(
+                                  fontSize: 16,
+                                  fontColor: ColorConsatnts.black),
+                            )
+                          ],
+                        ),
                       ),
                       Divider(
                         height: 26.h,
                         endIndent: 32.w,
                         indent: 32.w,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.wallpaper_outlined,
-                            color: ColorConsatnts.primary,
-                          ),
-                          const HorizontalSpacer(space: 18),
-                          Text(
-                            "Gallery",
-                            style: applyBoldStyle(
-                                fontSize: 16, fontColor: ColorConsatnts.black),
-                          )
-                        ],
+                      InkWell(
+                        onTap: () {
+                          BlocProvider.of<ChatCubit>(context)
+                              .pickImage(isFromCamera: false);
+                          BlocProvider.of<ChatCubit>(context)
+                                  .messageController
+                                  .text =
+                              context.read<ChatCubit>().imagepath ??
+                                  "No Path Found";
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.wallpaper_outlined,
+                              color: ColorConsatnts.primary,
+                            ),
+                            const HorizontalSpacer(space: 18),
+                            Text(
+                              "Gallery",
+                              style: applyBoldStyle(
+                                  fontSize: 16,
+                                  fontColor: ColorConsatnts.black),
+                            )
+                          ],
+                        ),
                       ),
                       Divider(
                         height: 26.h,

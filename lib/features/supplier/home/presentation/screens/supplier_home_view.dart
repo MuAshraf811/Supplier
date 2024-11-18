@@ -2,7 +2,9 @@ import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/app_button.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
+import 'package:e_printer/features/client/orders/notifications/presentation/screens/notifications_screen.dart';
 import 'package:e_printer/features/client/orders/presentation/screens/orders_view.dart';
+import 'package:e_printer/features/client/settings/presentation/views/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,35 +16,70 @@ import '../cubit/supplier_nav_bar_cubit.dart';
 
 class SupplierHomeView extends StatelessWidget {
   const SupplierHomeView({super.key});
-
+  static const _view = [
+    SupplierOrdersView(),
+    SupplierOrdersView(),
+    NotificationsScreen(),
+    ProfileView(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton: FloatingActionButton(
+        mini: true,
+        backgroundColor: ColorConsatnts.primary,
+        child: const SvgHandler(
+          imagePath: "assets/svgs/chat-round-line-svgrepo-com.svg",
+          height: 22,
+          color: ColorConsatnts.white,
+          width: 22,
+        ),
+        onPressed: () {
+          Navigator.pushNamed(context, RouteConstants.chatView);
+        },
+      ),
       bottomNavigationBar: const SupplierBottomBar(),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            children: [
-              const VerticalSpacer(space: 16),
-              const SupplierHomePageAppBar(),
-              const VerticalSpacer(space: 12),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) => SupplierOrderItem(
-                    index: index + 1,
-                    orderName: "Offset Printing",
-                    orderDetails: "Details Details Dummy Details",
-                    orderDescription: "Details Details Dummy Details",
-                  ),
-                ),
-              ),
-            ],
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          child: BlocBuilder<SupplierNavBarCubit, int>(
+            builder: (context, state) {
+              return _view[state];
+            },
           ),
         ),
       ),
+    );
+  }
+}
+
+class SupplierOrdersView extends StatelessWidget {
+  const SupplierOrdersView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const VerticalSpacer(space: 16),
+        const SupplierHomePageAppBar(),
+        const VerticalSpacer(space: 12),
+        Expanded(
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) => SupplierOrderItem(
+              index: index + 1,
+              orderName: "Offset Printing",
+              orderDetails: "Details Details Dummy Details",
+              orderDescription: "Details Details Dummy Details",
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -125,23 +162,28 @@ class SupplierOrderItem extends StatelessWidget {
               ),
             ),
           ),
+          const VerticalSpacer(space: 24),
           Padding(
-            padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 16.h),
-            child: AppButton(
-              text: "Make Offer",
-              fontSize: 16,
-              onTap: () {},
-            ),
-          ),
-          const VerticalSpacer(space: 12),
-          Padding(
-            padding: EdgeInsets.only(left: 12.0.w),
-            child: Text(
-              "2 hours ago",
-              style: applyMediumStyle(
-                fontSize: 14,
-                fontColor: ColorConsatnts.lightBlack,
-              ),
+            padding: EdgeInsets.only(left: 12.0.w, right: 14.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppButton(
+                  text: "Make Offer",
+                  textColor: ColorConsatnts.primary,
+                  color: ColorConsatnts.white,
+                  fontSize: 16,
+                  width: 160.w,
+                  onTap: () {},
+                ),
+                Text(
+                  "2 hours ago",
+                  style: applyMediumStyle(
+                    fontSize: 14,
+                    fontColor: ColorConsatnts.lightBlack,
+                  ),
+                ),
+              ],
             ),
           )
         ],
@@ -196,57 +238,111 @@ class SupplierBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 4.w, right: 4.w, bottom: 4.h),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(6.r),
-        child: BottomNavigationBar(
-          currentIndex: context.read<SupplierNavBarCubit>().state,
-          onTap: (value) {
-            context.read<SupplierNavBarCubit>().changeNavBarPages(value);
+      padding: EdgeInsets.only(left: 6.w, right: 6.w, bottom: 6.h),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6.r),
+            border: Border.all(color: ColorConsatnts.primary, width: 2.5.w)),
+        child: BlocBuilder<SupplierNavBarCubit, int>(
+          builder: (context, state) {
+            return BottomNavigationBar(
+              currentIndex: context.read<SupplierNavBarCubit>().state,
+              onTap: (value) {
+                context.read<SupplierNavBarCubit>().changeNavBarPages(value);
+              },
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: ColorConsatnts.primary,
+              unselectedItemColor: ColorConsatnts.white,
+              selectedItemColor: ColorConsatnts.white,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Column(
+                    children: [
+                      Container(
+                        width: 32.w,
+                        margin: EdgeInsets.only(bottom: 4.h),
+                        height: 4.h,
+                        color: state == 0
+                            ? ColorConsatnts.white
+                            : ColorConsatnts.primary,
+                      ),
+                      const SvgHandler(
+                        imagePath: "assets/svgs/order-nav.svg",
+                        height: 20,
+                        width: 20,
+                        color: ColorConsatnts.white,
+                      ),
+                    ],
+                  ),
+                  label: "Orders",
+                ),
+                BottomNavigationBarItem(
+                  icon: Column(
+                    children: [
+                      Container(
+                        width: 32.w,
+                        height: 4.h,
+                        margin: EdgeInsets.only(bottom: 4.h),
+                        color: state == 1
+                            ? ColorConsatnts.white
+                            : ColorConsatnts.primary,
+                      ),
+                      const SvgHandler(
+                        imagePath:
+                            "assets/svgs/offer-hot-product-fire-svgrepo-com.svg",
+                        height: 20,
+                        width: 20,
+                        color: ColorConsatnts.white,
+                      ),
+                    ],
+                  ),
+                  label: "Offers",
+                ),
+                BottomNavigationBarItem(
+                  icon: Column(
+                    children: [
+                      Container(
+                        width: 32.w,
+                        margin: EdgeInsets.only(bottom: 4.h),
+                        height: 4.h,
+                        color: state == 2
+                            ? ColorConsatnts.white
+                            : ColorConsatnts.primary,
+                      ),
+                      const SvgHandler(
+                        imagePath: AssetsConstants.mailIcon,
+                        height: 20,
+                        width: 20,
+                        color: ColorConsatnts.white,
+                      ),
+                    ],
+                  ),
+                  label: "Notifications",
+                ),
+                BottomNavigationBarItem(
+                  icon: Column(
+                    children: [
+                      Container(
+                        width: 32.w,
+                        margin: EdgeInsets.only(bottom: 4.h),
+                        height: 4.h,
+                        color: state == 3
+                            ? ColorConsatnts.white
+                            : ColorConsatnts.primary,
+                      ),
+                      const SvgHandler(
+                        imagePath: AssetsConstants.profileIcon,
+                        height: 22,
+                        width: 22,
+                        color: ColorConsatnts.white,
+                      ),
+                    ],
+                  ),
+                  label: "Profile",
+                ),
+              ],
+            );
           },
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: ColorConsatnts.primary,
-          unselectedItemColor: Colors.white70,
-          unselectedIconTheme: const IconThemeData(color: Colors.white70),
-          selectedItemColor: ColorConsatnts.white,
-          items: const [
-            BottomNavigationBarItem(
-              icon: SvgHandler(
-                imagePath: "assets/svgs/order-nav.svg",
-                height: 20,
-                width: 20,
-                color: ColorConsatnts.white,
-              ),
-              label: "Orders",
-            ),
-            BottomNavigationBarItem(
-              icon: SvgHandler(
-                imagePath: "assets/svgs/mail-5-svgrepo-com.svg",
-                height: 20,
-                width: 20,
-                color: ColorConsatnts.white,
-              ),
-              label: "Chat",
-            ),
-            BottomNavigationBarItem(
-              icon: SvgHandler(
-                imagePath: AssetsConstants.mailIcon,
-                height: 20,
-                width: 20,
-                color: ColorConsatnts.white,
-              ),
-              label: "Notifications",
-            ),
-            BottomNavigationBarItem(
-              icon: SvgHandler(
-                imagePath: AssetsConstants.profileIcon,
-                height: 22,
-                width: 22,
-                color: ColorConsatnts.white,
-              ),
-              label: "Profile",
-            ),
-          ],
         ),
       ),
     );

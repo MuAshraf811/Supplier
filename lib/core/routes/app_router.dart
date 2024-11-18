@@ -2,6 +2,7 @@ import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/features/onboarding&splash/on_boarding_view.dart';
 import 'package:e_printer/features/onboarding&splash/user_type_view.dart';
+import 'package:e_printer/features/supplier/Authentication/presentation/screens/supplier_register_view.dart';
 import 'package:e_printer/features/supplier/home/presentation/cubit/supplier_nav_bar_cubit.dart';
 import 'package:e_printer/features/supplier/home/presentation/screens/filter_view.dart';
 import 'package:e_printer/features/supplier/home/presentation/screens/supplier_home_view.dart';
@@ -60,6 +61,10 @@ class AppRouter {
       case RouteConstants.supplierFilterView:
         return MaterialPageRoute(
           builder: (context) => const FilterView(),
+        );
+      case RouteConstants.supplierRegistererView:
+        return MaterialPageRoute(
+          builder: (context) => const SupplierRegisterView(),
         );
       case RouteConstants.supplierHomeView:
         return MaterialPageRoute(

@@ -16,7 +16,7 @@ class PasswordValidationPart extends StatelessWidget {
             validationText: "At least 1 Uppercase letter (A-Z)",
           ),
           PasswordValidationItem(
-            validationText: " At least 1 special Character (!@\$-#/%*^\\)",
+            validationText: " At least 1 special Character",
           ),
           PasswordValidationItem(
             validationText: "At least 1 number (0-9)",

@@ -5,5 +5,6 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferencesManager.init();
+
   runApp(const EPrinter());
 }

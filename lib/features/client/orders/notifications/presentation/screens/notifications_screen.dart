@@ -10,7 +10,7 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -53,7 +53,7 @@ class NotificationItem extends StatelessWidget {
     return Container(
       width: 300.w,
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-      margin: EdgeInsets.only(bottom: 16.h),
+      margin: EdgeInsets.only(bottom: 14.h),
       decoration: BoxDecoration(
           border: Border.all(color: ColorConsatnts.grey),
           borderRadius: BorderRadius.circular(12.r)),

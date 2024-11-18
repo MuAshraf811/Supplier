@@ -15,8 +15,8 @@ class EPrinter extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRouter.onGenerateRoute,
         theme: ThemeData(
-          canvasColor: Colors.blue,
-        ),
+            // canvasColor: Colors.blue,
+            ),
       ),
     );
   }

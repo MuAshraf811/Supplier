@@ -47,7 +47,10 @@ class ChatView extends StatelessWidget {
                   },
                 ),
               ),
-              const ChatBottomBar(),
+              BlocProvider<ChatCubit>.value(
+                value: BlocProvider.of<ChatCubit>(context),
+                child: const ChatBottomBar(),
+              ),
             ],
           ),
         ),

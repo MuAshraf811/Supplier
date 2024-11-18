@@ -10,11 +10,19 @@ class AppButton extends StatelessWidget {
     required this.onTap,
     this.width,
     this.fontSize,
+    this.color,
+    this.raduis,
+    this.textColor,
   });
   final String text;
   final VoidCallback onTap;
   final double? width;
   final double? fontSize;
+  final Color? color;
+
+  final Color? textColor;
+  final double? raduis;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -24,14 +32,15 @@ class AppButton extends StatelessWidget {
         alignment: Alignment.center,
         height: 40.h,
         decoration: BoxDecoration(
-          color: ColorConsatnts.primary,
-          borderRadius: BorderRadius.circular(12.r),
+          color: color ?? ColorConsatnts.primary,
+          border: Border.all(color: ColorConsatnts.primary),
+          borderRadius: BorderRadius.circular(raduis ?? 12.r),
         ),
         child: Text(
           text,
           style: applySemiBoldStyle(
             fontSize: fontSize ?? 16,
-            fontColor: ColorConsatnts.white,
+            fontColor: textColor ?? ColorConsatnts.white,
           ),
         ),
       ),

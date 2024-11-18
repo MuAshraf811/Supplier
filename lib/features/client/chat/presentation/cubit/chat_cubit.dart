@@ -1,4 +1,5 @@
 import 'package:e_printer/core/utils/constants/app_const.dart';
+import 'package:e_printer/core/utils/native/image_picker.dart';
 import 'package:e_printer/features/client/chat/model/message_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class ChatCubit extends Cubit<ChatState> {
   final TextEditingController messageController = TextEditingController();
   final chatTextFieldKey = GlobalKey<FormState>();
   List<MessageModel> allMessages = AppConst.chatMessagesExamples;
+  String? imagepath;
   void setUpScrollControllerConfigs() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
@@ -33,6 +35,10 @@ class ChatCubit extends Cubit<ChatState> {
     chatScrollController.jumpTo(chatScrollController.position.maxScrollExtent);
 
     emit(NewMessageState());
+  }
+
+  void pickImage({required isFromCamera}) async {
+    imagepath = await ImagePickerHelper.pick(isFromCamera);
   }
 
   @override
