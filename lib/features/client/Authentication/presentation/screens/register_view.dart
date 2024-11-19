@@ -1,6 +1,7 @@
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/widgets/custom_app_bar.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
+import 'package:e_printer/core/utils/widgets/terms_and_conditions_dialog.dart';
 import 'package:e_printer/features/client/Authentication/presentation/widgets/drop_down_text_field.dart';
 import 'package:e_printer/features/client/Authentication/presentation/widgets/or_divider.dart';
 
@@ -23,7 +24,7 @@ class RegisterView extends StatelessWidget {
       backgroundColor: ColorConsatnts.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: ListView(
             children: [
               const VerticalSpacer(space: 18),
@@ -80,7 +81,7 @@ class RegisterView extends StatelessWidget {
               AppButton(
                 text: "Register",
                 onTap: () {
-                  Navigator.pop(context);
+                  showTermsAndConditionsDialog(context, false);
                 },
               ),
               const VerticalSpacer(space: 14),

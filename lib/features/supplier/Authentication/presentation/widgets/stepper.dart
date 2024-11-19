@@ -1,5 +1,6 @@
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/widgets/app_button.dart';
+import 'package:e_printer/core/utils/widgets/terms_and_conditions_dialog.dart';
 import 'package:e_printer/features/supplier/Authentication/presentation/widgets/steps_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,8 +38,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                       },
                     );
                   } else {
-                    Navigator.pushReplacementNamed(
-                        context, RouteConstants.supplierHomeView);
+                    showTermsAndConditionsDialog(context, true);
                   }
                 },
                 width: 100.w,

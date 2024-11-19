@@ -1,5 +1,6 @@
 import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
+import 'package:e_printer/features/client/settings/presentation/views/account_view.dart';
 import 'package:e_printer/features/onboarding&splash/on_boarding_view.dart';
 import 'package:e_printer/features/onboarding&splash/user_type_view.dart';
 import 'package:e_printer/features/supplier/Authentication/presentation/screens/supplier_register_view.dart';
@@ -43,9 +44,17 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const TermsAndConditionsView(),
         );
+      case RouteConstants.changePasswordView:
+        return MaterialPageRoute(
+          builder: (context) => const ChangePasswordView(),
+        );
       case RouteConstants.onBoardingView:
         return MaterialPageRoute(
           builder: (context) => const OnBoardingView(),
+        );
+      case RouteConstants.accountView:
+        return MaterialPageRoute(
+          builder: (context) => const AccountView(),
         );
       case RouteConstants.chatView:
         return MaterialPageRoute(

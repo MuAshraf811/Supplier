@@ -1,3 +1,4 @@
+import 'package:e_printer/core/utils/native/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -63,10 +64,12 @@ class StepTwoContent extends StatelessWidget {
       children: [
         const VerticalSpacer(space: 16),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            ImagePickerHelper.pick(false);
+          },
           child: Container(
             width: double.infinity,
-            margin: EdgeInsets.only(bottom: 28.h),
+            margin: EdgeInsets.only(bottom: 22.h),
             height: 80.h,
             decoration: BoxDecoration(
               border: Border.all(color: ColorConsatnts.primary),
@@ -93,13 +96,16 @@ class StepTwoContent extends StatelessWidget {
           ),
         ),
         const AppTextField(
+            label: "Company Name", suffixIcon: Icons.password_sharp),
+        const VerticalSpacer(space: 12),
+        const AppTextField(
             label: "Tax Number", suffixIcon: Icons.password_sharp),
         const VerticalSpacer(space: 12),
         const AppTextField(
             label: "Bank Name", suffixIcon: Icons.account_balance_outlined),
         const VerticalSpacer(space: 12),
         const AppTextField(
-            label: "Visa Ipan Number", suffixIcon: Icons.credit_card_sharp),
+            label: "Ipan Number", suffixIcon: Icons.credit_card_sharp),
         const VerticalSpacer(space: 24),
       ],
     );

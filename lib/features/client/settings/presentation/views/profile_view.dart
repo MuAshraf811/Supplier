@@ -87,6 +87,7 @@ class SettingsItem extends StatelessWidget {
         onTap: () {
           switch (index) {
             case 0:
+              Navigator.pushNamed(context, RouteConstants.accountView);
             case 1:
               Navigator.pushNamed(
                   context, RouteConstants.termsAndConditionsView);
@@ -144,8 +145,8 @@ class LanguageDropDown extends StatelessWidget {
           const CustomDropDown(
             text: "",
             entries: [
-              "English",
-              "Arabic",
+              "En",
+              "Ar",
             ],
           )
         ],

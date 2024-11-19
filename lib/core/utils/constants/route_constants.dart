@@ -6,6 +6,10 @@ class RouteConstants {
   static const detailedItemCategoryView = "/DetailedItemCategoryView";
   static const userTypeView = "/UserTypeView";
   static const chatView = "/ChatView";
+  static const accountView = "/AccountView";
+  static const changePasswordView = "/ChangePasswordView";
+
+  static const supplierAccountView = "/SupplierAccountView";
   static const onBoardingView = "/";
   static const termsAndConditionsView = "/TermsAndConditionsView";
   static const supplierHomeView = "/SupplierHomeView";
