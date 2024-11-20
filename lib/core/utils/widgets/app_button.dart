@@ -30,7 +30,7 @@ class AppButton extends StatelessWidget {
       child: Container(
         width: width ?? double.infinity,
         alignment: Alignment.center,
-        height: 40.h,
+        height: 38.h,
         decoration: BoxDecoration(
           color: color ?? ColorConsatnts.primary,
           border: Border.all(color: ColorConsatnts.primary),

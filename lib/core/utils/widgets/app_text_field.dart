@@ -46,7 +46,9 @@ class AppTextField extends StatelessWidget {
       ),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.only(top: 10.h, left: 8.w),
-        constraints: BoxConstraints(maxHeight: maxHeight ?? 48.h),
+        // constraints:
+        //     BoxConstraints(maxHeight: maxHeight ?? 48.h, minHeight: 36.h),
+        errorStyle: applyRegularStyle(fontSize: 14, fontColor: Colors.red),
         prefixIcon: prefixIcon,
         suffixIcon: Padding(
           padding: EdgeInsets.only(right: 12.w),
@@ -70,6 +72,18 @@ class AppTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           borderSide: const BorderSide(
             color: ColorConsatnts.grey,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(
+            color: Color.fromARGB(255, 146, 23, 14),
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(
+            color: ColorConsatnts.primary,
           ),
         ),
         enabledBorder: OutlineInputBorder(

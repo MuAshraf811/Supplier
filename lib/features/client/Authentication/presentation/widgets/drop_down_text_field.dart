@@ -19,6 +19,10 @@ class DropDownWithTextField extends StatelessWidget {
       isExpanded: false,
       isDense: true,
       decoration: InputDecoration(
+          constraints: BoxConstraints(maxHeight: 36.h),
+          contentPadding: EdgeInsets.only(left: 16.w, right: 18.w),
+          labelStyle:
+              applyMediumStyle(fontSize: 14, fontColor: ColorConsatnts.black),
           disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
               borderSide: BorderSide(
@@ -49,8 +53,8 @@ class DropDownWithTextField extends StatelessWidget {
               value: e,
               child: Text(
                 e,
-                style: applyBoldStyle(
-                  fontSize: 16,
+                style: applyMediumStyle(
+                  fontSize: 15,
                   fontColor: ColorConsatnts.black,
                 ),
               ),

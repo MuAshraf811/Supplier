@@ -27,7 +27,9 @@ class ForgetPasswordView extends StatelessWidget {
                   label: "Enter password",
                   suffixIcon: Icons.remove_red_eye_rounded),
               const VerticalSpacer(space: 12),
-              const PasswordValidationPart(),
+              PasswordValidationPart(
+                ctx: context,
+              ),
               const VerticalSpacer(space: 12),
               const AppTextField(
                   label: "Confirm password",

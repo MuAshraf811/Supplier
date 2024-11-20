@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "820970179759",
+    "project_id": "supplier-a69d0",
+    "storage_bucket": "supplier-a69d0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820970179759:android:6a12d184328ff10bb9185a",
+        "android_client_info": {
+          "package_name": "com.example.e_printer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820970179759-82i00r1e0i1of3ir65qults75smklccj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvUgJHg7OL8QOVvGVdPtRDfLPBdjN8iig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820970179759-82i00r1e0i1of3ir65qults75smklccj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -108,7 +108,7 @@ class ChangePasswordView extends StatelessWidget {
                   label: "Enter New Password",
                   suffixIcon: Icons.remove_red_eye),
               const VerticalSpacer(space: 6),
-              const PasswordValidationPart(),
+              //const PasswordValidationPart(),
               const VerticalSpacer(space: 10),
               const AppTextField(
                   label: "Confirm New Password",

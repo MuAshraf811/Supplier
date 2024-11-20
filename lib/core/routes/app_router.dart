@@ -1,5 +1,6 @@
 import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
+import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:e_printer/features/client/settings/presentation/views/account_view.dart';
 import 'package:e_printer/features/onboarding&splash/on_boarding_view.dart';
 import 'package:e_printer/features/onboarding&splash/user_type_view.dart';
@@ -38,7 +39,10 @@ class AppRouter {
         );
       case RouteConstants.logInView:
         return MaterialPageRoute(
-          builder: (context) => const LoginView(),
+          builder: (context) => BlocProvider<AuthenticationCubit>(
+            create: (context) => AuthenticationCubit(),
+            child: const LoginView(),
+          ),
         );
       case RouteConstants.termsAndConditionsView:
         return MaterialPageRoute(
@@ -84,7 +88,10 @@ class AppRouter {
         );
       case RouteConstants.registerView:
         return MaterialPageRoute(
-          builder: (context) => const RegisterView(),
+          builder: (context) => BlocProvider<AuthenticationCubit>(
+            create: (context) => AuthenticationCubit(),
+            child: const RegisterView(),
+          ),
         );
       case RouteConstants.forgetPasswordView:
         return MaterialPageRoute(
