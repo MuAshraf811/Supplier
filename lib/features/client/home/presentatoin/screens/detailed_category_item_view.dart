@@ -305,10 +305,11 @@ class CustomRadioButton extends StatelessWidget {
         Transform.scale(
           scale: 0.85,
           child: Radio<String>.adaptive(
-            value: value,
+            value: value, 
             groupValue: groupValue,
-            onChanged: onChanged,
-            useCupertinoCheckmarkStyle: true,
+            onChanged: onChanged, 
+             
+          //  useCupertinoCheckmarkStyle: true,
             activeColor: ColorConsatnts.primary,
           ),
         ),
