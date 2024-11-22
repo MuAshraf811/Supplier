@@ -76,8 +76,7 @@ class MainView extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(
                         context, RouteConstants.detailedItemCategoryView,
-                        
-                        );
+                        arguments: AppConst.categoryModel[0][index].index);
                   },
                   imagePath: AppConst.categoryModel[state][index].image,
                   title: AppConst.categoryModel[state][index].title,

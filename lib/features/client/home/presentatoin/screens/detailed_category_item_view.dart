@@ -1,16 +1,18 @@
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
+import 'package:e_printer/core/utils/constants/category_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/app_button.dart';
-import 'package:e_printer/core/utils/widgets/app_text_field.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
+import 'package:e_printer/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailedCategoryItemView extends StatelessWidget {
-  const DetailedCategoryItemView({super.key});
-
+  const DetailedCategoryItemView({super.key, required this.index});
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,106 +22,137 @@ class DetailedCategoryItemView extends StatelessWidget {
           padding: EdgeInsets.only(left: 14.w, right: 14.w, top: 16.h),
           child: ListView(
             children: [
-              Row(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const SvgHandler(
-                        imagePath: AssetsConstants.arrowLeftIcon,
-                        height: 20,
-                        width: 20,
-                      ),
-                    ),
-                  ), 
-                  const Spacer(), 
-                  Text("Priniting", style: applyBoldStyle(fontSize: 18, fontColor: ColorConsatnts.black,),),
-                  const Spacer()
-                ],
+              Align(
+                alignment: Alignment.centerLeft,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const SvgHandler(
+                    imagePath: AssetsConstants.arrowLeftIcon,
+                    height: 20,
+                    width: 20,
+                  ),
+                ),
               ),
               const VerticalSpacer(space: 18),
               Text(
-                "Wrapping Paper",
+                CategoryConstants.printing[index].title,
                 style: applySemiBoldStyle(
                   fontSize: 16,
                   fontColor: ColorConsatnts.primary,
                 ),
               ),
-              const VerticalSpacer(space: 12),
-              const RadioGroupItems(),
-              const VerticalSpacer(space: 12),
-              const Row(
-                children: [
-                  CustomDropDown(
-                    entries: [25, 30, 35, 40, 45],
-                    text: "Height",
-                  ),
-                  Spacer(),
-                  CustomDropDown(
-                    entries: [25, 30, 35, 40, 45],
-                    text: "Width",
-                  ),
-                ],
-              ),
-              const Row(
-                children: [
-                  CustomDropDown(
-                    entries: [25, 30, 35, 40, 45],
-                    text: "Paper",
-                  ),
-                  Spacer(),
-                  CustomDropDown(
-                    entries: [25, 30, 35, 40, 45],
-                    text: "Printing",
-                  ),
-                ],
-              ),
-              const Row(
-                children: [
-                  CustomDropDown(
-                    entries: [25, 30, 35, 40, 45],
-                    text: "Cutting",
-                  ),
-                  Spacer(),
-                  CustomDropDown(
-                    entries: [25, 30, 35, 40, 45],
-                    text: "Quantity",
-                  ),
-                ],
-              ),
-              const VerticalSpacer(space: 8),
-              Text(
-                "Additional",
-                style: applySemiBoldStyle(
-                    fontSize: 18, fontColor: ColorConsatnts.black),
-              ),
-              const VerticalSpacer(space: 16),
-              const Row(
-                children: [
-                  CustomDropDown(
-                    entries: [25, 30, 35, 40, 45],
-                    text: "Block",
-                  ),
-                  Spacer(),
-                  CustomDropDown(
-                    entries: [25, 30, 35, 40, 45],
-                    text: "Packing",
-                  ),
-                ],
-              ),
-              const VerticalSpacer(space: 16),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: const AppTextField(
-                  label: "Add some description",
-                  minLines: 3,
-                  maxLines: 5,
-                  suffixIcon: Icons.note_alt,
+              IntrinsicHeight(
+                child: BlocBuilder<HomePageCubit, HomePageState>(
+                  buildWhen: (previous, current) =>
+                      current is RadioCurrentChoice,
+                  builder: (context, state) {
+                    return Column(
+                      children: CategoryConstants.printing[index].radioOptions
+                          .map(
+                            (e) => CustomRadioButton(
+                              text: e,
+                              value: e,
+                              groupValue:
+                                  context.read<HomePageCubit>().selectedValue,
+                              onChanged: (val) {
+                                context
+                                    .read<HomePageCubit>()
+                                    .changeDropDownsBasedOnRadio(val!);
+                              },
+                            ),
+                          )
+                          .toList(),
+                    );
+                  },
                 ),
               ),
+              const VerticalSpacer(space: 12),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: BlocBuilder<HomePageCubit, HomePageState>(
+                  builder: (context, state) {
+                    return Text(
+                      context.read<HomePageCubit>().selectedValue,
+                      style: applySemiBoldStyle(
+                        fontSize: 16,
+                        fontColor: ColorConsatnts.primary,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const VerticalSpacer(space: 12),
+              SizedBox(
+                  height: 180.h,
+                  child: BlocBuilder<HomePageCubit, HomePageState>(
+                    buildWhen: (previous, current) =>
+                        current is RadioCurrentChoice,
+                    builder: (context, state) {
+                      final d = CategoryConstants.printing[index].details[
+                              context.read<HomePageCubit>().selectedValueIndex]
+                          ["details"] as Map;
+
+                      return GridView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 4.w,
+                          mainAxisSpacing: 10.w,
+                          childAspectRatio: 2 / 0.7,
+                        ),
+                        children: d.entries.map((entry) {
+                          final key = entry.key;
+                          final value = entry.value;
+                          return CustomDropDown(
+                            text: key,
+                            entries:
+                                value, // Assuming `value` is the list for dropdown
+                          );
+                        }).toList(),
+                      );
+                    },
+                  )),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Additionals",
+                  style: applySemiBoldStyle(
+                    fontSize: 16,
+                    fontColor: ColorConsatnts.primary,
+                  ),
+                ),
+              ),
+              const VerticalSpacer(space: 12),
+              SizedBox(
+                  height: 60.h,
+                  child: BlocBuilder<HomePageCubit, HomePageState>(
+                    buildWhen: (previous, current) =>
+                        current is RadioCurrentChoice,
+                    builder: (context, state) {
+                      final other = CategoryConstants.printing[index].details[
+                              context.read<HomePageCubit>().selectedValueIndex]
+                          ["other"] as Map;
+                      return GridView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10.w,
+                            mainAxisSpacing: 10.w,
+                            childAspectRatio: 2 / 0.7),
+                        children: other.entries.map((entry) {
+                          final key = entry.key;
+                          final value = entry.value;
+                          return CustomDropDown(
+                            text: key,
+                            entries:
+                                value, // Assuming `value` is the list for dropdown
+                          );
+                        }).toList(),
+                      );
+                    },
+                  )),
               const VerticalSpacer(space: 12),
               const CustomCheck(),
               const VerticalSpacer(space: 12),
@@ -149,36 +182,39 @@ class CustomDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          text,
-          style:
-              applySemiBoldStyle(fontSize: 14, fontColor: ColorConsatnts.black),
+        SizedBox(
+          width: 58.w,
+          child: Text(
+            text,
+            style:
+                applyBoldStyle(fontSize: 12, fontColor: ColorConsatnts.black),
+          ),
         ),
-        const HorizontalSpacer(space: 16),
         Transform.scale(
-          scale: 0.8,
+          scaleY: 0.6,
           child: DropdownMenu(
-              width: 90.w,
-              trailingIcon: const Icon(
-                Icons.arrow_drop_down,
-                size: 24,
-              ),
-              inputDecorationTheme: InputDecorationTheme(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6.r)),
-              ),
-              menuStyle: const MenuStyle(
-                  backgroundColor:
-                      WidgetStatePropertyAll(ColorConsatnts.white)),
-              initialSelection: entries[0],
-              dropdownMenuEntries: entries
-                  .map(
-                    (e) => DropdownMenuEntry(
-                      value: e,
-                      label: "$e",
-                    ),
-                  )
-                  .toList()),
+            width: 90.w,
+            trailingIcon: const Icon(
+              Icons.arrow_drop_down,
+              size: 24,
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              contentPadding: EdgeInsets.only(left: 4.w),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(6.r)),
+            ),
+            menuStyle: const MenuStyle(
+                backgroundColor: WidgetStatePropertyAll(ColorConsatnts.white)),
+            initialSelection: entries[0],
+            dropdownMenuEntries: entries
+                .map(
+                  (e) => DropdownMenuEntry(
+                    value: e,
+                    label: "$e",
+                  ),
+                )
+                .toList(),
+          ),
         ),
       ],
     );
@@ -220,77 +256,6 @@ class _CustomCheckState extends State<CustomCheck> {
   }
 }
 
-class RadioGroupItems extends StatefulWidget {
-  const RadioGroupItems({super.key});
-
-  @override
-  State<RadioGroupItems> createState() => _RadioGroupItemsState();
-}
-
-class _RadioGroupItemsState extends State<RadioGroupItems> {
-  String selectedValue = "Sweet Roll";
-
-  @override
-  Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Column(
-        children: [
-          CustomRadioButton(
-            text: "Sandwich Paper",
-            value: "Sandwich Paper",
-            groupValue: selectedValue,
-            onChanged: (val) {
-              setState(() {
-                selectedValue = val!;
-              });
-            },
-          ),
-          CustomRadioButton(
-            text: "L Shape Paper",
-            value: "L Shape Paper",
-            groupValue: selectedValue,
-            onChanged: (val) {
-              setState(() {
-                selectedValue = val!;
-              });
-            },
-          ),
-          CustomRadioButton(
-            text: "Sandwich Pouch",
-            value: "Sandwich Pouch",
-            groupValue: selectedValue,
-            onChanged: (val) {
-              setState(() {
-                selectedValue = val!;
-              });
-            },
-          ),
-          CustomRadioButton(
-            text: "Wrapping Roll",
-            value: "Wrapping Roll",
-            groupValue: selectedValue,
-            onChanged: (val) {
-              setState(() {
-                selectedValue = val!;
-              });
-            },
-          ),
-          CustomRadioButton(
-            text: "Sweet Roll",
-            value: "Sweet Roll",
-            groupValue: selectedValue,
-            onChanged: (val) {
-              setState(() {
-                selectedValue = val!;
-              });
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class CustomRadioButton extends StatelessWidget {
   const CustomRadioButton({
     super.key,
@@ -307,28 +272,30 @@ class CustomRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Transform.scale(
-          scale: 0.9,
-          child: Radio<String>.adaptive(
-            value: value, 
-            groupValue: groupValue,
-            onChanged: onChanged, 
+    return SizedBox(
+      height: 28.h,
+      child: Row(
+        children: [
+          Transform.scale(
+            scale: 0.9,
+            child: Radio<String>.adaptive(
+              value: value,
+              groupValue: groupValue,
+              onChanged: onChanged,
              
-          //  useCupertinoCheckmarkStyle: true,
-            activeColor: ColorConsatnts.primary,
+              activeColor: ColorConsatnts.primary,
+            ),
           ),
-        ),
-        const HorizontalSpacer(space: 4),
-        Text(
-          text,
-          style: applyMediumStyle(
-            fontSize: 14,
-            fontColor: ColorConsatnts.black,
+          const HorizontalSpacer(space: 4),
+          Text(
+            text,
+            style: applyMediumStyle(
+              fontSize: 14,
+              fontColor: ColorConsatnts.black,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
