@@ -272,6 +272,7 @@ class CustomRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return SizedBox(
       height: 28.h,
       child: Row(
@@ -285,6 +286,19 @@ class CustomRadioButton extends StatelessWidget {
               useCupertinoCheckmarkStyle: true,
               activeColor: ColorConsatnts.primary,
             ),
+=======
+    return Row(
+      children: [
+        Transform.scale(
+          scale: 0.85,
+          child: Radio<String>.adaptive(
+            value: value, 
+            groupValue: groupValue,
+            onChanged: onChanged, 
+             
+          //  useCupertinoCheckmarkStyle: true,
+            activeColor: ColorConsatnts.primary,
+>>>>>>> 1ed564fe360ba560b4a58419f968bc03c6a4a1ae
           ),
           const HorizontalSpacer(space: 4),
           Text(
