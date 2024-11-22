@@ -141,9 +141,12 @@ class LanguageDropDown extends StatelessWidget {
             style:
                 applyBoldStyle(fontSize: 15, fontColor: ColorConsatnts.black),
           ),
-          const CustomDropDown(
+           CustomDropDown( 
+            onSelected: (p0) {
+              
+            },
             text: "",
-            entries: [
+            entries: const [
               "English",
               "Arabic",
             ],

@@ -5,6 +5,8 @@ class ColorConsatnts {
   static const white = Colors.white;
   static const black = Colors.black;
   static const grey = Colors.grey;
-  static const lightBlack = Colors.black54;
+  static const lightBlack = Colors.black54; 
+    static const red = Colors.red;
+
   static const lightgrey = Color(0xfff7f7f7);
 }

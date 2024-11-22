@@ -6,6 +6,7 @@ import 'package:e_printer/core/utils/widgets/app_button.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
 import 'package:e_printer/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
+import 'package:e_printer/features/client/home/presentatoin/widgets/show_order_dialog_confirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -105,7 +106,10 @@ class DetailedCategoryItemView extends StatelessWidget {
                         children: d.entries.map((entry) {
                           final key = entry.key;
                           final value = entry.value;
-                          return CustomDropDown(
+                          return CustomDropDown( 
+                            onSelected: (selectedValue) {
+                              context.read<HomePageCubit>().orderdetails[key]= selectedValue;
+                            },
                             text: key,
                             entries:
                                 value, // Assuming `value` is the list for dropdown
@@ -144,7 +148,10 @@ class DetailedCategoryItemView extends StatelessWidget {
                         children: other.entries.map((entry) {
                           final key = entry.key;
                           final value = entry.value;
-                          return CustomDropDown(
+                          return CustomDropDown( 
+                            onSelected: (p0) {
+                               context.read<HomePageCubit>().orderdetails[key]= p0;
+                            },
                             text: key,
                             entries:
                                 value, // Assuming `value` is the list for dropdown
@@ -158,7 +165,19 @@ class DetailedCategoryItemView extends StatelessWidget {
               const VerticalSpacer(space: 12),
               AppButton(
                 text: "Add Order",
-                onTap: () {},
+                onTap: () {  
+                  context.read<HomePageCubit>().addOrder(
+
+                  );
+                  showOrderConfirmation(
+                      context: context,
+                      orderCategory: context.read<HomePageCubit>().addedOeder.orderCategoryName,
+                      orderType: context.read<HomePageCubit>().addedOeder.orderType,
+                      extraDetails: "Hello This is Dummy",
+                      orderDate: context.read<HomePageCubit>().addedOeder.orderDate,
+                      details:
+                         context.read<HomePageCubit>().addedOeder.orderDetails);
+                },
                 width: 120,
               ),
               const VerticalSpacer(space: 16),
@@ -174,10 +193,11 @@ class CustomDropDown extends StatelessWidget {
   const CustomDropDown({
     super.key,
     required this.text,
-    required this.entries,
+    required this.entries, required this.onSelected,
   });
   final String text;
-  final List entries;
+  final List entries; 
+  final void Function(dynamic)? onSelected;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -193,7 +213,8 @@ class CustomDropDown extends StatelessWidget {
         Transform.scale(
           scaleY: 0.6,
           child: DropdownMenu(
-            width: 90.w,
+            width: 90.w, 
+            onSelected:onSelected,
             trailingIcon: const Icon(
               Icons.arrow_drop_down,
               size: 24,
@@ -282,7 +303,6 @@ class CustomRadioButton extends StatelessWidget {
               value: value,
               groupValue: groupValue,
               onChanged: onChanged,
-             
               activeColor: ColorConsatnts.primary,
             ),
           ),
