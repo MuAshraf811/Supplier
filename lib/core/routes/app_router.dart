@@ -1,6 +1,7 @@
 import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
+import 'package:e_printer/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
 import 'package:e_printer/features/client/settings/presentation/views/account_view.dart';
 import 'package:e_printer/features/onboarding&splash/on_boarding_view.dart';
 import 'package:e_printer/features/onboarding&splash/user_type_view.dart';
@@ -68,8 +69,14 @@ class AppRouter {
           ),
         );
       case RouteConstants.detailedItemCategoryView:
+        final args = settings.arguments as int;
         return MaterialPageRoute(
-          builder: (context) => const DetailedCategoryItemView(),
+          builder: (context) => BlocProvider<HomePageCubit>(
+            create: (context) => HomePageCubit()..initIndex(args),
+            child: DetailedCategoryItemView(
+              index: args,
+            ),
+          ),
         );
       case RouteConstants.supplierFilterView:
         return MaterialPageRoute(

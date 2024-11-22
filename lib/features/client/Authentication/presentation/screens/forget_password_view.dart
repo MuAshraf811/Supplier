@@ -6,8 +6,6 @@ import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../widgets/password_validation_coulmn.dart';
-
 class ForgetPasswordView extends StatelessWidget {
   const ForgetPasswordView({super.key});
 

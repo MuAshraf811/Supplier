@@ -75,7 +75,8 @@ class MainView extends StatelessWidget {
                 itemBuilder: (context, index) => SectionGridItem(
                   onTap: () {
                     Navigator.pushNamed(
-                        context, RouteConstants.detailedItemCategoryView);
+                        context, RouteConstants.detailedItemCategoryView,
+                        arguments: index);
                   },
                   imagePath: AppConst.categoryModel[state][index].image,
                   title: AppConst.categoryModel[state][index].title,
