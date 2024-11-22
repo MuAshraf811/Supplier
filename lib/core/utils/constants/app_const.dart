@@ -74,7 +74,13 @@ class AppConst {
     const Color.fromARGB(255, 8, 79, 138),
     Colors.red,
     const Color.fromARGB(255, 43, 136, 212),
+  ]; 
+
+  static List<Map<String, dynamic>> detailedSection= 
+  [
+    
   ];
+
   static List<List<CategoryModel>> categoryModel = [
     [
       CategoryModel(

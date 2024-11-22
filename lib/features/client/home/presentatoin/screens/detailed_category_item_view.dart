@@ -20,18 +20,25 @@ class DetailedCategoryItemView extends StatelessWidget {
           padding: EdgeInsets.only(left: 14.w, right: 14.w, top: 16.h),
           child: ListView(
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const SvgHandler(
-                    imagePath: AssetsConstants.arrowLeftIcon,
-                    height: 20,
-                    width: 20,
-                  ),
-                ),
+              Row(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const SvgHandler(
+                        imagePath: AssetsConstants.arrowLeftIcon,
+                        height: 20,
+                        width: 20,
+                      ),
+                    ),
+                  ), 
+                  const Spacer(), 
+                  Text("Priniting", style: applyBoldStyle(fontSize: 18, fontColor: ColorConsatnts.black,),),
+                  const Spacer()
+                ],
               ),
               const VerticalSpacer(space: 18),
               Text(
@@ -48,12 +55,12 @@ class DetailedCategoryItemView extends StatelessWidget {
                 children: [
                   CustomDropDown(
                     entries: [25, 30, 35, 40, 45],
-                    text: "height",
+                    text: "Height",
                   ),
                   Spacer(),
                   CustomDropDown(
                     entries: [25, 30, 35, 40, 45],
-                    text: "width",
+                    text: "Width",
                   ),
                 ],
               ),
@@ -61,12 +68,12 @@ class DetailedCategoryItemView extends StatelessWidget {
                 children: [
                   CustomDropDown(
                     entries: [25, 30, 35, 40, 45],
-                    text: "paper",
+                    text: "Paper",
                   ),
                   Spacer(),
                   CustomDropDown(
                     entries: [25, 30, 35, 40, 45],
-                    text: "printing",
+                    text: "Printing",
                   ),
                 ],
               ),
@@ -74,12 +81,12 @@ class DetailedCategoryItemView extends StatelessWidget {
                 children: [
                   CustomDropDown(
                     entries: [25, 30, 35, 40, 45],
-                    text: "cutting",
+                    text: "Cutting",
                   ),
                   Spacer(),
                   CustomDropDown(
                     entries: [25, 30, 35, 40, 45],
-                    text: "quantity",
+                    text: "Quantity",
                   ),
                 ],
               ),
@@ -94,12 +101,12 @@ class DetailedCategoryItemView extends StatelessWidget {
                 children: [
                   CustomDropDown(
                     entries: [25, 30, 35, 40, 45],
-                    text: "cutting",
+                    text: "Block",
                   ),
                   Spacer(),
                   CustomDropDown(
                     entries: [25, 30, 35, 40, 45],
-                    text: "quantity",
+                    text: "Packing",
                   ),
                 ],
               ),
@@ -303,7 +310,7 @@ class CustomRadioButton extends StatelessWidget {
     return Row(
       children: [
         Transform.scale(
-          scale: 0.85,
+          scale: 0.9,
           child: Radio<String>.adaptive(
             value: value, 
             groupValue: groupValue,

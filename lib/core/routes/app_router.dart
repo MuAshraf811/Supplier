@@ -69,7 +69,8 @@ class AppRouter {
         );
       case RouteConstants.detailedItemCategoryView:
         return MaterialPageRoute(
-          builder: (context) => const DetailedCategoryItemView(),
+          builder: (context) => const DetailedCategoryItemView(), 
+          
         );
       case RouteConstants.supplierFilterView:
         return MaterialPageRoute(
