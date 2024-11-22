@@ -15,8 +15,9 @@ class HomePageCubit extends Cubit<HomePageState> {
 
   changeDropDownsBasedOnRadio(String choice) {
     selectedValue = choice;
-    selectedValueIndex =
-        CategoryConstants.printing[1].radioOptions.indexOf(selectedValue);
+    selectedValueIndex = CategoryConstants
+        .printing[detailedSectionIndex].radioOptions
+        .indexOf(selectedValue);
 
     emit(RadioCurrentChoice(choice: choice, choiceIndex: selectedValueIndex));
   }
