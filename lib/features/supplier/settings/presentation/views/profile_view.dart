@@ -5,10 +5,10 @@ import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
+import 'package:e_printer/features/client/home/presentatoin/widgets/custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../client/home/presentatoin/screens/detailed_category_item_view.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
