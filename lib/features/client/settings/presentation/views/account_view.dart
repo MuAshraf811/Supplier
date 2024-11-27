@@ -8,8 +8,6 @@ import '../../../../../core/utils/constants/color_consatnts.dart';
 import '../../../../../core/utils/styles/text_styles.dart';
 import '../../../../../core/utils/widgets/app_button.dart';
 import '../../../Authentication/presentation/widgets/drop_down_text_field.dart';
-import '../../../Authentication/presentation/widgets/password_validation_coulmn.dart';
-
 class AccountView extends StatelessWidget {
   const AccountView({super.key});
 

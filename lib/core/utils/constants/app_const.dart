@@ -132,118 +132,118 @@ class AppConst {
           title: "Plastic cup",
           index: 10),
     ],
-    // [
-    //   CategoryModel(
-    //       image: "assets/images/Digital/Brochure.jpeg", title: "Brochure"),
-    //   CategoryModel(
-    //       image: "assets/images/Digital/catalog.jpeg", title: "catalog"),
-    //   CategoryModel(
-    //       image: "assets/images/Digital/digital card.jpeg",
-    //       title: "digital card"),
-    //   CategoryModel(
-    //       image: "assets/images/Digital/diverse.jpeg", title: "Diverse"),
-    //   CategoryModel(image: "assets/images/Digital/Flyer.jpeg", title: "Flyer"),
-    //   CategoryModel(
-    //       image: "assets/images/Digital/small shopping bag.png",
-    //       title: "small shopping bag"),
-    //   CategoryModel(
-    //       image: "assets/images/Digital/Stickers.jpg", title: "Stickers"),
-    // ],
-    // [
-    //   CategoryModel(
-    //       image: "assets/images/Packaging/Aluminum Products-01.png",
-    //       title: "Aluminum Products"),
-    //   CategoryModel(
-    //       image: "assets/images/Packaging/Fiber Products-01.png",
-    //       title: "Fiber Products"),
-    //   CategoryModel(
-    //       image: "assets/images/Packaging/Foam Products-01.png",
-    //       title: "Foam Products"),
-    //   CategoryModel(
-    //       image: "assets/images/Packaging/Hygiene Products-01.png",
-    //       title: "Hygiene Products"),
-    //   CategoryModel(
-    //       image: "assets/images/Packaging/Paper Products-01.png",
-    //       title: "Paper Products"),
-    //   CategoryModel(
-    //       image: "assets/images/Packaging/wooden Products-01.png",
-    //       title: "wooden Products"),
-    //   CategoryModel(
-    //       image: "assets/images/Packaging/Tissue-01.png", title: "Tissue"),
-    // ],
-    // [
-    //   CategoryModel(
-    //       image: "assets/images/Signage/2D signage.jpeg", title: "2D signage"),
-    //   CategoryModel(
-    //       image: "assets/images/Signage/3D signage.jpeg", title: "3D signage"),
-    //   CategoryModel(
-    //       image: "assets/images/Signage/Digital Screen.jpeg",
-    //       title: "Digital Screen"),
-    //   CategoryModel(
-    //       image: "assets/images/Signage/diverse.jpeg", title: "diverse"),
-    //   CategoryModel(
-    //       image: "assets/images/Signage/exhibition stand.jpeg",
-    //       title: "exhibition stand."),
-    //   CategoryModel(image: "assets/images/Signage/Flag.jpeg", title: "Flag"),
-    //   CategoryModel(
-    //       image: "assets/images/Signage/flix signage.jpeg",
-    //       title: "flix signage"),
-    //   CategoryModel(
-    //       image: "assets/images/Signage/large format sticker.jpeg",
-    //       title: "large format sticker"),
-    //   CategoryModel(
-    //       image: "assets/images/Signage/pop up.jpeg", title: "pop up"),
-    //   CategoryModel(
-    //       image: "assets/images/Signage/roll up.jpeg", title: "roll up"),
-    //   CategoryModel(
-    //       image: "assets/images/Signage/side signage.jpeg",
-    //       title: "side signage"),
-    // ],
-    // [
-    //   CategoryModel(
-    //       image: "assets/images/Unifoarm/Chef Cap.jpeg", title: "Chef Cap"),
-    //   CategoryModel(
-    //       image: "assets/images/Unifoarm/Chef Jacket.jpeg",
-    //       title: "Chef Jacket"),
-    //   CategoryModel(
-    //       image: "assets/images/Unifoarm/diverse.jpeg", title: "diverse"),
-    //   CategoryModel(
-    //       image: "assets/images/Unifoarm/full set.jpg", title: "Full Set"),
-    //   CategoryModel(image: "assets/images/Unifoarm/shirt.jpeg", title: "Shirt"),
-    //   CategoryModel(image: "assets/images/Unifoarm/suit.jpeg", title: "Suit"),
-    //   CategoryModel(
-    //       image: "assets/images/Unifoarm/T-shirt.jpeg", title: "T-shirt"),
-    //   CategoryModel(
-    //       image: "assets/images/Unifoarm/trouser.jpeg", title: "Trouser"),
-    // ],
-    // [
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/agenda.jpeg", title: "agenda"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/Diverse.jpeg", title: "Diverse"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/flash memory.jpeg",
-    //       title: "flash memory"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/ID Card.jpeg", title: "Id Card"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/Lanyard.jpeg", title: "Lanyard"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/mobile cover.jpeg",
-    //       title: "Mobile Cover"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/Mouse Pad.jpeg", title: "Mouse Pad"),
-    //   CategoryModel(image: "assets/images/Gift Items/Mug.jpeg", title: "Mug"),
-    //   CategoryModel(image: "assets/images/Gift Items/Pen.jpeg", title: "Pen"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/Trophy.jpeg", title: "Trophy"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/umbrella.jpeg", title: "umbrella"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/Wooden-Stand-.jpeg",
-    //       title: "Wooden-Stand"),
-    //   CategoryModel(
-    //       image: "assets/images/Gift Items/Wristband.jpeg", title: "Wristband"),
-    // ],
+    [
+      CategoryModel(
+          image: "assets/images/Digital/Brochure.jpeg", title: "Brochure", index : 0),
+      CategoryModel(
+          image: "assets/images/Digital/catalog.jpeg", title: "catalog", index: 1),
+      CategoryModel(
+          image: "assets/images/Digital/digital card.jpeg",
+          title: "digital card", index: 2),
+      CategoryModel(
+          image: "assets/images/Digital/diverse.jpeg", title: "Diverse", index: 3),
+      CategoryModel(image: "assets/images/Digital/Flyer.jpeg", title: "Flyer", index: 4),
+      CategoryModel(
+          image: "assets/images/Digital/small shopping bag.png",
+          title: "small shopping bag", index: 5),
+      CategoryModel(
+          image: "assets/images/Digital/Stickers.jpg", title: "Stickers", index: 5),
+    ],
+    [
+      CategoryModel(
+          image: "assets/images/Packaging/Aluminum Products-01.png",
+          title: "Aluminum Products", index: 0),
+      CategoryModel(
+          image: "assets/images/Packaging/Fiber Products-01.png",
+          title: "Fiber Products", index: 1),
+      CategoryModel(
+          image: "assets/images/Packaging/Foam Products-01.png",
+          title: "Foam Products", index: 2),
+      CategoryModel(
+          image: "assets/images/Packaging/Hygiene Products-01.png",
+          title: "Hygiene Products", index: 3),
+      CategoryModel(
+          image: "assets/images/Packaging/Paper Products-01.png",
+          title: "Paper Products",index: 4),
+      CategoryModel(
+          image: "assets/images/Packaging/wooden Products-01.png",
+          title: "wooden Products", index: 5),
+      CategoryModel(
+          image: "assets/images/Packaging/Tissue-01.png", title: "Tissue", index: 6),
+    ],
+    [
+      CategoryModel(
+          image: "assets/images/Signage/2D signage.jpeg", title: "2D signage", index: 0),
+      CategoryModel(
+          image: "assets/images/Signage/3D signage.jpeg", title: "3D signage", index: 1),
+      CategoryModel(
+          image: "assets/images/Signage/Digital Screen.jpeg",
+          title: "Digital Screen", index: 2),
+      CategoryModel(
+          image: "assets/images/Signage/diverse.jpeg", title: "diverse", index: 3),
+      CategoryModel(
+          image: "assets/images/Signage/exhibition stand.jpeg",
+          title: "exhibition stand.", index: 4),
+      CategoryModel(image: "assets/images/Signage/Flag.jpeg", title: "Flag", index: 5),
+      CategoryModel(
+          image: "assets/images/Signage/flix signage.jpeg",
+          title: "flix signage", index: 6),
+      CategoryModel(
+          image: "assets/images/Signage/large format sticker.jpeg",
+          title: "large format sticker", index: 7),
+      CategoryModel(
+          image: "assets/images/Signage/pop up.jpeg", title: "pop up", index: 8),
+      CategoryModel(
+          image: "assets/images/Signage/roll up.jpeg", title: "roll up", index: 9),
+      CategoryModel(
+          image: "assets/images/Signage/side signage.jpeg",
+          title: "side signage", index: 10),
+    ],
+    [
+      CategoryModel(
+          image: "assets/images/Unifoarm/Chef Cap.jpeg", title: "Chef Cap", index: 0),
+      CategoryModel(
+          image: "assets/images/Unifoarm/Chef Jacket.jpeg",
+          title: "Chef Jacket", index: 1),
+      CategoryModel(
+          image: "assets/images/Unifoarm/diverse.jpeg", title: "diverse", index: 2),
+      CategoryModel(
+          image: "assets/images/Unifoarm/full set.jpg", title: "Full Set", index: 3),
+      CategoryModel(image: "assets/images/Unifoarm/shirt.jpeg", title: "Shirt", index: 4),
+      CategoryModel(image: "assets/images/Unifoarm/suit.jpeg", title: "Suit", index: 5),
+      CategoryModel(
+          image: "assets/images/Unifoarm/T-shirt.jpeg", title: "T-shirt", index: 6),
+      CategoryModel(
+          image: "assets/images/Unifoarm/trouser.jpeg", title: "Trouser", index: 7),
+    ],
+    [
+      CategoryModel(
+          image: "assets/images/Gift Items/agenda.jpeg", title: "agenda", index: 0),
+      CategoryModel(
+          image: "assets/images/Gift Items/Diverse.jpeg", title: "Diverse", index: 1),
+      CategoryModel(
+          image: "assets/images/Gift Items/flash memory.jpeg",
+          title: "flash memory", index: 2),
+      CategoryModel(
+          image: "assets/images/Gift Items/ID Card.jpeg", title: "Id Card", index: 3),
+      CategoryModel(
+          image: "assets/images/Gift Items/Lanyard.jpeg", title: "Lanyard" , index: 4),
+      CategoryModel(
+          image: "assets/images/Gift Items/mobile cover.jpeg",
+          title: "Mobile Cover", index: 5),
+      CategoryModel(
+          image: "assets/images/Gift Items/Mouse Pad.jpeg", title: "Mouse Pad", index: 6),
+      CategoryModel(image: "assets/images/Gift Items/Mug.jpeg", title: "Mug", index: 7),
+      CategoryModel(image: "assets/images/Gift Items/Pen.jpeg", title: "Pen", index: 8),
+      CategoryModel(
+          image: "assets/images/Gift Items/Trophy.jpeg", title: "Trophy", index: 9),
+      CategoryModel(
+          image: "assets/images/Gift Items/umbrella.jpeg", title: "umbrella", index: 10),
+      CategoryModel(
+          image: "assets/images/Gift Items/Wooden-Stand-.jpeg",
+          title: "Wooden-Stand", index: 11),
+      CategoryModel(
+          image: "assets/images/Gift Items/Wristband.jpeg", title: "Wristband", index: 12),
+    ],
   ];
 }

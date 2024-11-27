@@ -398,7 +398,7 @@ class CategoryConstants {
         "Manakish Box",
         "Sandwich Box",
         "Take Away Box",
-        "Salad Box",
+       
         "Noodles Box"
       ],
       details: [
@@ -487,23 +487,7 @@ class CategoryConstants {
           },
           "isRequired": true,
         },
-        {
-          "title": "Salad Box",
-          "details": {
-            "Type": ["Food Board", "Kraft"],
-            "Size": ["Stander", "Customize"],
-            "Printing": ["1/0 Color", "2/0 Color", "3/0 Color", "4/0 Color"],
-            "Paper": [350, 40],
-            "Lamination": ["Non", "Glossy", "Matt"],
-            "Shape": [500, 1000, 1500, 2000],
-            "Quantity": [5000, 7000, 10000, 12000, 15000, 17000, 20000],
-          },
-          "other": {
-            "Emboss": ["Yes", "Non"],
-            "Packing": [250],
-          },
-          "isRequired": true,
-        },
+       
         {
           "title": "Noodles Box",
           "details": {
@@ -947,6 +931,22 @@ class CategoryConstants {
       ],
       details: [
         {
+          "title": "Paper Cup Sigle Wall",
+          "details": {
+            "Size": [4, 5, 6, 7, 8],
+            "Lid": [25, 30, 35, 40, 45],
+            "Foil": [10, 20, 30],
+            "Printing": [1, 2, 3],
+            "Block": ["Laser"],
+            "Quantity": [3000, 4000, 5000, 6000, 7000, 8000],
+          },
+          "other": {
+            "Emboss": ["Yes", "No"],
+            "Packing": ["1x1000 pcs"],
+          },
+          "isRequired": true,
+        }, 
+         {
           "title": "Paper Cup Sigle Wall",
           "details": {
             "Size": [4, 5, 6, 7, 8],

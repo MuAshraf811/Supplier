@@ -23,7 +23,7 @@ showOrderConfirmation({
     backgroundColor: Colors.black12, 
     isDismissible: false, 
     useRootNavigator: true,
-    constraints: BoxConstraints(maxHeight: 500.h),
+    constraints: BoxConstraints(maxHeight: 7000.h),
     builder: (context) => Scaffold(
       backgroundColor: Colors.black12,
       body: Container(

@@ -72,9 +72,9 @@ class AppRouter {
         final args = settings.arguments as int;
         return MaterialPageRoute(
           builder: (context) => BlocProvider<HomePageCubit>(
-            create: (context) => HomePageCubit()..initIndex(args),
+            create: (context) => HomePageCubit(),
             child: DetailedCategoryItemView(
-              index: args,
+              categoryItemIndex: args,
             ),
           ),
         );

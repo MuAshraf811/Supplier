@@ -47,9 +47,7 @@ class HomePageView extends StatelessWidget {
 }
 
 class MainView extends StatelessWidget {
-  const MainView({
-    super.key,
-  });
+  const MainView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +74,8 @@ class MainView extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(
                         context, RouteConstants.detailedItemCategoryView,
-                        arguments: AppConst.categoryModel[0][index].index);
+                        arguments: AppConst.categoryModel[context.read<MainHomeCubit>().state][index].index);
+                    
                   },
                   imagePath: AppConst.categoryModel[state][index].image,
                   title: AppConst.categoryModel[state][index].title,
