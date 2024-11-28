@@ -4,6 +4,7 @@ import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/app_button.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
+import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -48,7 +49,7 @@ showOrderConfirmation({
                       border: Border.all(color: ColorConsatnts.primary),
                       borderRadius: BorderRadius.circular(28.r)),
                   child: Text(
-                    "Order Summary",
+                    S.of(context).order_summary,
                     style: applyBoldStyle(
                         fontSize: 16, fontColor: ColorConsatnts.black),
                   ),
@@ -81,14 +82,14 @@ showOrderConfirmation({
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TitleWithValueText(title: "Category Name", value: orderCategory),
+                  TitleWithValueText(title: S.of(context).category_name, value: orderCategory),
                   const CustomDivider(),
-                  TitleWithValueText(title: "Order Name", value: orderType),
+                  TitleWithValueText(title: S.of(context).order_name, value: orderType),
                   const CustomDivider(),
-                  TitleWithValueText(title: "Date", value: orderDate, valueColor: ColorConsatnts.grey,),
+                  TitleWithValueText(title: S.of(context).order_date, value: orderDate, valueColor: ColorConsatnts.grey,),
                   const CustomDivider(),
                   Text(
-                    "Order Details :",
+                    S.of(context).order_details,
                     style: applyBoldStyle(
                       fontSize: 16,
                       fontColor: ColorConsatnts.primary,
@@ -104,7 +105,7 @@ showOrderConfirmation({
                   ), 
                    const CustomDivider(), 
                     Text(
-                    "Extra Details :",
+                    S.of(context).extra_details,
                     style: applyBoldStyle(
                       fontSize: 16,
                       fontColor: ColorConsatnts.primary,
@@ -123,7 +124,7 @@ showOrderConfirmation({
               ),
             ),
             AppButton(
-                text: "Confirm",
+                text: S.of(context).confirm,
                 onTap: () {
                   Navigator.pop(context);
                 })

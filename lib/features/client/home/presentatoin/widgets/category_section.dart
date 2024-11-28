@@ -20,7 +20,7 @@ class CategorySection extends StatelessWidget {
         height: 40.h,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: AppConst.homeCategoryStrings.length,
+          itemCount: AppConst.homeCategoryStrings(context).length,
           itemBuilder: (context, index) => CategoryItem(
             index: index,
           ),
@@ -57,7 +57,7 @@ class CategoryItem extends StatelessWidget {
                   : ColorConsatnts.grey.withOpacity(0.15),
             ),
             child: Text(
-              AppConst.homeCategoryStrings[index],
+              AppConst.homeCategoryStrings(context)[index],
               style: applySemiBoldStyle(
                 fontColor: index == state
                     ? ColorConsatnts.white

@@ -1,3 +1,5 @@
+import 'package:e_printer/core/cubit/app_config_cubit.dart';
+import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
@@ -6,7 +8,9 @@ import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/custom_drop_down.dart';
+import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileView extends StatelessWidget {
@@ -24,14 +28,14 @@ class ProfileView extends StatelessWidget {
           SizedBox(
             height: 248.h,
             child: ListView.builder(
-              itemCount: AppConst.settingsText.length,
+              itemCount: AppConst.settingsText(context).length,
               padding: EdgeInsets.symmetric(horizontal: 12.w),
               itemBuilder: (context, index) => SettingsItem(index: index),
             ),
           ),
           const VerticalSpacer(space: 6),
           Text(
-            "Find Us On",
+            S.of(context).find_us_on,
             style: applyBoldStyle(fontSize: 14, fontColor: ColorConsatnts.grey),
           ),
           const VerticalSpacer(space: 16),
@@ -105,7 +109,7 @@ class SettingsItem extends StatelessWidget {
             ),
             const HorizontalSpacer(space: 12),
             Text(
-              AppConst.settingsText[index],
+              AppConst.settingsText(context)[index],
               style: applySemiBoldStyle(
                 fontSize: 15,
                 fontColor: ColorConsatnts.black,
@@ -137,18 +141,18 @@ class LanguageDropDown extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Language",
+            S.of(context).language,
             style:
                 applyBoldStyle(fontSize: 15, fontColor: ColorConsatnts.black),
           ),
            CustomDropDown( 
-            onSelected: (p0) {
-              
+            onSelected: (val) {
+              context.read<AppConfigCubit>().changeLanguage(val);
             },
             text: "",
             entries:const [
-              "En",
-              "Ar",
+              "en",
+              "ar",
             ],
           )
         ],

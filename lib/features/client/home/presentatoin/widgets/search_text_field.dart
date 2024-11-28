@@ -1,4 +1,5 @@
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
+import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -46,7 +47,7 @@ class CustomTextField extends StatelessWidget {
         label: Padding(
           padding: EdgeInsets.only(left: 20.0.w),
           child: Text(
-            "Search ...",
+            S.of(context).search,
             style: TextStyle(
               color: Colors.black54,
               letterSpacing: 1.w,

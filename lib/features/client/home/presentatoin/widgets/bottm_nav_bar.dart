@@ -1,5 +1,6 @@
 import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
+import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,39 +24,39 @@ class AppBottomBar extends StatelessWidget {
       unselectedItemColor: Colors.white70,
       unselectedIconTheme: const IconThemeData(color: Colors.white70),
       selectedItemColor: ColorConsatnts.white,
-      items: const [
+      items:  [
         BottomNavigationBarItem(
-            icon: SvgHandler(
+            icon:const SvgHandler(
               imagePath: AssetsConstants.homeIcon,
               height: 22,
               width: 22,
               color: ColorConsatnts.white,
             ),
-            label: "Home"),
+            label: S.of(context).home),
         BottomNavigationBarItem(
-            icon: SvgHandler(
+            icon:const SvgHandler(
               imagePath: "assets/svgs/order-nav.svg",
               height: 22,
               width: 22,
               color: ColorConsatnts.white,
             ),
-            label: "Orders"),
+            label: S.of(context).orders),
         BottomNavigationBarItem(
-            icon: SvgHandler(
+            icon: const SvgHandler(
               imagePath: AssetsConstants.mailIcon,
               height: 22,
               width: 22,
               color: ColorConsatnts.white,
             ),
-            label: "Notifications"),
+            label: S.of(context).notifications),
         BottomNavigationBarItem(
-          icon: SvgHandler(
+          icon: const SvgHandler(
             imagePath: AssetsConstants.profileIcon,
             height: 22,
             width: 22,
             color: ColorConsatnts.white,
           ),
-          label: "Profile",
+          label: S.of(context).profile,
         ),
       ],
     );

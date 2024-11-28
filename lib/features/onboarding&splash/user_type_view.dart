@@ -37,7 +37,8 @@ class UserTypeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RoleContainer(
-                    onTap: () {
+                    onTap: () { 
+                      
                       // Navigator.popAndPushNamed(
                       //     context, RouteConstants.logInView); 
                                             Navigator.popAndPushNamed(
@@ -49,7 +50,8 @@ class UserTypeView extends StatelessWidget {
                   ),
                   const HorizontalSpacer(space: 18),
                   RoleContainer(
-                    onTap: () {
+                    onTap: () { 
+                     
                       Navigator.popAndPushNamed(
                           context, RouteConstants.supplierRegistererView);
                     },

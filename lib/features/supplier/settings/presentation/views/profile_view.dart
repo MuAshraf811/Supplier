@@ -25,7 +25,7 @@ class ProfileView extends StatelessWidget {
           SizedBox(
             height: 248.h,
             child: ListView.builder(
-              itemCount: AppConst.settingsText.length,
+              itemCount: AppConst.settingsText(context).length,
               padding: EdgeInsets.symmetric(horizontal: 12.w),
               itemBuilder: (context, index) => SettingsItem(index: index),
             ),
@@ -105,7 +105,7 @@ class SettingsItem extends StatelessWidget {
             ),
             const HorizontalSpacer(space: 12),
             Text(
-              AppConst.settingsText[index],
+              AppConst.settingsText(context)[index],
               style: applySemiBoldStyle(
                 fontSize: 15,
                 fontColor: ColorConsatnts.black,

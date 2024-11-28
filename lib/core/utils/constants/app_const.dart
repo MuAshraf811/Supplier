@@ -1,6 +1,7 @@
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/models/category_model.dart';
+import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../../../features/client/chat/model/message_model.dart';
@@ -11,15 +12,27 @@ class AppConst {
 
   static const sellerTermsAndConditions =
       "SELLER TERMS AND CONDITIONS By joining SUPPLIER app as a Seller, you agree to uphold the following standards in quality, quantity, and delivery timing. Failure to meet these conditions may result in penalties, suspension, or termination of your account.\n---------------\n - The seller must provide complete and correct information along with a copy of the trade license.\n---------\nIn the event that fraud or fraudulent information is discovered, the account will be deleted immediately without consulting the seller.\n---------------------------------\n Shipping and delivery : (FREE) are the responsibility of the SUPPLIER app and without collecting fees from the seller \n----------\n1. Quality Standards 1.1 Quality Assurance: Sellers must ensure that all products and services meet industry standards and comply with specifications provided by the Buyer in the quote request.1.2 Consistency: Sellers agree to deliver consistent quality across all orders. This includes using appropriate materials, adhering to design specifications, and maintaining color accuracy, print clarity, and finishing quality.1.3 Inspection: Sellers must inspect each order before dispatch to verify that it meetsagreed-upon quality standards. Repeated failure to meet quality standards may result in account suspension.1.4 Complaint Resolution: Sellers are required to promptly address any complaints about quality. a product or service is deemed unsatisfactory or defective,the Seller must offer an appropriate resolution, which may include repairs, replacements, or refunds, as SUPPLIER app requierment determined on a case-by-case basis.\n------------------------------\n 2. Quantity Standards 2.1 Order Fulfillment: Sellers must fulfill orders according to the quantities specified in each contract. Any discrepancies in quantity (shortage or surplus) without prior written agreement from the SUPPLIER app are not permitted. 2.2 Excess Quantity Handling: Any excess quantity delivered without the Buyer’s request or consent may be returned at the Seller’s expense or discarded. 2.3 Shortage Penalties: Failure to deliver the agreed quantity may result in a penalty and potential reimbursement of costs incurred by the Buyer due to the shortage.\n-------------------------\n 3. Delivery Timing 3.1 On-Time Delivery: Sellers are required to meet the delivery timeline specified in the Buyer’s contract or agreement. Late deliveries can negatively impact the Buyer and may result in penalties. 3.2 Communication of Delays: If delays are unavoidable, Sellers must notify the SUPPLIER app immediately, providing an updated delivery timeline. Failure to communicate delays promptly may result in additional penalties. 3.3 Rush Orders: If the Seller accepts a rush order, they must deliver within the expedited timeline specified. If the Seller fails to meet the rush order timing, they may be liable for refunds or compensation. 3.4 Penalty for Delays: Repeated or unjustified delays may result in penalties, and SUPPLIER app reserves the right to suspend or terminate the Seller’s account if they consistently fail to meet agreed-upon timelines.\n-----------------------\n 4. Guarantee 4.1 Satisfaction Guarantee: Sellers must guarantee satisfaction in terms of quality, quantity, and timeliness. If the product does not meet the agreed-upon standards, the Seller agrees to offer a replacement, repair, or refund as According to the conditions applicable in the SUPPLIER app. 4.2 Guarantee Period: The seller must ensure the quality of the product before sending it for shipping or delivery The seller is also committed to the agreed upon product sent in the price offer with all its details In the event of a violation of the product details sent by the seller, the supplier application has the right to reject the product or return it according to the customer’s requirements without the seller rejecting it and deducting the full price of the product or offering the seller a solution by reproducing the product according to the specifications of the price offer.\n------------------------\n 5. Return and Refund Policy: 5.1 Sellers must return products in the following cases: - The product is different from the specifications included in the price quote. - Defect in agreed upon colours. - Change in the materials agreed upon in the price offer. - Shortage in the agreed upon quantity. - Delay in product delivery. 5.2 Accountability: SUPPLIER app reserves the right to review Seller performance periodically. Sellers who repeatedly fail to uphold these conditions may face account penalties, including suspension or permanent removal from the platform.\n----------------------------------\n6.Commission Tiers (Dubai - Sharjah - Ajman) Orders from Dhs. 500, to Dhs. 1000 Commission Rate: %15 Example: For an order worth Dhs. 500 is a minimum , the commission fee would be Dhs. 75, and the Seller would receive Dhs 425.\n--------------------------\n .Orders from Dhs. 1001 to Dhs. 5000 Commission Rate: %10 Example: For an order worth Dhs 1,500, the commission fee would be Dhs.150, and the Seller would receive Dhs.1,350. \n----------------------------\nOrders from Dhs. 5,001 to Dhs. 10,000 Commission Rate: %7 Example: For an order worth Dhs. 5,100, the commission fee would be Dhs. 510, and the Seller would receive Dhs. 4,590.\n----------------------\n Orders Above Dhs. 10,000 Commission Rate: %5 Example: For an order worth Dhs. 10,050, the commission fee would be Dhs. 502.50, and the Seller would receive Dhs. 9,547.50.\n-----------------------\n Delivery Conditions\n--------\n 1. It is prohibited to place the seller’s logo or any details (address, phone number, any social media method) on the shipment when it is received by the shipping company.\n-----------\n2. The seller must ship the product, whatever it is, in plain boxes/wrapping paper without any drawings or details.\n-------------------\n 3. The shipping company must deliver a delivery note in the name of the SUPPLIER app.\n------------------------------\n* If the seller does not adhere to the shipping terms, fees and penalties may be imposed on the seller from SUPPLIER app.\nAdditional Conditions \nPromotional Discounts: SUPPLIER app may, at its discretion, offer promotional discounts on commission rates. Sellers will be notified of such promotions and how long they apply.Commission Deduction and Payout Automatic Deduction: The commission is automatically deducted from the Seller’s payout upon completion of each transaction.Payout Schedule: Payouts are issued on a [weekly] basis to the Seller’s designated account,minus the commission fee and any applicable processing charges (Agreed upon in advance).Refunds and Adjustments Order Cancellations: If an order is canceled before completion, no commission is charged.Disputed Orders: In cases of disputes where a partial refund is granted, the commission will be adjusted based on the final agreed-upon amount. Invoices Sellers must issue an invoice in the name of SUPPLYER PORTAL.For every purchase made through the supplier’s application.Disputes This Agreement is protected and construed in accordance with the laws of the United Arab Emirates and the laws of the Emirate of Dubai. The Dubai Courts have jurisdiction to hear every dispute arising from this agreement.Legal obligations of Seller You acknowledge and commit as a party to this agreement to: Compliance with applicable laws at all times and with legislation and regulations, including - without exception - all privacy protection legislation, laws and regulations.\n---------------------------------------\n You have all the powers and capacity to enter into this agreement and pay the dues in accordance with the terms and conditions contained therein.Acknowledgment\n----------\n - By joining SUPPLIER app as a Seller, you acknowledge and agree to abide by these standards.-\n-----\n By accepting these terms, you agree to the commission structure outlined above.\n-----------------\n SUPPLIER app reserves the right to modify commission rates with advance notice to Sellers.";
-  static const homeCategoryStrings = [
-    "Printing",
-    "Digital Fast Print",
-    "Packaging",
-    "Signage",
-    "UniForm",
-    "Gift Items"
-  ];
-
+  static List<String> homeCategoryStrings(BuildContext context) {
+    return [
+      S.of(context).printing,
+      S.of(context).fast_print,
+      S.of(context).packaging,
+      S.of(context).signage,
+      S.of(context).uniform,
+      S.of(context).gift_items,
+    ];
+  }
+// static List<String> homeCategoryString(BuildContext context) {
+//     final localizations = AppLocalizaStions.of(context)!;
+//     return [
+//       localizations.printing,
+//       localizations.digital,
+//       localizations.packaging,
+//       localizations.signage,
+//       localizations.uniform,
+//       localizations.gift_items,
+//     ];
+//   }
   static final chatMessagesExamples = [
     MessageModel(
         message: "Hello This is Test Message", time: "2:13", isSender: true),
@@ -54,13 +67,16 @@ class AppConst {
     'Khor Fakkan',
     'Dibba Al-Fujairah',
   ];
-  static List<String> settingsText = [
-    'Account',
-    'Terms & Conditions',
-    'Our Website',
-    'Delete Account',
-    'Log Out',
-  ];
+  
+   static List<String> settingsText(BuildContext context) {
+    return [
+      S.of(context).account,
+      S.of(context).terms_and_conditions,
+      S.of(context).our_website,
+      S.of(context).delete_account,
+      S.of(context).log_out,
+    ];
+  }
   static List<String> settingsIcon = [
     AssetsConstants.profileIcon,
     AssetsConstants.termsIcon,
@@ -76,52 +92,49 @@ class AppConst {
     const Color.fromARGB(255, 43, 136, 212),
   ]; 
 
-  static List<Map<String, dynamic>> detailedSection= 
-  [
-    
-  ];
+ 
 
-  static List<List<CategoryModel>> categoryModel = [
+  static List<List<CategoryModel>> categoryModel(BuildContext context){ return[
     [
       CategoryModel(
           image: "assets/images/printing/offset-printing.jpeg",
-          title: "offset-printing",
+          title: S.of(context).offset_print,
           index: 0),
       CategoryModel(
           image: "assets/images/printing/carton box.jpeg",
-          title: "Carton box",
+          title:S.of(context).carton_boxes,
           index: 1),
       CategoryModel(
           image: "assets/images/printing/paper box.jpeg",
-          title: "Paper box",
+          title: S.of(context).paper_boxes,
           index: 2),
       CategoryModel(
           image: "assets/images/printing/wrapping paper.jpeg",
-          title: "wrapping paper",
+          title: S.of(context).wrapping_paper,
           index: 3),
       CategoryModel(
           image: "assets/images/printing/coffee bag.jpeg",
-          title: "coffee bag",
+          title: S.of(context).coffee_bags,
           index: 4),
       CategoryModel(
           image: "assets/images/printing/shopping bag.jpeg",
-          title: "shopping bag",
+          title: S.of(context).shopping_bags,
           index: 5),
       CategoryModel(
           image: "assets/images/printing/Paper Bag-01.png",
-          title: "Paper bag",
+          title: S.of(context).paper_bags,
           index: 6),
       CategoryModel(
           image: "assets/images/printing/canvas bag.jpeg",
-          title: "Canvas bag",
+          title: S.of(context).canvas_bags,
           index: 7),
       CategoryModel(
           image: "assets/images/printing/Plastic Bag.jpeg",
-          title: "Plastic Bag",
+          title: S.of(context).plastic_bags,
           index: 8),
       CategoryModel(
           image: "assets/images/printing/paper cup.jpeg",
-          title: "Paper cup",
+          title: S.of(context).paper_cups,
           index: 9),
       CategoryModel(
           image: "assets/images/printing/Diverse.jpeg",
@@ -129,121 +142,121 @@ class AppConst {
           index: 11),
       CategoryModel(
           image: "assets/images/printing/plastic cup.jpeg",
-          title: "Plastic cup",
+          title: S.of(context).plastic_cups,
           index: 10),
     ],
     [
       CategoryModel(
-          image: "assets/images/Digital/Brochure.jpeg", title: "Brochure", index : 0),
+          image: "assets/images/Digital/Brochure.jpeg", title: S.of(context).brochure, index : 0),
       CategoryModel(
-          image: "assets/images/Digital/catalog.jpeg", title: "catalog", index: 1),
+          image: "assets/images/Digital/catalog.jpeg", title: S.of(context).catalogue, index: 1),
       CategoryModel(
           image: "assets/images/Digital/digital card.jpeg",
-          title: "digital card", index: 2),
+          title: S.of(context).digital_cards, index: 2),
       CategoryModel(
           image: "assets/images/Digital/diverse.jpeg", title: "Diverse", index: 3),
-      CategoryModel(image: "assets/images/Digital/Flyer.jpeg", title: "Flyer", index: 4),
+      CategoryModel(image: "assets/images/Digital/Flyer.jpeg", title: S.of(context).flyers, index: 4),
       CategoryModel(
           image: "assets/images/Digital/small shopping bag.png",
-          title: "small shopping bag", index: 5),
+          title: S.of(context).small_shopping_bag, index: 5),
       CategoryModel(
-          image: "assets/images/Digital/Stickers.jpg", title: "Stickers", index: 5),
+          image: "assets/images/Digital/Stickers.jpg", title: S.of(context).stickers, index: 5),
     ],
     [
       CategoryModel(
           image: "assets/images/Packaging/Aluminum Products-01.png",
-          title: "Aluminum Products", index: 0),
+          title: S.of(context).aluminium_products, index: 0),
       CategoryModel(
           image: "assets/images/Packaging/Fiber Products-01.png",
-          title: "Fiber Products", index: 1),
+          title: S.of(context).molded_fiber_products, index: 1),
       CategoryModel(
           image: "assets/images/Packaging/Foam Products-01.png",
-          title: "Foam Products", index: 2),
+          title: S.of(context).foam_products, index: 2),
       CategoryModel(
           image: "assets/images/Packaging/Hygiene Products-01.png",
-          title: "Hygiene Products", index: 3),
+          title: S.of(context).hygiene_and_protection, index: 3),
       CategoryModel(
           image: "assets/images/Packaging/Paper Products-01.png",
-          title: "Paper Products",index: 4),
+          title: S.of(context).paper_products,index: 4),
       CategoryModel(
           image: "assets/images/Packaging/wooden Products-01.png",
-          title: "wooden Products", index: 5),
+          title: S.of(context).wooden_products, index: 5),
       CategoryModel(
-          image: "assets/images/Packaging/Tissue-01.png", title: "Tissue", index: 6),
+          image: "assets/images/Packaging/Tissue-01.png", title: S.of(context).tissue_products, index: 6),
     ],
     [
       CategoryModel(
-          image: "assets/images/Signage/2D signage.jpeg", title: "2D signage", index: 0),
+          image: "assets/images/Signage/2D signage.jpeg", title: S.of(context).two_d_signage, index: 0),
       CategoryModel(
-          image: "assets/images/Signage/3D signage.jpeg", title: "3D signage", index: 1),
+          image: "assets/images/Signage/3D signage.jpeg", title: S.of(context).three_d_signage, index: 1),
       CategoryModel(
           image: "assets/images/Signage/Digital Screen.jpeg",
-          title: "Digital Screen", index: 2),
+          title: S.of(context).digital_screen, index: 2),
       CategoryModel(
           image: "assets/images/Signage/diverse.jpeg", title: "diverse", index: 3),
       CategoryModel(
           image: "assets/images/Signage/exhibition stand.jpeg",
           title: "exhibition stand.", index: 4),
-      CategoryModel(image: "assets/images/Signage/Flag.jpeg", title: "Flag", index: 5),
+      CategoryModel(image: "assets/images/Signage/Flag.jpeg", title: S.of(context).flags, index: 5),
       CategoryModel(
           image: "assets/images/Signage/flix signage.jpeg",
-          title: "flix signage", index: 6),
+          title: S.of(context).flex_signage, index: 6),
       CategoryModel(
           image: "assets/images/Signage/large format sticker.jpeg",
           title: "large format sticker", index: 7),
       CategoryModel(
-          image: "assets/images/Signage/pop up.jpeg", title: "pop up", index: 8),
+          image: "assets/images/Signage/pop up.jpeg", title: S.of(context).pop_up, index: 8),
       CategoryModel(
-          image: "assets/images/Signage/roll up.jpeg", title: "roll up", index: 9),
+          image: "assets/images/Signage/roll up.jpeg", title:S.of(context).rollup, index: 9),
       CategoryModel(
           image: "assets/images/Signage/side signage.jpeg",
-          title: "side signage", index: 10),
+          title: S.of(context).side_signage, index: 10),
     ],
     [
       CategoryModel(
-          image: "assets/images/Unifoarm/Chef Cap.jpeg", title: "Chef Cap", index: 0),
+          image: "assets/images/Unifoarm/Chef Cap.jpeg", title: S.of(context).chef_cap, index: 0),
       CategoryModel(
           image: "assets/images/Unifoarm/Chef Jacket.jpeg",
-          title: "Chef Jacket", index: 1),
+          title: S.of(context).chef_jacket, index: 1),
       CategoryModel(
           image: "assets/images/Unifoarm/diverse.jpeg", title: "diverse", index: 2),
       CategoryModel(
-          image: "assets/images/Unifoarm/full set.jpg", title: "Full Set", index: 3),
-      CategoryModel(image: "assets/images/Unifoarm/shirt.jpeg", title: "Shirt", index: 4),
-      CategoryModel(image: "assets/images/Unifoarm/suit.jpeg", title: "Suit", index: 5),
+          image: "assets/images/Unifoarm/full set.jpg", title: S.of(context).full_set, index: 3),
+      CategoryModel(image: "assets/images/Unifoarm/shirt.jpeg", title: S.of(context).shirt, index: 4),
+      CategoryModel(image: "assets/images/Unifoarm/suit.jpeg", title: S.of(context).suit, index: 5),
       CategoryModel(
-          image: "assets/images/Unifoarm/T-shirt.jpeg", title: "T-shirt", index: 6),
+          image: "assets/images/Unifoarm/T-shirt.jpeg", title: S.of(context).t_shirt, index: 6),
       CategoryModel(
-          image: "assets/images/Unifoarm/trouser.jpeg", title: "Trouser", index: 7),
+          image: "assets/images/Unifoarm/trouser.jpeg", title: S.of(context).trouser, index: 7),
     ],
     [
       CategoryModel(
-          image: "assets/images/Gift Items/agenda.jpeg", title: "agenda", index: 0),
+          image: "assets/images/Gift Items/agenda.jpeg", title: S.of(context).agenda, index: 0),
       CategoryModel(
           image: "assets/images/Gift Items/Diverse.jpeg", title: "Diverse", index: 1),
       CategoryModel(
           image: "assets/images/Gift Items/flash memory.jpeg",
-          title: "flash memory", index: 2),
+          title: S.of(context).offset_print, index: 2),
       CategoryModel(
-          image: "assets/images/Gift Items/ID Card.jpeg", title: "Id Card", index: 3),
+          image: "assets/images/Gift Items/ID Card.jpeg", title: S.of(context).id_cards, index: 3),
       CategoryModel(
-          image: "assets/images/Gift Items/Lanyard.jpeg", title: "Lanyard" , index: 4),
+          image: "assets/images/Gift Items/Lanyard.jpeg", title: S.of(context).lanyard , index: 4),
       CategoryModel(
           image: "assets/images/Gift Items/mobile cover.jpeg",
-          title: "Mobile Cover", index: 5),
+          title: S.of(context).mobile_cover, index: 5),
       CategoryModel(
-          image: "assets/images/Gift Items/Mouse Pad.jpeg", title: "Mouse Pad", index: 6),
-      CategoryModel(image: "assets/images/Gift Items/Mug.jpeg", title: "Mug", index: 7),
-      CategoryModel(image: "assets/images/Gift Items/Pen.jpeg", title: "Pen", index: 8),
+          image: "assets/images/Gift Items/Mouse Pad.jpeg", title: S.of(context).mouse_pad, index: 6),
+      CategoryModel(image: "assets/images/Gift Items/Mug.jpeg", title: S.of(context).mugs, index: 7),
+      CategoryModel(image: "assets/images/Gift Items/Pen.jpeg", title:S.of(context).pen, index: 8),
       CategoryModel(
           image: "assets/images/Gift Items/Trophy.jpeg", title: "Trophy", index: 9),
       CategoryModel(
-          image: "assets/images/Gift Items/umbrella.jpeg", title: "umbrella", index: 10),
+          image: "assets/images/Gift Items/umbrella.jpeg", title: S.of(context).umbrella, index: 10),
       CategoryModel(
           image: "assets/images/Gift Items/Wooden-Stand-.jpeg",
-          title: "Wooden-Stand", index: 11),
+          title: S.of(context).offset_print, index: 11),
       CategoryModel(
-          image: "assets/images/Gift Items/Wristband.jpeg", title: "Wristband", index: 12),
+          image: "assets/images/Gift Items/Wristband.jpeg", title: S.of(context).wristband, index: 12),
     ],
-  ];
+  ];}
 }

@@ -10,11 +10,10 @@ import 'package:e_printer/features/client/home/presentatoin/cubit/cubit/home_pag
 import 'package:e_printer/features/client/home/presentatoin/widgets/custom_drop_down.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/custom_radio_button.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/detailed_screen_order_button.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../widgets/custom_check.dart';
 
 class DetailedCategoryItemView extends StatelessWidget {
   const DetailedCategoryItemView({super.key, required this.categoryItemIndex});
@@ -90,7 +89,6 @@ class DetailedCategoryItemView extends StatelessWidget {
               const VerticalSpacer(space: 12),
               ItemTextField(categoryItemIndex: categoryItemIndex),
               const VerticalSpacer(space: 12),
-             
               const DetailedScreenOrderButton(),
               const VerticalSpacer(space: 16),
             ],
@@ -153,7 +151,8 @@ class ItemRequiredDropDowns extends StatelessWidget {
             ["details"] as Map<String, dynamic>;
         radioDropDowns.entries.forEach((e) {
           final defaultValue = (e.value as List<dynamic>).first;
-          context.read<HomePageCubit>().orderDetails[e.key] ??= "$defaultValue\n";
+          context.read<HomePageCubit>().orderDetails[e.key] ??=
+              "$defaultValue\n";
         });
         return SizedBox(
           height: 220.h,
@@ -170,7 +169,8 @@ class ItemRequiredDropDowns extends StatelessWidget {
                       text: e.key,
                       entries: e.value,
                       onSelected: (val) {
-                        context.read<HomePageCubit>().orderDetails[e.key] = "$val\n";
+                        context.read<HomePageCubit>().orderDetails[e.key] =
+                            "$val\n";
                       },
                     ))
                 .toList(),
@@ -202,8 +202,8 @@ class ItemTextField extends StatelessWidget {
             controller:
                 context.read<HomePageCubit>().orderExtraDetailsController,
             label: isRequird
-                ? "This Field Is Required"
-                : "This Field is Optional ",
+                ? S.of(context).this_field_is_required
+                : S.of(context).this_field_is_optional,
             suffixIcon: Icons.edit,
             maxLines: 6,
             minLines: 4,
@@ -240,7 +240,8 @@ class AdditionalDropDowns extends StatelessWidget {
             as Map<String, dynamic>;
         radioDropDowns.entries.forEach((e) {
           final defaultValue = (e.value as List<dynamic>).first;
-          context.read<HomePageCubit>().orderDetails[e.key] ??="$defaultValue\n";
+          context.read<HomePageCubit>().orderDetails[e.key] ??=
+              "$defaultValue\n";
         });
         return SizedBox(
           height: 50.h,
@@ -258,7 +259,8 @@ class AdditionalDropDowns extends StatelessWidget {
                     text: e.key,
                     entries: e.value,
                     onSelected: (val) {
-                      context.read<HomePageCubit>().orderDetails[e.key] = "$val\n";
+                      context.read<HomePageCubit>().orderDetails[e.key] =
+                          "$val\n";
                     },
                   ),
                 )

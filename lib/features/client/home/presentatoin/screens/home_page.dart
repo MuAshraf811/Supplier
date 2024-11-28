@@ -69,16 +69,16 @@ class MainView extends StatelessWidget {
                   mainAxisSpacing: 14.h,
                   childAspectRatio: 1.w / 1.2.h,
                 ),
-                itemCount: AppConst.categoryModel[state].length,
+                itemCount: AppConst.categoryModel(context)[state].length,
                 itemBuilder: (context, index) => SectionGridItem(
                   onTap: () {
                     Navigator.pushNamed(
                         context, RouteConstants.detailedItemCategoryView,
-                        arguments: AppConst.categoryModel[context.read<MainHomeCubit>().state][index].index);
+                        arguments: AppConst.categoryModel(context)[context.read<MainHomeCubit>().state][index].index);
                     
                   },
-                  imagePath: AppConst.categoryModel[state][index].image,
-                  title: AppConst.categoryModel[state][index].title,
+                  imagePath: AppConst.categoryModel(context)[state][index].image,
+                  title: AppConst.categoryModel(context)[state][index].title,
                 ),
               );
             },

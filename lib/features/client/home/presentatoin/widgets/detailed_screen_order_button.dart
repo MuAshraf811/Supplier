@@ -1,5 +1,6 @@
 import 'package:e_printer/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/show_order_dialog_confirmation.dart';
+import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +14,7 @@ class DetailedScreenOrderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppButton(
-      text: "Add Order",
+      text: S.of(context).add_order,
       onTap: () {
         if (context.read<HomePageCubit>().formKey.currentState!.validate()) {
           context.read<HomePageCubit>().addOrder();
