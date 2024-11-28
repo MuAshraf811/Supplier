@@ -4,7 +4,6 @@ class OrderModel {
   final String orderDate;
   final String orderDetails;
   final String? orderExtraDescription;
-
   OrderModel({
     required this.orderCategoryName,
     required this.orderType,

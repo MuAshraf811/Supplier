@@ -85,7 +85,7 @@ showOrderConfirmation({
                   const CustomDivider(),
                   TitleWithValueText(title: "Order Name", value: orderType),
                   const CustomDivider(),
-                  TitleWithValueText(title: "Date", value: orderDate),
+                  TitleWithValueText(title: "Date", value: orderDate, valueColor: ColorConsatnts.grey,),
                   const CustomDivider(),
                   Text(
                     "Order Details :",
@@ -136,9 +136,10 @@ showOrderConfirmation({
 
 class TitleWithValueText extends StatelessWidget {
   const TitleWithValueText(
-      {super.key, required this.title, required this.value});
+      {super.key, required this.title, required this.value, this.valueColor});
   final String title;
-  final String value;
+  final String value; 
+  final Color? valueColor;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -152,7 +153,7 @@ class TitleWithValueText extends StatelessWidget {
         Text(
           value,
           style:
-              applySemiBoldStyle(fontSize: 16, fontColor: ColorConsatnts.black),
+              applySemiBoldStyle(fontSize: 16, fontColor:valueColor?? ColorConsatnts.black),
         ),
       ],
     );

@@ -3,12 +3,14 @@ import 'package:e_printer/core/utils/constants/category_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/app_text_field.dart';
+import 'package:e_printer/core/utils/widgets/snack_bar.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
 import 'package:e_printer/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/custom_drop_down.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/custom_radio_button.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/detailed_screen_order_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,32 +55,7 @@ class DetailedCategoryItemView extends StatelessWidget {
                 ),
               ),
               const VerticalSpacer(space: 12),
-              BlocBuilder<HomePageCubit, HomePageState>(
-                buildWhen: (previous, current) => current is RadioCurrentChoice,
-                builder: (context, state) => IntrinsicHeight(
-                  child: Column(
-                    children: CategoryConstants
-                        .printing[categoryItemIndex].radioOptions
-                        .map((val) => CustomRadioButton(
-                            text: val,
-                            value: val,
-                            groupValue: context
-                                .read<HomePageCubit>()
-                                .radioButtonGroupValue,
-                            onChanged: (value) {
-                              context
-                                  .read<HomePageCubit>()
-                                  .rebuildRadioOnChooseing(
-                                      value!,
-                                      CategoryConstants
-                                          .printing[categoryItemIndex]
-                                          .radioOptions
-                                          .indexOf(value));
-                            }))
-                        .toList(),
-                  ),
-                ),
-              ),
+              ItemRadioButtons(categoryItemIndex: categoryItemIndex),
               const VerticalSpacer(space: 12),
               Align(
                 alignment: Alignment.centerLeft,
@@ -96,34 +73,7 @@ class DetailedCategoryItemView extends StatelessWidget {
                 ),
               ),
               const VerticalSpacer(space: 12),
-              BlocBuilder<HomePageCubit, HomePageState>(
-                buildWhen: (previous, current) => current is RadioCurrentChoice,
-                builder: (context, state) {
-                  final radioDropDowns =
-                      CategoryConstants.printing[categoryItemIndex].details[
-                              context.read<HomePageCubit>().indexFromChoice]
-                          ["details"] as Map<String, dynamic>;
-                  return SizedBox(
-                    height: 220.h,
-                    child: GridView(
-                                          physics:const NeverScrollableScrollPhysics(),
-
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 4.w,
-                        mainAxisSpacing: 10.w,
-                        childAspectRatio: 2 / 0.7,
-                      ),
-                      children: radioDropDowns.entries
-                          .map((e) => CustomDropDown(
-                              text: e.key,
-                              entries: e.value,
-                              onSelected: (val) {}))
-                          .toList(),
-                    ),
-                  );
-                },
-              ),
+              ItemRequiredDropDowns(categoryItemIndex: categoryItemIndex),
               const VerticalSpacer(space: 12),
               Align(
                 alignment: Alignment.centerLeft,
@@ -136,68 +86,186 @@ class DetailedCategoryItemView extends StatelessWidget {
                 ),
               ),
               const VerticalSpacer(space: 12),
-              BlocBuilder<HomePageCubit, HomePageState>(
-                buildWhen: (previous, current) => current is RadioCurrentChoice,
-                builder: (context, state) {
-                  final radioDropDowns =
-                      CategoryConstants.printing[categoryItemIndex].details[
-                              context.read<HomePageCubit>().indexFromChoice]
-                          ["other"] as Map<String, dynamic>;
-                  return SizedBox(
-                    height: 50.h,
-                    child: GridView( 
-                    physics:const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 4.w,
-                        mainAxisSpacing: 10.w,
-                        childAspectRatio: 2 / 0.7,
-                      ), 
-                    
-                      children: radioDropDowns.entries
-                          .map((e) => CustomDropDown(
-                              text: e.key,
-                              entries: e.value,
-                              onSelected: (val) {}))
-                          .toList(),
-                    ),
-                  );
-                },
-              ),
+              AdditionalDropDowns(categoryItemIndex: categoryItemIndex),
               const VerticalSpacer(space: 12),
-              BlocBuilder<HomePageCubit, HomePageState>(
-                builder: (context, state) {
-                  final bool isRequird =
-                      CategoryConstants.printing[categoryItemIndex].details[
-                              context.read<HomePageCubit>().indexFromChoice]
-                          ["isRequired"];
-                  return Form( 
-                    key: context.read<HomePageCubit>().formKey,
-                    child: AppTextField(
-                      label: isRequird
-                          ? "This Field Is Required"
-                          : "This Field is Optional ",
-                      suffixIcon: Icons.edit,  
-                      maxLines: 3,
-                      validator: (value) {
-                        if(isRequird && value==null&& value!.isEmpty){
-                                return "This Field Shouldn't be null";
-                        } 
-                        return null;
-                      },
-                    ),
-                  );
-                },
-              ),
+              ItemTextField(categoryItemIndex: categoryItemIndex),
               const VerticalSpacer(space: 12),
-              const CustomCheck(),
-              const VerticalSpacer(space: 12),
+             
               const DetailedScreenOrderButton(),
               const VerticalSpacer(space: 16),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class ItemRadioButtons extends StatelessWidget {
+  const ItemRadioButtons({
+    super.key,
+    required this.categoryItemIndex,
+  });
+
+  final int categoryItemIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomePageCubit, HomePageState>(
+      buildWhen: (previous, current) => current is RadioCurrentChoice,
+      builder: (context, state) => IntrinsicHeight(
+        child: Column(
+          children: CategoryConstants.printing[categoryItemIndex].radioOptions
+              .map((val) => CustomRadioButton(
+                  text: val,
+                  value: val,
+                  groupValue:
+                      context.read<HomePageCubit>().radioButtonGroupValue,
+                  onChanged: (value) {
+                    context.read<HomePageCubit>().rebuildRadioOnChooseing(
+                        value!,
+                        CategoryConstants
+                            .printing[categoryItemIndex].radioOptions
+                            .indexOf(value));
+                  }))
+              .toList(),
+        ),
+      ),
+    );
+  }
+}
+
+class ItemRequiredDropDowns extends StatelessWidget {
+  const ItemRequiredDropDowns({
+    super.key,
+    required this.categoryItemIndex,
+  });
+
+  final int categoryItemIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomePageCubit, HomePageState>(
+      buildWhen: (previous, current) => current is RadioCurrentChoice,
+      builder: (context, state) {
+        final radioDropDowns = CategoryConstants.printing[categoryItemIndex]
+                .details[context.read<HomePageCubit>().indexFromChoice]
+            ["details"] as Map<String, dynamic>;
+        radioDropDowns.entries.forEach((e) {
+          final defaultValue = (e.value as List<dynamic>).first;
+          context.read<HomePageCubit>().orderDetails[e.key] ??= "$defaultValue\n";
+        });
+        return SizedBox(
+          height: 220.h,
+          child: GridView(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 4.w,
+              mainAxisSpacing: 10.w,
+              childAspectRatio: 2 / 0.7,
+            ),
+            children: radioDropDowns.entries
+                .map((e) => CustomDropDown(
+                      text: e.key,
+                      entries: e.value,
+                      onSelected: (val) {
+                        context.read<HomePageCubit>().orderDetails[e.key] = "$val\n";
+                      },
+                    ))
+                .toList(),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ItemTextField extends StatelessWidget {
+  const ItemTextField({
+    super.key,
+    required this.categoryItemIndex,
+  });
+
+  final int categoryItemIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomePageCubit, HomePageState>(
+      builder: (context, state) {
+        final bool isRequird = CategoryConstants.printing[categoryItemIndex]
+                .details[context.read<HomePageCubit>().indexFromChoice]
+            ["isRequired"];
+        return Form(
+          key: context.read<HomePageCubit>().formKey,
+          child: AppTextField(
+            controller:
+                context.read<HomePageCubit>().orderExtraDetailsController,
+            label: isRequird
+                ? "This Field Is Required"
+                : "This Field is Optional ",
+            suffixIcon: Icons.edit,
+            maxLines: 6,
+            minLines: 4,
+            validator: (value) {
+              if (isRequird && value == null && value!.isEmpty) {
+                showCustomSnackBar(context, "This Field Shouldn't be empty",
+                    ColorConsatnts.red);
+                return "This Field Shouldn't be null";
+              }
+              return null;
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class AdditionalDropDowns extends StatelessWidget {
+  const AdditionalDropDowns({
+    super.key,
+    required this.categoryItemIndex,
+  });
+
+  final int categoryItemIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomePageCubit, HomePageState>(
+      buildWhen: (previous, current) => current is RadioCurrentChoice,
+      builder: (context, state) {
+        final radioDropDowns = CategoryConstants.printing[categoryItemIndex]
+                .details[context.read<HomePageCubit>().indexFromChoice]["other"]
+            as Map<String, dynamic>;
+        radioDropDowns.entries.forEach((e) {
+          final defaultValue = (e.value as List<dynamic>).first;
+          context.read<HomePageCubit>().orderDetails[e.key] ??="$defaultValue\n";
+        });
+        return SizedBox(
+          height: 50.h,
+          child: GridView(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 4.w,
+              mainAxisSpacing: 10.w,
+              childAspectRatio: 2 / 0.7,
+            ),
+            children: radioDropDowns.entries
+                .map(
+                  (e) => CustomDropDown(
+                    text: e.key,
+                    entries: e.value,
+                    onSelected: (val) {
+                      context.read<HomePageCubit>().orderDetails[e.key] = "$val\n";
+                    },
+                  ),
+                )
+                .toList(),
+          ),
+        );
+      },
     );
   }
 }

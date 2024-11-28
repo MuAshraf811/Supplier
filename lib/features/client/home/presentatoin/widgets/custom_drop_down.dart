@@ -27,7 +27,8 @@ class CustomDropDown extends StatelessWidget {
         Transform.scale(
           scaleY: 0.6,
           child: DropdownMenu(
-            width: 90.w, 
+            width: 90.w,  
+            
             onSelected:onSelected,
             trailingIcon: const Icon(
               Icons.arrow_drop_down,
