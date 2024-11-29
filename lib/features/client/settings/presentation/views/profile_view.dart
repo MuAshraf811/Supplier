@@ -93,8 +93,8 @@ class SettingsItem extends StatelessWidget {
             case 1:
               Navigator.pushNamed(
                   context, RouteConstants.termsAndConditionsView);
-            case 2:
             case 3:
+            case 4: Navigator.pushReplacementNamed(context, RouteConstants.logInView);
             default:
           }
         },
