@@ -1,10 +1,6 @@
 import 'package:e_printer/core/utils/constants/route_constants.dart';
-import 'package:e_printer/core/utils/styles/text_styles.dart';
-import 'package:e_printer/core/utils/widgets/app_button.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/features/client/orders/notifications/presentation/screens/notifications_screen.dart';
-import 'package:e_printer/features/client/orders/presentation/screens/orders_view.dart';
-import 'package:e_printer/features/client/orders/presentation/widget/divider_with_text.dart';
 import 'package:e_printer/features/client/settings/presentation/views/profile_view.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_bottom_bar.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_home_app_bar.dart';
@@ -12,10 +8,8 @@ import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_o
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/utils/constants/assets_constants.dart';
 import '../../../../../core/utils/constants/color_consatnts.dart';
 import '../../../../../core/utils/widgets/svg_handler.dart';
-import '../../../../client/home/presentatoin/widgets/search_text_field.dart';
 import '../cubit/supplier_nav_bar_cubit.dart';
 
 class SupplierHomeView extends StatelessWidget {

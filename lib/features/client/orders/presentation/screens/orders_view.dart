@@ -5,7 +5,6 @@ import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
 import 'package:e_printer/features/client/orders/model/client_order_model.dart';
 import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
-import 'package:e_printer/features/client/orders/presentation/widget/divider_with_text.dart';
 import 'package:e_printer/features/client/orders/presentation/widget/order_item.dart';
 import 'package:e_printer/features/client/orders/presentation/widget/order_shimmer.dart';
 import 'package:flutter/material.dart';
