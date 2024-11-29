@@ -10,7 +10,9 @@ part 'orders_state.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit() : super(OrdersInitial());
-  late List<ClientOrderModel> clientOrders ; 
+  late List<ClientOrderModel> clientOrders ;  
+  late List<ClientOrderModel> supplierOrders ; 
+
 
  void deleteOrder({required String orderId})async{ 
     
@@ -18,7 +20,32 @@ class OrdersCubit extends Cubit<OrdersState> {
      fetchClientOrders();
  }
 
+ void fetchSupplierAvailableOrders()async{ 
+   try {
+    emit(FetchingOrderState());
 
+   
+
+    // Query Firestore to fetch only documents matching the userId
+    final QuerySnapshot<Map<String, dynamic>> response = await FirebaseFirestore.instance
+        .collection("Orders")
+        
+        .get();
+     
+    // Map the documents to  model
+   supplierOrders = response.docs
+    .map((e) => ClientOrderModel.fromJson({
+          'id': e.id, // Add the document ID
+          ...e.data(), // Spread the document data
+        }))
+    .toList();
+
+    emit(FetchingOrderSuccessState());
+  } catch (error) {
+    log("Error fetching orders: $error");
+    emit(FetchingOrderErrorState(error: error.toString()));
+  }
+ }
 
 void fetchClientOrders() async {
   try {

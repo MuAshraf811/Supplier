@@ -84,7 +84,10 @@ class AppRouter {
         );
       case RouteConstants.supplierRegistererView:
         return MaterialPageRoute(
-          builder: (context) => const SupplierRegisterView(),
+          builder: (context) => BlocProvider<AuthenticationCubit>(
+            create: (context) => AuthenticationCubit(),
+            child: const SupplierRegisterView(),
+          ),
         );
       case RouteConstants.supplierHomeView:
         return MaterialPageRoute(

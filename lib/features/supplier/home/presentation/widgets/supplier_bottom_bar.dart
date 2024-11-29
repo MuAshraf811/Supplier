@@ -11,113 +11,110 @@ class SupplierBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 6.w, right: 6.w, bottom: 6.h),
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.r),
-            border: Border.all(color: ColorConsatnts.primary, width: 2.5.w)),
-        child: BlocBuilder<SupplierNavBarCubit, int>(
-          builder: (context, state) {
-            return BottomNavigationBar(
-              currentIndex: context.read<SupplierNavBarCubit>().state,
-              onTap: (value) {
-                context.read<SupplierNavBarCubit>().changeNavBarPages(value);
-              },
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: ColorConsatnts.primary,
-              unselectedItemColor: ColorConsatnts.white,
-              selectedItemColor: ColorConsatnts.white,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Column(
-                    children: [
-                      Container(
-                        width: 32.w,
-                        margin: EdgeInsets.only(bottom: 4.h),
-                        height: 4.h,
-                        color: state == 0
-                            ? ColorConsatnts.white
-                            : ColorConsatnts.primary,
-                      ),
-                      const SvgHandler(
-                        imagePath: "assets/svgs/order-nav.svg",
-                        height: 20,
-                        width: 20,
-                        color: ColorConsatnts.white,
-                      ),
-                    ],
-                  ),
-                  label: "Orders",
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6.r),
+          border: Border.all(color: ColorConsatnts.primary, width: 2.5.w)),
+      child: BlocBuilder<SupplierNavBarCubit, int>(
+        builder: (context, state) {
+          return BottomNavigationBar(
+            currentIndex: context.read<SupplierNavBarCubit>().state,
+            onTap: (value) {
+              context.read<SupplierNavBarCubit>().changeNavBarPages(value);
+            },
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: ColorConsatnts.primary,
+            unselectedItemColor: ColorConsatnts.white,
+            selectedItemColor: ColorConsatnts.white,
+            items: [
+              BottomNavigationBarItem(
+                icon: Column(
+                  children: [
+                    Container(
+                      width: 32.w,
+                      margin: EdgeInsets.only(bottom: 4.h),
+                      height: 4.h,
+                      color: state == 0
+                          ? ColorConsatnts.white
+                          : ColorConsatnts.primary,
+                    ),
+                    const SvgHandler(
+                      imagePath: "assets/svgs/order-nav.svg",
+                      height: 20,
+                      width: 20,
+                      color: ColorConsatnts.white,
+                    ),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: Column(
-                    children: [
-                      Container(
-                        width: 32.w,
-                        height: 4.h,
-                        margin: EdgeInsets.only(bottom: 4.h),
-                        color: state == 1
-                            ? ColorConsatnts.white
-                            : ColorConsatnts.primary,
-                      ),
-                      const SvgHandler(
-                        imagePath:
-                            "assets/svgs/offer-hot-product-fire-svgrepo-com.svg",
-                        height: 20,
-                        width: 20,
-                        color: ColorConsatnts.white,
-                      ),
-                    ],
-                  ),
-                  label: "Offers",
+                label: "Orders",
+              ),
+              BottomNavigationBarItem(
+                icon: Column(
+                  children: [
+                    Container(
+                      width: 32.w,
+                      height: 4.h,
+                      margin: EdgeInsets.only(bottom: 4.h),
+                      color: state == 1
+                          ? ColorConsatnts.white
+                          : ColorConsatnts.primary,
+                    ),
+                    const SvgHandler(
+                      imagePath:
+                          "assets/svgs/offer-hot-product-fire-svgrepo-com.svg",
+                      height: 20,
+                      width: 20,
+                      color: ColorConsatnts.white,
+                    ),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: Column(
-                    children: [
-                      Container(
-                        width: 32.w,
-                        margin: EdgeInsets.only(bottom: 4.h),
-                        height: 4.h,
-                        color: state == 2
-                            ? ColorConsatnts.white
-                            : ColorConsatnts.primary,
-                      ),
-                      const SvgHandler(
-                        imagePath: AssetsConstants.mailIcon,
-                        height: 20,
-                        width: 20,
-                        color: ColorConsatnts.white,
-                      ),
-                    ],
-                  ),
-                  label: "Notifications",
+                label: "Offers",
+              ),
+              BottomNavigationBarItem(
+                icon: Column(
+                  children: [
+                    Container(
+                      width: 32.w,
+                      margin: EdgeInsets.only(bottom: 4.h),
+                      height: 4.h,
+                      color: state == 2
+                          ? ColorConsatnts.white
+                          : ColorConsatnts.primary,
+                    ),
+                    const SvgHandler(
+                      imagePath: AssetsConstants.mailIcon,
+                      height: 20,
+                      width: 20,
+                      color: ColorConsatnts.white,
+                    ),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: Column(
-                    children: [
-                      Container(
-                        width: 32.w,
-                        margin: EdgeInsets.only(bottom: 4.h),
-                        height: 4.h,
-                        color: state == 3
-                            ? ColorConsatnts.white
-                            : ColorConsatnts.primary,
-                      ),
-                      const SvgHandler(
-                        imagePath: AssetsConstants.profileIcon,
-                        height: 22,
-                        width: 22,
-                        color: ColorConsatnts.white,
-                      ),
-                    ],
-                  ),
-                  label: "Profile",
+                label: "Notifications",
+              ),
+              BottomNavigationBarItem(
+                icon: Column(
+                  children: [
+                    Container(
+                      width: 32.w,
+                      margin: EdgeInsets.only(bottom: 4.h),
+                      height: 4.h,
+                      color: state == 3
+                          ? ColorConsatnts.white
+                          : ColorConsatnts.primary,
+                    ),
+                    const SvgHandler(
+                      imagePath: AssetsConstants.profileIcon,
+                      height: 22,
+                      width: 22,
+                      color: ColorConsatnts.white,
+                    ),
+                  ],
                 ),
-              ],
-            );
-          },
-        ),
+                label: "Profile",
+              ),
+            ],
+          );
+        },
       ),
     );
   }

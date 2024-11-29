@@ -12,21 +12,23 @@ class SupplierOrderItem extends StatelessWidget {
     required this.index,
     required this.orderName,
     required this.orderDetails,
-    required this.orderDescription,
+    required this.orderDescription, 
+    required this.orderDate,
   });
   final int index;
   final String orderName;
   final String orderDetails;
-  final String orderDescription;
+  final String orderDescription; 
+  final String orderDate;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(bottom: 16.h),
-      margin: EdgeInsets.only(bottom: 18.h),
+      margin: EdgeInsets.only(bottom: 10.h),
       decoration: BoxDecoration(
           border: Border.all(color: ColorConsatnts.grey),
-          borderRadius: BorderRadius.circular(12.r)),
+          borderRadius: BorderRadius.circular(10.r)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -37,10 +39,10 @@ class SupplierOrderItem extends StatelessWidget {
             decoration: BoxDecoration(
                 color: ColorConsatnts.primary,
                 borderRadius:
-                    BorderRadius.only(topLeft: Radius.circular(12.r))),
+                    BorderRadius.only(topLeft: Radius.circular(10.r))),
             child: Text(
               index.toString(),
-              style: applyMediumStyle(
+              style: applyBoldStyle(
                 fontSize: 14,
                 fontColor: ColorConsatnts.white,
               ),
@@ -99,7 +101,7 @@ class SupplierOrderItem extends StatelessWidget {
                   onTap: () {},
                 ),
                 Text(
-                  "2 hours ago",
+                orderDate,
                   style: applyMediumStyle(
                     fontSize: 14,
                     fontColor: ColorConsatnts.lightBlack,

@@ -1,6 +1,8 @@
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/features/client/orders/notifications/presentation/screens/notifications_screen.dart';
+import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
+import 'package:e_printer/features/client/orders/presentation/widget/order_shimmer.dart';
 import 'package:e_printer/features/client/settings/presentation/views/profile_view.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_bottom_bar.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_home_app_bar.dart';
@@ -14,11 +16,14 @@ import '../cubit/supplier_nav_bar_cubit.dart';
 
 class SupplierHomeView extends StatelessWidget {
   const SupplierHomeView({super.key});
-  static const _view = [
-    SupplierOrdersView(),
-    SupplierOrdersView(),
-    NotificationsScreen(),
-    ProfileView(),
+  static final _view = [
+    BlocProvider<OrdersCubit>(
+      create: (context) => OrdersCubit()..fetchSupplierAvailableOrders(),
+      child: const SupplierOrdersView(),
+    ),
+    const SupplierOrdersView(),
+    const NotificationsScreen(),
+    const ProfileView(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -66,19 +71,37 @@ class SupplierOrdersView extends StatelessWidget {
         const VerticalSpacer(space: 16),
         const SupplierHomePageAppBar(),
         const VerticalSpacer(space: 12),
-        Expanded(
-          child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) => SupplierOrderItem(
-              index: index + 1,
-              orderName: "Offset Printing",
-              orderDetails: "Details Details Dummy Details",
-              orderDescription: "Details Details Dummy Details",
-            ),
-          ),
+        BlocBuilder<OrdersCubit, OrdersState>(
+          buildWhen: (previous, current) =>
+              current is FetchingOrderState ||
+              current is FetchingOrderErrorState ||
+              current is FetchingOrderSuccessState,
+          builder: (context, state) { 
+            if(state is FetchingOrderSuccessState){ 
+              final res = context.read<OrdersCubit>().supplierOrders;
+              return Expanded(
+              child: ListView.builder(
+                itemCount: context.read<OrdersCubit>().supplierOrders.length,
+                itemBuilder: (context, index) => SupplierOrderItem(
+                  index: index + 1,
+                  orderName: res[index].orderName,
+                  orderDetails: res[index].orderDetails,
+                  orderDescription: res[index].orderDescription,  
+                  orderDate: res[index].orderDate,
+
+                ),
+              ),
+            );
+            }
+            return Expanded(
+              child: ListView.builder(
+                itemCount: 3,
+                itemBuilder: (context, index) => const ShimmerOrderItem()
+              ),
+            );
+          },
         ),
       ],
     );
   }
 }
-
