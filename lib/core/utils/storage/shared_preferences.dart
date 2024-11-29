@@ -13,6 +13,9 @@ class SharedPreferencesManager {
 
   static storeBoolValue({required String key, required bool value}) async {
     await _object!.setBool(key, value);
+  } 
+  static storeStringValue({required String key, required String value}) async {
+    await _object!.setString(key, value);
   }
 
   static storeIntValue({required String key, required int value}) async {
@@ -21,6 +24,10 @@ class SharedPreferencesManager {
 
   static bool getBoolValue({required String key}) {
     return _object!.getBool(key) ?? false;
+  } 
+
+  static String getStringValue({required String key}) {
+    return _object!.getString(key) ?? "No Value Found";
   }
 
   static int getIntValue({required String key}) {

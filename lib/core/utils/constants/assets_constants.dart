@@ -1,6 +1,6 @@
 class AssetsConstants {
 // Icons
-
+  static const noData= "assets/svgs/No data.svg";
   static const searchIcon = "assets/svgs/Search.svg";
   static const arrowLeftIcon = "assets/svgs/arrow-left.svg";
   static const homeIcon = "assets/svgs/homeNavv.svg";

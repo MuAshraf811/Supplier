@@ -17,7 +17,8 @@ class DetailedScreenOrderButton extends StatelessWidget {
       text: S.of(context).add_order,
       onTap: () {
         if (context.read<HomePageCubit>().formKey.currentState!.validate()) {
-          context.read<HomePageCubit>().addOrder();
+          context.read<HomePageCubit>().addOrder(); 
+          Navigator.pop(context);
           showOrderConfirmation(
             context: context,
             orderCategory:  context.read<HomePageCubit>().addedOrder.orderCategoryName,

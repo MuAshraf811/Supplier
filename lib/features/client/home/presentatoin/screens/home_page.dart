@@ -3,6 +3,7 @@ import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/features/client/home/presentatoin/cubit/main_home_cubit.dart';
+import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,11 +20,14 @@ import '../widgets/section_grid_item.dart';
 
 class HomePageView extends StatelessWidget {
   const HomePageView({super.key});
-  static const List<Widget> _views = [
-    MainView(),
-    OrdersView(),
-    NotificationsScreen(),
-    ProfileView()
+  static final List<Widget> _views = [
+   const MainView(),
+    BlocProvider<OrdersCubit>(
+      create: (context) => OrdersCubit()..fetchClientOrders(),
+      child:const  OrdersView(),
+    ),
+    const NotificationsScreen(),
+   const  ProfileView()
   ];
 
   @override
@@ -74,10 +78,12 @@ class MainView extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(
                         context, RouteConstants.detailedItemCategoryView,
-                        arguments: AppConst.categoryModel(context)[context.read<MainHomeCubit>().state][index].index);
-                    
+                        arguments: AppConst.categoryModel(context)[
+                                context.read<MainHomeCubit>().state][index]
+                            .index);
                   },
-                  imagePath: AppConst.categoryModel(context)[state][index].image,
+                  imagePath:
+                      AppConst.categoryModel(context)[state][index].image,
                   title: AppConst.categoryModel(context)[state][index].title,
                 ),
               );

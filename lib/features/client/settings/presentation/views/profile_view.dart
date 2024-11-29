@@ -1,5 +1,4 @@
 import 'package:e_printer/core/cubit/app_config_cubit.dart';
-import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
@@ -147,7 +146,7 @@ class LanguageDropDown extends StatelessWidget {
           ),
            CustomDropDown( 
             onSelected: (val) {
-              context.read<AppConfigCubit>().changeLanguage(val);
+              context.read<AppConfigCubit>().changeLanguage(val); 
             },
             text: "",
             entries:const [

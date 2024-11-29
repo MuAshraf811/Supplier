@@ -125,10 +125,8 @@ class LoginView extends StatelessWidget {
                       child: Center(
                         child: Transform.scale(
                           scale: 0.7,
-                          child: CircularProgressIndicator.adaptive(
-                            backgroundColor: ColorConsatnts.primary,
-                            valueColor: AlwaysStoppedAnimation(
-                                ColorConsatnts.white.withOpacity(0.85)),
+                          child:const CircularProgressIndicator.adaptive(
+                          
                           ),
                         ),
                       ),

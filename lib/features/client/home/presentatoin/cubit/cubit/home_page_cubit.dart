@@ -15,7 +15,7 @@ class HomePageCubit extends Cubit<HomePageState> {
   initGroupVal(int index) {
     radioButtonGroupValue = CategoryConstants.printing[index].radioOptions[0];
   }
-
+ 
   rebuildRadioOnChooseing(String choice, int choiceIndex) {
     radioButtonGroupValue = choice;
     indexFromChoice = choiceIndex;

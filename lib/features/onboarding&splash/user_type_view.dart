@@ -39,10 +39,9 @@ class UserTypeView extends StatelessWidget {
                   RoleContainer(
                     onTap: () { 
                       
-                      // Navigator.popAndPushNamed(
-                      //     context, RouteConstants.logInView); 
-                                            Navigator.popAndPushNamed(
-                          context, RouteConstants.homePage);
+                      Navigator.popAndPushNamed(
+                          context, RouteConstants.logInView); 
+                                          
                     },
                     title: 'FIND SUPPLIER',
                     discription: '(Person / Company)',

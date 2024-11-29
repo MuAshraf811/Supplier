@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:e_printer/core/utils/constants/storage_const.dart';
+import 'package:e_printer/core/utils/storage/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +48,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailLogInController.text,
           password: passwordLogInController.text);
+      await SharedPreferencesManager.storeStringValue(
+          key: StorageConstants.userId, value: response.user?.uid ?? "");
 
-      log(response.user!.email.toString());
       emit(SuccessLogInWithEmailState());
     } on FirebaseAuthException catch (e) {
       emit(ErrorLogInWithEmailState(error: e.message.toString()));
