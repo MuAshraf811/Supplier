@@ -6,11 +6,13 @@ import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
+import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/custom_drop_down.dart';
 import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -94,7 +96,8 @@ class SettingsItem extends StatelessWidget {
               Navigator.pushNamed(
                   context, RouteConstants.termsAndConditionsView);
             case 3:
-            case 4: Navigator.pushReplacementNamed(context, RouteConstants.logInView);
+            case 4:
+              Navigator.pushReplacementNamed(context, RouteConstants.logInView);
             default:
           }
         },
@@ -144,12 +147,12 @@ class LanguageDropDown extends StatelessWidget {
             style:
                 applyBoldStyle(fontSize: 15, fontColor: ColorConsatnts.black),
           ),
-           CustomDropDown( 
+          CustomDropDown(
             onSelected: (val) {
-              context.read<AppConfigCubit>().changeLanguage(val); 
+              context.read<AppConfigCubit>().changeLanguage(val);
             },
             text: "",
-            entries:const [
+            entries: const [
               "en",
               "ar",
             ],
@@ -212,51 +215,142 @@ class ProfileInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-      margin: EdgeInsets.only(top: 18.h, bottom: 20.h),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24.r),
-        border: Border.all(
-          color: ColorConsatnts.grey,
-          width: 0.5,
-        ),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundColor: ColorConsatnts.primary,
-            radius: 32.w,
+    return BlocBuilder<AuthenticationCubit, AuthenticationState>(
+      buildWhen: (previous, current) =>
+          current is FetchUserDataErrorState ||
+          current is FetchingUserDataState ||
+          current is FetchingUserDataSuccessState,
+      builder: (context, state) { 
+        if (state is FetchingUserDataSuccessState){  
+          final userModel = context.read<AuthenticationCubit>().userPersonalData;
+         return   Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+          margin: EdgeInsets.only(top: 18.h, bottom: 20.h),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24.r),
+            border: Border.all(
+              color: ColorConsatnts.grey,
+              width: 0.5,
+            ),
           ),
-          const HorizontalSpacer(space: 24),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Text(
-                "Muhammed Ashraf ",
-                style: applyBoldStyle(
-                  fontSize: 16,
-                  fontColor: ColorConsatnts.black,
-                ),
+              CircleAvatar(
+                backgroundColor: ColorConsatnts.primary,
+                radius: 32.w,
               ),
-              Text(
-                "Sharkia-Egypt",
-                style: applySemiBoldStyle(
-                  fontSize: 16,
-                  fontColor: ColorConsatnts.lightBlack,
-                ),
-              ),
-              Text(
-                "01002011850",
-                style: applySemiBoldStyle(
-                  fontSize: 16,
-                  fontColor: ColorConsatnts.lightBlack,
-                ),
+              const HorizontalSpacer(space: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${userModel.firstName} ${userModel.lastName}",
+                    style: applyBoldStyle(
+                      fontSize: 16,
+                      fontColor: ColorConsatnts.black,
+                    ),
+                  ),
+                  Text(
+                    userModel.city,
+                    style: applySemiBoldStyle(
+                      fontSize: 16,
+                      fontColor: ColorConsatnts.lightBlack,
+                    ),
+                  ), 
+                         Text(
+                    userModel.email,
+                    style: applySemiBoldStyle(
+                      fontSize: 16,
+                      fontColor: ColorConsatnts.primary,
+                    ),
+                  ),
+                  Text(
+                    userModel.mobileNumber,
+                    style: applySemiBoldStyle(
+                      fontSize: 16,
+                      fontColor: ColorConsatnts.lightBlack,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ); 
+        
+        }
+        return const InfoShimmer(); 
+       
+      },
+    );
+  }
+}
+
+class InfoShimmer extends StatelessWidget {
+  const InfoShimmer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors( 
+      baseColor: ColorConsatnts.grey.shade500, 
+      highlightColor: Colors.white, 
+      child: Container( 
+          margin: EdgeInsets.symmetric(horizontal: 12.w), 
+          padding: EdgeInsets.symmetric(horizontal: 14.w , vertical: 12.h),
+          width: double.infinity, 
+          decoration: BoxDecoration( 
+            borderRadius: BorderRadius.circular(12.r),
+          ), 
+          child: Row(  
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [ 
+              CircleAvatar(radius: 26.w, backgroundColor: Colors.grey.shade500,), 
+              const HorizontalSpacer(space: 24), 
+              Column(  
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [ 
+                  Container( 
+                    width: 140.w, 
+                    height: 4.h,  
+                    margin: EdgeInsets.only(bottom: 4.h),
+                    decoration: BoxDecoration( 
+                      color: Colors.grey.shade800, 
+                      borderRadius: BorderRadius.circular(14.r)
+                    ),
+                  ), 
+                    Container( 
+                    width: 180.w, 
+                    height: 4.h,  
+                    margin: EdgeInsets.only(bottom: 4.h),
+                    decoration: BoxDecoration( 
+                      color: Colors.grey.shade500, 
+                      borderRadius: BorderRadius.circular(14.r)
+                    ),
+                  ),
+                    Container( 
+                    width: 100.w, 
+                    height: 4.h,  
+                    margin: EdgeInsets.only(bottom: 4.h),
+                    decoration: BoxDecoration( 
+                      color: Colors.grey.shade500, 
+                      borderRadius: BorderRadius.circular(14.r)
+                    ),
+                  ), 
+                   Container( 
+                    width: 100.w, 
+                    height: 4.h,  
+                    margin: EdgeInsets.only(bottom: 4.h),
+                    decoration: BoxDecoration( 
+                      color: Colors.grey.shade500, 
+                      borderRadius: BorderRadius.circular(14.r)
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
       ),
     );
   }

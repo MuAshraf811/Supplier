@@ -179,15 +179,31 @@ class RegisterView extends StatelessWidget {
                           duration: 3);
                       showTermsAndConditionsDialog(context, false);
                     }
+                    if (state is AddingUserDataSuccessState) {
+                      showCustomSnackBar(
+                          context,
+                          "congratulations! Your are now Part of Supplier",
+                          ColorConsatnts.primary,
+                          duration: 3);
+                    }
+                    if (state is AddingUserDataErrorState) {
+                      showCustomSnackBar(
+                          context, state.error, ColorConsatnts.red,
+                          duration: 3);
+                    }
                   },
                   listenWhen: (previous, current) =>
                       current is SuccessAuthenticationWithEmailState ||
                       current is ErrorAuthenticationWithEmailState ||
-                      current is LoadingAuthenticationWithEmailState,
+                      current is LoadingAuthenticationWithEmailState ||
+                      current is AddingUserDataErrorState ||
+                      current is AddingUserDataSuccessState,
                   buildWhen: (previous, current) =>
                       current is SuccessAuthenticationWithEmailState ||
                       current is ErrorAuthenticationWithEmailState ||
-                      current is LoadingAuthenticationWithEmailState,
+                      current is LoadingAuthenticationWithEmailState|| 
+                        current is AddingUserDataErrorState ||
+                      current is AddingUserDataSuccessState, 
                   builder: (context, state) {
                     if (state is LoadingAuthenticationWithEmailState) {
                       return Container(
@@ -219,6 +235,9 @@ class RegisterView extends StatelessWidget {
                           context
                               .read<AuthenticationCubit>()
                               .registerWithEmail();
+                          context
+                              .read<AuthenticationCubit>()
+                              .addUserToDataBase();
                           //  showTermsAndConditionsDialog(context, false);
                         }
                       },

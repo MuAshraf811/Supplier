@@ -34,3 +34,24 @@ final class ErrorLogInWithGoogleState extends AuthenticationState {
 
   ErrorLogInWithGoogleState({required this.error});
 }
+
+
+
+final class AddingUserDataState extends AuthenticationState {}
+
+final class AddingUserDataSuccessState extends AuthenticationState {}
+
+final class AddingUserDataErrorState extends AuthenticationState {
+  final String error;
+
+  AddingUserDataErrorState({required this.error});
+} 
+final class FetchingUserDataState extends AuthenticationState {}
+
+final class FetchingUserDataSuccessState extends AuthenticationState {}
+
+final class FetchUserDataErrorState extends AuthenticationState {
+  final String error;
+
+  FetchUserDataErrorState({required this.error});
+}

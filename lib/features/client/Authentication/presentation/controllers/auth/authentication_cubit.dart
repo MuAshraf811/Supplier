@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_printer/core/utils/constants/storage_const.dart';
 import 'package:e_printer/core/utils/storage/shared_preferences.dart';
+import 'package:e_printer/features/client/Authentication/model/user_data_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   bool isUpperCase = false;
   bool isSpecial = false;
   bool isNumber = false;
+
   AuthenticationCubit() : super(AuthenticationInitial());
   TextEditingController emailLogInController = TextEditingController();
   TextEditingController passwordLogInController = TextEditingController();
@@ -25,7 +28,52 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       TextEditingController();
   TextEditingController lastNameRegisterController = TextEditingController();
   final registerFormKey = GlobalKey<FormState>();
-  final logInFormKey = GlobalKey<FormState>();
+  final logInFormKey = GlobalKey<FormState>(); 
+  late UserDataModel userPersonalData;
+  String citySelection = "";
+  addUserToDataBase() async {
+    try {
+      emit(AddingUserDataState());
+      final instance = FirebaseFirestore.instance.collection("Users");
+      final obj = await instance.add({
+        "first_name": firstNameRegisterController.text,
+        "last_name": lastNameRegisterController.text,
+        "email": emailRegisterController.text,
+        "password": passwordRegisterController.text,
+        "mobile_number": mobileNumberRegisterController.text,
+        "city": citySelection,
+      });
+      SharedPreferencesManager.storeStringValue(
+          key: StorageConstants.userDataId, value: obj.id);
+      emit(AddingUserDataSuccessState());
+    } catch (e) {
+      AddingUserDataErrorState(error: e.toString());
+    }
+  }
+
+ void getUserData() async { 
+
+try { 
+  emit(FetchingUserDataState());
+       final instance = FirebaseFirestore.instance.collection("Users");
+    DocumentSnapshot<Map<String, dynamic>> res = await instance
+        .doc(SharedPreferencesManager.getStringValue(
+            key: StorageConstants.userDataId))
+        .get();  
+        if(res.data()!=null){ 
+         userPersonalData=  UserDataModel.fromJson(res.data()!);  
+           emit(FetchingUserDataSuccessState());
+        } else{ 
+          emit(FetchUserDataErrorState(error: "Cann't fetch your data"));
+        }
+} catch (e) { 
+  log("---------------"); 
+  log(e.toString());
+  emit(FetchUserDataErrorState(error: e.toString()));
+}
+
+      
+  }
 
   registerWithEmail() async {
     try {

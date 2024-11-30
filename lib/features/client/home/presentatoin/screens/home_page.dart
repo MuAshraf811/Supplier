@@ -2,6 +2,7 @@ import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
+import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:e_printer/features/client/home/presentatoin/cubit/main_home_cubit.dart';
 import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +22,16 @@ import '../widgets/section_grid_item.dart';
 class HomePageView extends StatelessWidget {
   const HomePageView({super.key});
   static final List<Widget> _views = [
-   const MainView(),
+    const MainView(),
     BlocProvider<OrdersCubit>(
       create: (context) => OrdersCubit()..fetchClientOrders(),
-      child:const  OrdersView(),
+      child: const OrdersView(),
     ),
     const NotificationsScreen(),
-   const  ProfileView()
+     BlocProvider<AuthenticationCubit>(
+      create: (context) => AuthenticationCubit()..getUserData(),
+      child:const  ProfileView(),
+    )
   ];
 
   @override
