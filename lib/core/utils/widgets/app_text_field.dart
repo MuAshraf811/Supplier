@@ -16,7 +16,8 @@ class AppTextField extends StatelessWidget {
     this.minLines,
     this.maxHeight,
     this.suffixColor,
-    this.suffixSize,
+    this.suffixSize, 
+    this.suffixSvg
   });
   final String label;
   final IconData suffixIcon;
@@ -28,7 +29,7 @@ class AppTextField extends StatelessWidget {
   final int? minLines;
   final double? maxHeight;
   final double? suffixSize;
-
+  final  Widget? suffixSvg;
   final Color? suffixColor;
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class AppTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         suffixIcon: Padding(
           padding: EdgeInsets.only(right: 12.w),
-          child: Icon(
+          child:   suffixSvg??  Icon(
             suffixIcon,
             size: suffixSize ?? 24,
             color: suffixColor ?? ColorConsatnts.primary,

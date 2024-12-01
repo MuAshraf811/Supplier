@@ -21,6 +21,13 @@ class AppConst {
       S.of(context).uniform,
       S.of(context).gift_items,
     ];
+  } 
+
+  static String getDate(){  
+    final day = DateTime.now().day.toString().padLeft(2,"0"); 
+    final month = DateTime.now().month.toString().padLeft(2,"0"); 
+    final year = DateTime.now().year.toString().padLeft(2,"0");
+    return "$day-$month-$year";
   }
 // static List<String> homeCategoryString(BuildContext context) {
 //     final localizations = AppLocalizaStions.of(context)!;

@@ -4,6 +4,7 @@ import 'package:e_printer/features/client/orders/notifications/presentation/scre
 import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
 import 'package:e_printer/features/client/orders/presentation/widget/order_shimmer.dart';
 import 'package:e_printer/features/client/settings/presentation/views/profile_view.dart';
+import 'package:e_printer/features/supplier/home/presentation/cubit/quotation/quotation_cubit.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/quotation_dialog.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_bottom_bar.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_home_app_bar.dart';
@@ -18,8 +19,15 @@ import '../cubit/supplier_nav_bar_cubit.dart';
 class SupplierHomeView extends StatelessWidget {
   const SupplierHomeView({super.key});
   static final _view = [
-    BlocProvider<OrdersCubit>(
-      create: (context) => OrdersCubit()..fetchSupplierAvailableOrders(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<OrdersCubit>(
+          create: (context) => OrdersCubit()..fetchSupplierAvailableOrders(),
+        ),
+        BlocProvider<QuotationCubit>(
+          create: (context) => QuotationCubit(),
+        ),
+      ],
       child: const SupplierOrdersView(),
     ),
     const SupplierOrdersView(),
@@ -77,31 +85,31 @@ class SupplierOrdersView extends StatelessWidget {
               current is FetchingOrderState ||
               current is FetchingOrderErrorState ||
               current is FetchingOrderSuccessState,
-          builder: (context, state) { 
-            if(state is FetchingOrderSuccessState){ 
+          builder: (context, state) {
+            if (state is FetchingOrderSuccessState) {
               final res = context.read<OrdersCubit>().supplierOrders;
               return Expanded(
-              child: ListView.builder(
-                itemCount: context.read<OrdersCubit>().supplierOrders.length,
-                itemBuilder: (context, index) => SupplierOrderItem(
-                  index: index + 1,
-                  orderName: res[index].orderName,
-                  orderDetails: res[index].orderDetails,
-                  orderDescription: res[index].orderDescription,  
-                  orderDate: res[index].orderDate, 
-                  onTap: () {
-                    showQuotationDialog(context);
-                  },
-
+                child: ListView.builder(
+                  itemCount: context.read<OrdersCubit>().supplierOrders.length,
+                  itemBuilder: (context, index) => SupplierOrderItem(
+                    index: index + 1,
+                    orderName: res[index].orderName,
+                    orderDetails: res[index].orderDetails,
+                    orderDescription: res[index].orderDescription,
+                    orderDate: res[index].orderDate,
+                    onTap: () {
+                      context.read<QuotationCubit>().orderNumber =
+                          res[index].orderId;
+                      showQuotationDialog(context, BlocProvider.of<QuotationCubit>(context),);
+                    },
+                  ),
                 ),
-              ),
-            );
+              );
             }
             return Expanded(
               child: ListView.builder(
-                itemCount: 3,
-                itemBuilder: (context, index) => const ShimmerOrderItem()
-              ),
+                  itemCount: 3,
+                  itemBuilder: (context, index) => const ShimmerOrderItem()),
             );
           },
         ),

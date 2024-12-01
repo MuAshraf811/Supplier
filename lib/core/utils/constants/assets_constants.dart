@@ -1,5 +1,11 @@
 class AssetsConstants {
-// Icons
+// Icons 
+
+  static const count = "assets/svgs/fingers-three-count-3-svgrepo-com.svg";
+  static const money = "assets/svgs/money.svg"; 
+  static const sum = "assets/svgs/sum.svg"; 
+  static const description="assets/svgs/description.svg"; 
+  static const amount = "assets/svgs/amount.svg";
   static const noData= "assets/svgs/No data.svg";
   static const searchIcon = "assets/svgs/Search.svg";
   static const arrowLeftIcon = "assets/svgs/arrow-left.svg";
