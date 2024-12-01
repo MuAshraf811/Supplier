@@ -66,7 +66,28 @@ class AppConst {
     'Al Ain',
     'Khor Fakkan',
     'Dibba Al-Fujairah',
-  ];
+  ]; 
+   static String getQuotationConditionText(int index) {
+    switch (index) {
+      case 1:
+        return 'By accepting this price offer, you agree to Quotes Terms & Conditions and provide your LPO approval to place the order.';
+      case 2:
+        return 'The application agent will get in touch with you to collect the deposit.';
+      case 3:
+        return 'A sample of the order to be completed will be created and signed by the buyer after the deposit has been paid.';
+      case 4:
+        return 'On the same day of delivery, the remaining balance must be paid.';
+      case 5:
+        return 'Delivery Date is determined by the shape, size and details of the order (one order may differ from another based on the details).';
+      case 6:
+        return 'Using the communication channels provided by SUPPLIER App, the application administrator must be informed of any errors in the order details on the same day of delivery.';
+      case 7:
+        return 'Returning the order is not possible if the delivery exceeds one business day and the order is considered to have been successfully delivered.';
+      default:
+        return '';
+    }
+  }
+
   
    static List<String> settingsText(BuildContext context) {
     return [

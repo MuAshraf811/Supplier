@@ -4,6 +4,7 @@ import 'package:e_printer/features/client/orders/notifications/presentation/scre
 import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
 import 'package:e_printer/features/client/orders/presentation/widget/order_shimmer.dart';
 import 'package:e_printer/features/client/settings/presentation/views/profile_view.dart';
+import 'package:e_printer/features/supplier/home/presentation/widgets/quotation_dialog.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_bottom_bar.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_home_app_bar.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_order_item.dart';
@@ -87,7 +88,10 @@ class SupplierOrdersView extends StatelessWidget {
                   orderName: res[index].orderName,
                   orderDetails: res[index].orderDetails,
                   orderDescription: res[index].orderDescription,  
-                  orderDate: res[index].orderDate,
+                  orderDate: res[index].orderDate, 
+                  onTap: () {
+                    showQuotationDialog(context);
+                  },
 
                 ),
               ),

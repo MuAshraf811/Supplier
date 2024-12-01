@@ -86,7 +86,7 @@ class CategoryConstants {
             "Foil": ["Non", "Sliver"],
             "Emboss": [1, 2],
           },
-          "isRequired": false,
+          "isRequired": true,
         },
         {
           "title": "Envelope",
@@ -107,7 +107,7 @@ class CategoryConstants {
         {
           "title": "Noot Book",
           "details": {
-            "Size": ["A4", "A3", "A3"],
+            "Size": ["A5", "A4", "A6"],
             "Printing": [1, 2, 3],
             "Paper": [55, 90, 100, 115, 135, 150, 170, 200, 250, 300, 350],
             "Lamination": ["Glossy", "Matt"],

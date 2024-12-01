@@ -13,13 +13,15 @@ class SupplierOrderItem extends StatelessWidget {
     required this.orderName,
     required this.orderDetails,
     required this.orderDescription, 
-    required this.orderDate,
+    required this.orderDate, 
+    required this.onTap,
   });
   final int index;
   final String orderName;
   final String orderDetails;
   final String orderDescription; 
-  final String orderDate;
+  final String orderDate; 
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -98,7 +100,7 @@ class SupplierOrderItem extends StatelessWidget {
                   color: ColorConsatnts.white,
                   fontSize: 16,
                   width: 160.w,
-                  onTap: () {},
+                  onTap: onTap,
                 ),
                 Text(
                 orderDate,
