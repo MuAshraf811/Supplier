@@ -16,7 +16,7 @@ class OrdersCubit extends Cubit<OrdersState> {
 
  void deleteOrder({required String orderId})async{ 
     
-   await FirebaseFirestore.instance.collection("Orders").doc(orderId).delete(); 
+   await FirebaseFirestore.instance.collection("accepted_orders").doc(orderId).delete(); 
      fetchClientOrders();
  }
 
@@ -28,7 +28,7 @@ class OrdersCubit extends Cubit<OrdersState> {
 
     // Query Firestore to fetch only documents matching the userId
     final QuerySnapshot<Map<String, dynamic>> response = await FirebaseFirestore.instance
-        .collection("Orders")
+        .collection("accepted_orders")
         
         .get();
      
@@ -59,7 +59,7 @@ void fetchClientOrders() async {
 
     // Query Firestore to fetch only documents matching the userId
     final QuerySnapshot<Map<String, dynamic>> response = await FirebaseFirestore.instance
-        .collection("Orders")
+        .collection("accepted_orders")
         .where("userId", isEqualTo: userId)
         .get();
      
@@ -84,7 +84,11 @@ void fetchClientOrders() async {
     required String orderType,
     required String category,
     required String details,
-    required String extra,
+    required String extra, 
+    required String email, 
+    required String name, 
+    required String mobile, 
+    required String address,
   }) async {
     try {
       emit(AddingOrderState());
@@ -97,7 +101,11 @@ void fetchClientOrders() async {
         "category": category,
         "orderType": orderType,
         "details": details,
-        "extra_details": extra
+        "extra_details": extra, 
+        "name":name , 
+        "email" : email, 
+        "mobile": mobile,  
+        "address":address
       });
 
       emit(AddingOrderSuccessState());

@@ -5,6 +5,7 @@ import 'package:e_printer/core/utils/widgets/app_button.dart';
 import 'package:e_printer/core/utils/widgets/snack_bar.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
+import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
 import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,9 @@ showOrderConfirmation(
     backgroundColor: Colors.black12,
     isDismissible: false,
     useRootNavigator: true,
-    constraints: BoxConstraints(maxHeight: 700.h,),
+    constraints: BoxConstraints(
+      maxHeight: 700.h,
+    ),
     builder: (context) => Scaffold(
       backgroundColor: Colors.black12,
       body: BlocProvider<OrdersCubit>(
@@ -40,158 +43,195 @@ showOrderConfirmation(
               4.r,
             ),
           ),
-          child: ListView(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                    decoration: BoxDecoration(
-                        color: ColorConsatnts.white,
-                        border: Border.all(color: ColorConsatnts.primary),
-                        borderRadius: BorderRadius.circular(28.r)),
-                    child: Text(
-                      S.of(context).order_summary,
-                      style: applyBoldStyle(
-                          fontSize: 16, fontColor: ColorConsatnts.black),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: CircleAvatar(
-                      backgroundColor: ColorConsatnts.red.withOpacity(0.15),
-                      radius: 10.w,
-                      child: const SvgHandler(
-                        imagePath: AssetsConstants.wrongIcon,
-                        height: 8,
-                        width: 8,
-                        color: ColorConsatnts.red,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 22.h),
-                margin: EdgeInsets.symmetric(vertical: 16.h),
-                decoration: BoxDecoration(
-                  color: ColorConsatnts.white,
-                  border:
-                      Border.all(color: ColorConsatnts.primary, width: 0.5.h),
-                  borderRadius: BorderRadius.circular(6.r),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: BlocProvider<AuthenticationCubit>(
+            create: (context) => AuthenticationCubit()..getUserData(),
+            child: ListView(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TitleWithValueText(
-                        title: S.of(context).category_name,
-                        value: orderCategory),
-                    const CustomDivider(),
-                    TitleWithValueText(
-                        title: S.of(context).order_name, value: orderType),
-                    const CustomDivider(),
-                    TitleWithValueText(
-                      title: S.of(context).order_date,
-                      value: orderDate,
-                      valueColor: ColorConsatnts.grey,
-                    ),
-                    const CustomDivider(),
-                    Text(
-                      S.of(context).order_details,
-                      style: applyBoldStyle(
-                        fontSize: 16,
-                        fontColor: ColorConsatnts.primary,
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                      decoration: BoxDecoration(
+                          color: ColorConsatnts.white,
+                          border: Border.all(color: ColorConsatnts.primary),
+                          borderRadius: BorderRadius.circular(28.r)),
+                      child: Text(
+                        S.of(context).order_summary,
+                        style: applyBoldStyle(
+                            fontSize: 16, fontColor: ColorConsatnts.black),
                       ),
                     ),
-                    const VerticalSpacer(space: 8),
-                    Text(
-                      details,
-                      style: applyMediumStyle(
-                        fontSize: 15,
-                        fontColor: ColorConsatnts.black,
-                      ),
-                    ),
-                    const CustomDivider(),
-                    Text(
-                      S.of(context).extra_details,
-                      style: applyBoldStyle(
-                        fontSize: 16,
-                        fontColor: ColorConsatnts.primary,
-                      ),
-                    ),
-                    const VerticalSpacer(space: 8),
-                    Text(
-                      extraDetails,
-                      style: applyMediumStyle(
-                        fontSize: 15,
-                        fontColor: ColorConsatnts.black,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: ColorConsatnts.red.withOpacity(0.15),
+                        radius: 10.w,
+                        child: const SvgHandler(
+                          imagePath: AssetsConstants.wrongIcon,
+                          height: 8,
+                          width: 8,
+                          color: ColorConsatnts.red,
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              BlocConsumer<OrdersCubit, OrdersState>(
-                buildWhen: (previous, current) =>
-                    current is AddingOrderSuccessState ||
-                    current is AddingOrderErrorState ||
-                    current is AddingOrderState,
-                listenWhen: (previous, current) =>
-                    current is AddingOrderSuccessState ||
-                    current is AddingOrderErrorState,
-                listener: (context, state) {
-                  if (state is AddingOrderErrorState) {
-                    showCustomSnackBar(
-                        context, state.error, ColorConsatnts.red); 
-                        
-                  }  
-                  if (state is AddingOrderSuccessState){ 
-                      showCustomSnackBar(context, "Orders added successfully",
-                      ColorConsatnts.primary); 
-                        Navigator.pop(context);
-                  }
-                
-                },
-                builder: (context, state) {
-                  if (state is AddingOrderState) {
-                    return Container(
-                      width: double.infinity,
-                      height: 46.h,
-                      decoration: BoxDecoration(
-                          color: ColorConsatnts.primary,
-                          borderRadius: BorderRadius.circular(12.r)),
-                      child: Center(
-                        child: Transform.scale(
-                          scale: 0.95,
-                          child: const CircularProgressIndicator.adaptive(
-                            backgroundColor: ColorConsatnts.white,
-                          ),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 22.h),
+                  margin: EdgeInsets.symmetric(vertical: 16.h),
+                  decoration: BoxDecoration(
+                    color: ColorConsatnts.white,
+                    border:
+                        Border.all(color: ColorConsatnts.primary, width: 0.5.h),
+                    borderRadius: BorderRadius.circular(6.r),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TitleWithValueText(
+                          title: S.of(context).category_name,
+                          value: orderCategory),
+                      const CustomDivider(),
+                      TitleWithValueText(
+                          title: S.of(context).order_name, value: orderType),
+                      const CustomDivider(),
+                      TitleWithValueText(
+                        title: S.of(context).order_date,
+                        value: orderDate,
+                        valueColor: ColorConsatnts.grey,
+                      ),
+                      const CustomDivider(),
+                      Text(
+                        S.of(context).order_details,
+                        style: applyBoldStyle(
+                          fontSize: 16,
+                          fontColor: ColorConsatnts.primary,
                         ),
                       ),
+                      const VerticalSpacer(space: 8),
+                      Text(
+                        details,
+                        style: applyMediumStyle(
+                          fontSize: 15,
+                          fontColor: ColorConsatnts.black,
+                        ),
+                      ),
+                      const CustomDivider(),
+                      Text(
+                        S.of(context).extra_details,
+                        style: applyBoldStyle(
+                          fontSize: 16,
+                          fontColor: ColorConsatnts.primary,
+                        ),
+                      ),
+                      const VerticalSpacer(space: 8),
+                      Text(
+                        extraDetails,
+                        style: applyMediumStyle(
+                          fontSize: 15,
+                          fontColor: ColorConsatnts.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                BlocConsumer<OrdersCubit, OrdersState>(
+                  buildWhen: (previous, current) =>
+                      current is AddingOrderSuccessState ||
+                      current is AddingOrderErrorState ||
+                      current is AddingOrderState,
+                  listenWhen: (previous, current) =>
+                      current is AddingOrderSuccessState ||
+                      current is AddingOrderErrorState,
+                  listener: (context, state) {
+                    if (state is AddingOrderErrorState) {
+                      showCustomSnackBar(
+                          context, state.error, ColorConsatnts.red);
+                    }
+                    if (state is AddingOrderSuccessState) {
+                      showCustomSnackBar(context, "Orders added successfully",
+                          ColorConsatnts.primary);
+                      Navigator.pop(context);
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is AddingOrderState) {
+                      return Container(
+                        width: double.infinity,
+                        height: 46.h,
+                        decoration: BoxDecoration(
+                            color: ColorConsatnts.primary,
+                            borderRadius: BorderRadius.circular(12.r)),
+                        child: Center(
+                          child: Transform.scale(
+                            scale: 0.95,
+                            child: const CircularProgressIndicator.adaptive(
+                              backgroundColor: ColorConsatnts.white,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    if (state is AddingOrderErrorState) {
+                      return AppButton(
+                          text: S.of(context).confirm, onTap: () {});
+                    }
+                    return BlocBuilder<AuthenticationCubit, AuthenticationState>( 
+                      buildWhen: (previous, current) => current is FetchingUserDataState||current is FetchingUserDataSuccessState,
+                      builder: (context, state) { 
+                        if (state is FetchingUserDataState){ 
+                           return Container(
+                        width: double.infinity,
+                        height: 46.h,
+                        decoration: BoxDecoration(
+                            color: ColorConsatnts.primary,
+                            borderRadius: BorderRadius.circular(12.r)),
+                        child: Center(
+                          child: Transform.scale(
+                            scale: 0.95,
+                            child: const CircularProgressIndicator.adaptive(
+                              backgroundColor: ColorConsatnts.white,
+                            ),
+                          ),
+                        ),
+                      );
+                        }
+                        return AppButton(
+                          text: S.of(context).confirm,
+                          onTap: () {
+                            context.read<OrdersCubit>().storeOrder(
+                                date: orderDate,
+                                orderType: orderType,
+                                category: orderCategory,
+                                details: details,
+                                extra: extraDetails,
+                                email: context
+                                    .read<AuthenticationCubit>()
+                                    .userPersonalData
+                                    .email,
+                                mobile: context
+                                    .read<AuthenticationCubit>()
+                                    .userPersonalData
+                                    .mobileNumber,
+                                address: context
+                                    .read<AuthenticationCubit>()
+                                    .userPersonalData
+                                    .city,
+                                name:
+                                    "${context.read<AuthenticationCubit>().userPersonalData.firstName} ${context.read<AuthenticationCubit>().userPersonalData.lastName}");
+                          },
+                        );
+                      },
                     );
-                  }
-                  if (state is AddingOrderErrorState) {
-                    return AppButton(text: S.of(context).confirm, onTap: () {});
-                  }
-                  return AppButton(
-                    text: S.of(context).confirm,
-                    onTap: () {
-                      context.read<OrdersCubit>().storeOrder(
-                          date: orderDate,
-                          orderType: orderType,
-                          category: orderCategory,
-                          details: details,
-                          extra: extraDetails); 
-                          
-                    }, 
-                  
-                  );
-                },
-              )
-            ],
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -211,14 +251,14 @@ class TitleWithValueText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          title,
+          title, 
+          maxLines: 2,
           style:
               applySemiBoldStyle(fontSize: 16, fontColor: ColorConsatnts.black),
         ),
         Text(
-          value, 
-          maxLines: 1,  
-
+          value,
+          maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: applySemiBoldStyle(
               fontSize: 16, fontColor: valueColor ?? ColorConsatnts.black),

@@ -24,8 +24,24 @@ String orderNumber = "";
     quotationRateController.clear(); 
     quotationTotalController.clear(); 
     quotationVatController.clear();
-   }
-  addquotationOffer({ required String supplierId, required String supplierName}) async{  
+   } 
+fetchOffers()async{ 
+    try { 
+      emit(AddingQuotationState());
+       final instance= FirebaseFirestore.instance.collection("quotations"); 
+    await instance.get();
+   
+   emit(AddingQuotationSuccessState());
+   AddingQuotationSuccessState();
+    } catch (e) { 
+      log("**************"); 
+      log(e.toString());
+      emit(AddingQuotationErrorState(error: e.toString()));
+    }
+}
+
+
+  void addquotationOffer({ required String supplierId, required String supplierName}) async{  
     try { 
       emit(AddingQuotationState());
        final instance= FirebaseFirestore.instance.collection("quotations"); 

@@ -179,13 +179,7 @@ class RegisterView extends StatelessWidget {
                           duration: 3);
                       showTermsAndConditionsDialog(context, false);
                     }
-                    if (state is AddingUserDataSuccessState) {
-                      showCustomSnackBar(
-                          context,
-                          "congratulations! Your are now Part of Supplier",
-                          ColorConsatnts.primary,
-                          duration: 3);
-                    }
+                   
                     if (state is AddingUserDataErrorState) {
                       showCustomSnackBar(
                           context, state.error, ColorConsatnts.red,

@@ -43,7 +43,8 @@ class SectionGridItem extends StatelessWidget {
             ),
             const VerticalSpacer(space: 26),
             Text(
-              title,
+              title, 
+              textAlign: TextAlign.center,
               style: applySemiBoldStyle(
                   fontSize: 16, fontColor: ColorConsatnts.black),
             ),

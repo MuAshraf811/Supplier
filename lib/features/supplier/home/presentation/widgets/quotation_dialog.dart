@@ -154,10 +154,7 @@ showQuotationDialog(BuildContext context, QuotationCubit cubit) {
                         Navigator.pop(context);
                         showCustomSnackBar(context,
                             "Quotation Sent Successfully", Colors.green);
-                        context
-                            .read<QuotationCubit>()
-                            .clearControllers();
-                  
+                        context.read<QuotationCubit>().clearControllers();
                       }
                     },
                     builder: (context, state) {
@@ -242,20 +239,6 @@ class TextWithTextField extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class CustomDivider extends StatelessWidget {
-  const CustomDivider({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Divider(
-      endIndent: 24.w,
-      indent: 24.w,
-      thickness: 0.5.h,
-      color: ColorConsatnts.grey,
-      height: 28.h,
     );
   }
 }

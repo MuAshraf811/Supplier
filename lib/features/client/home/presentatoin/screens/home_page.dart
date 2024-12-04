@@ -28,9 +28,9 @@ class HomePageView extends StatelessWidget {
       child: const OrdersView(),
     ),
     const NotificationsScreen(),
-     BlocProvider<AuthenticationCubit>(
+    BlocProvider<AuthenticationCubit>(
       create: (context) => AuthenticationCubit()..getUserData(),
-      child:const  ProfileView(),
+      child: const ProfileView(),
     )
   ];
 
@@ -75,16 +75,28 @@ class MainView extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 14.w,
                   mainAxisSpacing: 14.h,
-                  childAspectRatio: 1.w / 1.2.h,
+                  childAspectRatio: 1.w / 1.3.h,
                 ),
                 itemCount: AppConst.categoryModel(context)[state].length,
                 itemBuilder: (context, index) => SectionGridItem(
                   onTap: () {
-                    Navigator.pushNamed(
-                        context, RouteConstants.detailedItemCategoryView,
-                        arguments: AppConst.categoryModel(context)[
-                                context.read<MainHomeCubit>().state][index]
-                            .index);
+                    if (state == 0) {
+                      Navigator.pushNamed(
+                          context, RouteConstants.detailedItemCategoryView,
+                          arguments: AppConst.categoryModel(context)[
+                                  context.read<MainHomeCubit>().state][index]
+                              .index);
+                    } else {
+                      Navigator.pushNamed(
+                        context,
+                        RouteConstants.otherDetailedView, 
+                        arguments: {  
+                          "image" :  AppConst.categoryModel(context)[state][index].image,
+                          "cat name" :  AppConst.homeCategoryStrings(context)[state], 
+                          "item name" : AppConst.categoryModel(context)[state][index].title,
+                        }
+                      );
+                    }
                   },
                   imagePath:
                       AppConst.categoryModel(context)[state][index].image,
