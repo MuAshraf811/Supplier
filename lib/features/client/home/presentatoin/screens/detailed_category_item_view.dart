@@ -149,11 +149,11 @@ class ItemRequiredDropDowns extends StatelessWidget {
         final radioDropDowns = CategoryConstants.printing[categoryItemIndex]
                 .details[context.read<HomePageCubit>().indexFromChoice]
             ["details"] as Map<String, dynamic>;
-        radioDropDowns.entries.forEach((e) {
+        for (var e in radioDropDowns.entries) {
           final defaultValue = (e.value as List<dynamic>).first;
           context.read<HomePageCubit>().orderDetails[e.key] ??=
               "$defaultValue\n";
-        });
+        }
         return SizedBox(
           height: 220.h,
           child: GridView(
@@ -238,11 +238,11 @@ class AdditionalDropDowns extends StatelessWidget {
         final radioDropDowns = CategoryConstants.printing[categoryItemIndex]
                 .details[context.read<HomePageCubit>().indexFromChoice]["other"]
             as Map<String, dynamic>;
-        radioDropDowns.entries.forEach((e) {
+        for (var e in radioDropDowns.entries) {
           final defaultValue = (e.value as List<dynamic>).first;
           context.read<HomePageCubit>().orderDetails[e.key] ??=
               "$defaultValue\n";
-        });
+        }
         return SizedBox(
           height: 50.h,
           child: GridView(

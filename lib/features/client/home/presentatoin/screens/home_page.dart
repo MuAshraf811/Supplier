@@ -73,9 +73,9 @@ class MainView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 20.h),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 14.w,
-                  mainAxisSpacing: 14.h,
-                  childAspectRatio: 1.w / 1.3.h,
+                  crossAxisSpacing: 10.w,
+                  mainAxisSpacing: 10.h,
+                  childAspectRatio: 1.w / 1.32.h,
                 ),
                 itemCount: AppConst.categoryModel(context)[state].length,
                 itemBuilder: (context, index) => SectionGridItem(
@@ -86,7 +86,14 @@ class MainView extends StatelessWidget {
                           arguments: AppConst.categoryModel(context)[
                                   context.read<MainHomeCubit>().state][index]
                               .index);
-                    } else {
+                    } else  if (state == 2) {
+                      Navigator.pushNamed(
+                          context, RouteConstants.detailedPackagingView, 
+                          arguments:  AppConst.categoryModel(context)[state][index].index
+                      );
+                    }
+                    
+                     else {
                       Navigator.pushNamed(
                         context,
                         RouteConstants.otherDetailedView, 

@@ -21,7 +21,7 @@ class SvgHandler extends StatelessWidget {
       height: height.h,
       width: width.w,
       fit: BoxFit.contain,
-      color: color ?? null,
+      color: color,
       theme: SvgTheme(currentColor: color ?? Colors.transparent),
     );
   }

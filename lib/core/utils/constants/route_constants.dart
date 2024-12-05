@@ -1,3 +1,4 @@
+
 class RouteConstants {
   static const homePage = "/HomeView";
   static const logInView = "/LogInView";
@@ -9,7 +10,7 @@ class RouteConstants {
   static const accountView = "/AccountView";
   static const changePasswordView = "/ChangePasswordView";
   static const otherDetailedView = "/OtherDetailedView";
-
+  static const detailedPackagingView= "/DetailedPackagingView";
   static const supplierAccountView = "/SupplierAccountView";
   static const onBoardingView = "/";
   static const termsAndConditionsView = "/TermsAndConditionsView";

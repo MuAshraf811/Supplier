@@ -22,11 +22,23 @@ class SectionGridItem extends StatelessWidget {
       child: Container(
         width: 150.w,
         // height: 200.h,
-        decoration: BoxDecoration(
+        decoration: BoxDecoration( 
+          color: ColorConsatnts.white,
             border: Border.all(
-              color: ColorConsatnts.primary.withOpacity(0.5),
+              color: ColorConsatnts.grey,
+              width: 0.5.h
             ),
-            borderRadius: BorderRadius.circular(10.r)),
+            borderRadius: BorderRadius.circular(10.r), 
+             boxShadow: [ 
+                        BoxShadow( 
+                          color: ColorConsatnts.grey.withOpacity(0.5), 
+                          blurRadius: 2.w, 
+                          spreadRadius: 1, 
+                          blurStyle: BlurStyle.normal,
+                          offset: Offset(1.5.w, 2.5.h)
+                        )
+                      ],
+            ),
         child: Column(
           children: [
             Container(
