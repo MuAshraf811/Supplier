@@ -1,7 +1,9 @@
 
    
     {  
-        "@@locale": "en",
+        "@@locale": "en",  
+        "carton":"Carton Products", 
+        "plastic":"Plastic Products",
         "register":"Register",  
         "fast_print":"Digital Fast Print",
         "printing": "Printing",

@@ -50,6 +50,26 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Carton Products`
+  String get carton {
+    return Intl.message(
+      'Carton Products',
+      name: 'carton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plastic Products`
+  String get plastic {
+    return Intl.message(
+      'Plastic Products',
+      name: 'plastic',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Register`
   String get register {
     return Intl.message(

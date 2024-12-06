@@ -1,87 +1,93 @@
-import 'package:e_printer/core/utils/constants/category_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
+import 'package:e_printer/core/utils/constants/packaging_constants.dart';
+import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/features/client/chat/presentation/widgets/chat_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailedPackagingView extends StatelessWidget {
-  const DetailedPackagingView({super.key, required this.indx});
-final int indx; 
+  const DetailedPackagingView(
+      {super.key,
+      required this.packageItemIndex,
+      required this.itemTitle,
+      required this.innerIndex});
+  final int packageItemIndex;
+  final String itemTitle;
+  final int innerIndex;
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
+    return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14.w),
-          child: Column( 
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const VerticalSpacer(space: 16),
               const CustomAppbar(title: "Packaging View"),
               const VerticalSpacer(space: 12),
-              const Text(
-                "Aluminium Products",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), 
-              ), 
-                            const VerticalSpacer(space: 6),
-
-               const Text(
-                "Please , Choose your order carefully :",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: ColorConsatnts.red), 
+              Text(
+                itemTitle,
+                style:
+                    applyBoldStyle(fontSize: 16, fontColor: ColorConsatnts.red),
               ),
-              const VerticalSpacer(space: 18),
+              const VerticalSpacer(space: 12),
               Expanded(
                 child: GridView.builder(
+                  itemCount: PackagingConstants.showPackagingItems(
+                          loopIndex: 0, innerIndex: innerIndex)[packageItemIndex]
+                      .length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 3 / 4,
-                      crossAxisSpacing: 10.w,
-                      mainAxisSpacing: 10.h), 
-                  
-                                  
-                               itemCount: CategoryConstants.packageingItems(index:1)[indx].length ,
-                  itemBuilder: (context, index) => Container( 
-                    
-                    decoration: BoxDecoration( 
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: ColorConsatnts.grey, width: 0.3.h), 
-                      boxShadow: [ 
-                        BoxShadow( 
-                          color: ColorConsatnts.grey.withOpacity(0.5), 
-                          blurRadius: 2.w, 
-                          spreadRadius: 1, 
-                          blurStyle: BlurStyle.normal,
-                          offset: Offset(1.w, 2.h)
-                        )
+                      mainAxisSpacing: 10.h,
+                      childAspectRatio: 1.w / 1.4.h,
+                      crossAxisSpacing: 10.w),
+                  itemBuilder: (context, index) => Container(
+                    decoration: BoxDecoration(
+                      color: ColorConsatnts.white,
+                      border:
+                          Border.all(color: ColorConsatnts.grey, width: 0.5.h),
+                      borderRadius: BorderRadius.circular(10.r),
+                      boxShadow: [
+                        BoxShadow(
+                            color: ColorConsatnts.grey.withOpacity(0.5),
+                            blurRadius: 2.w,
+                            spreadRadius: 1,
+                            blurStyle: BlurStyle.normal,
+                            offset: Offset(1.5.w, 2.5.h)),
                       ],
                     ),
                     child: Column(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(12.r), topRight: Radius.circular(12.r)),
-                          child: Image.asset( 
-                            height: 120.h, 
-                            width: double.infinity,
-                            CategoryConstants.packageingItems(index: index+1)[indx]
-                                    [index]
-                                .image,
-                            fit: BoxFit.cover,
+                        Container(
+                          height: 130.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.r),
+                                topRight: Radius.circular(10.r)),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(
+                                  PackagingConstants.showPackagingItems(
+                                              loopIndex: index + 1,
+                                              innerIndex: innerIndex)[packageItemIndex]
+                                          [index]
+                                      .image),
+                            ),
                           ),
                         ),
-                        const VerticalSpacer(space: 10),
+                        const VerticalSpacer(space: 26),
                         Text(
-                          CategoryConstants.packageingItems(index: index+1)[indx]
-                                  [index]
+                          PackagingConstants.showPackagingItems(
+                                  loopIndex: index,
+                                  innerIndex: innerIndex)[packageItemIndex][index]
                               .title,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              color: ColorConsatnts.primary,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400),
-                        )
+                          style: applySemiBoldStyle(
+                              fontSize: 16, fontColor: ColorConsatnts.black),
+                        ),
                       ],
                     ),
                   ),

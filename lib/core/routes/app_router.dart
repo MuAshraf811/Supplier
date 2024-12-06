@@ -2,6 +2,7 @@ import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:e_printer/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
+import 'package:e_printer/features/client/home/presentatoin/screens/detailed_item_packaging.dart';
 import 'package:e_printer/features/client/home/presentatoin/screens/detailed_packaging_view.dart';
 import 'package:e_printer/features/client/home/presentatoin/screens/other_detailed_screen.dart';
 import 'package:e_printer/features/client/settings/presentation/views/account_view.dart';
@@ -71,12 +72,22 @@ class AppRouter {
       case RouteConstants.accountView:
         return MaterialPageRoute(
           builder: (context) => const AccountView(),
+        );  
+         case RouteConstants.detailedItemPackagingView: 
+          final args = settings.arguments as Map;
+        return MaterialPageRoute(
+          builder: (context) =>  DetailedItemPackaging( 
+            packageOrderIndex: args["packageOrderIndex"], 
+            title: args["title"],  
+          ),
         ); 
         case RouteConstants.detailedPackagingView: 
-        final args = settings.arguments as int ;
+        final args = settings.arguments as Map;
         return MaterialPageRoute(
           builder: (context) =>  DetailedPackagingView( 
-               indx : args,
+               packageItemIndex : args["packageItemIndex"], 
+               itemTitle: args["title"], 
+               innerIndex: args["innerIndex"],
           ),
         );
       case RouteConstants.chatView:

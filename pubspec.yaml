@@ -52,8 +52,42 @@ flutter:
     - assets/jsons/Supplier Logo Final333-01.json 
     - assets/images/Molded Fiber Products/ 
     - assets/images/Carton Products/ 
-    - assets/images/Foam Products/
-
+    - assets/images/Foam Products/ 
+    - assets/images/Hygiene and protection/ 
+    - assets/images/Alumium Products/Containers/
+    - assets/images/Alumium Products/Foils/ 
+    - assets/images/Alumium Products/Platters/ 
+    - assets/images/Alumium Products/Pots/ 
+    - assets/images/Plastic Products/Bakery Range/ 
+    - assets/images/Plastic Products/Bottles/ 
+    - assets/images/Plastic Products/Cling Film/ 
+    - assets/images/Plastic Products/Containers/ 
+    - assets/images/Plastic Products/Cups/ 
+    - assets/images/Plastic Products/Cutlery range/
+    - assets/images/Plastic Products/Deli Containers/ 
+    - assets/images/Plastic Products/Garbage Bags/ 
+    - assets/images/Plastic Products/Microwave Containers/ 
+    - assets/images/Plastic Products/Plate:Trays/ 
+    - assets/images/Plastic Products/Portion Cups/ 
+    - assets/images/Plastic Products/Powls/ 
+    - assets/images/Plastic Products/Salad Containers/ 
+    - assets/images/Plastic Products/Stirrer:Straws/ 
+    - assets/images/Plastic Products/Table Sheets/ 
+    - assets/images/Plastic Products/Tamper Evident Containers/
+    - assets/images/Wooden Products/Concession Trays/ 
+    - assets/images/Wooden Products/Cutleries/ 
+    - assets/images/Wooden Products/Sticks & Skewers/
+    - assets/images/paper products/Baking Range/ 
+    - assets/images/paper products/Bowls/ 
+    - assets/images/paper products/Boxes/ 
+    - assets/images/paper products/Concession Supplies/ 
+    - assets/images/paper products/Cups/ 
+    - assets/images/paper products/Paper Bags/ 
+    - assets/images/paper products/Sweet Boxes/
+    - assets/images/Hygiene and protection/ Dispenser/ 
+    - assets/images/Hygiene and protection/Cleaner/ 
+    - assets/images/Hygiene and protection/Gloves/ 
+    - assets/images/Hygiene and protection/Hygiene/
   fonts:
     - family: Quicksand
       fonts:

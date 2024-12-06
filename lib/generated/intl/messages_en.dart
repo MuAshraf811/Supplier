@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Aluminium Products"),
         "brochure": MessageLookupByLibrary.simpleMessage("Brochure"),
         "canvas_bags": MessageLookupByLibrary.simpleMessage("Canvas Bags"),
+        "carton": MessageLookupByLibrary.simpleMessage("Carton Products"),
         "carton_boxes": MessageLookupByLibrary.simpleMessage("Carton Boxes"),
         "catalogue": MessageLookupByLibrary.simpleMessage("Catalogue"),
         "categories_quality_description": MessageLookupByLibrary.simpleMessage(
@@ -108,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pen": MessageLookupByLibrary.simpleMessage("Pen"),
         "person_or_company":
             MessageLookupByLibrary.simpleMessage("(Person / Company)"),
+        "plastic": MessageLookupByLibrary.simpleMessage("Plastic Products"),
         "plastic_bags": MessageLookupByLibrary.simpleMessage("Plastic Bags"),
         "plastic_cups": MessageLookupByLibrary.simpleMessage("Plastic Cups"),
         "plastic_products":

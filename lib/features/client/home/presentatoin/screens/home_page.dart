@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
@@ -82,27 +84,54 @@ class MainView extends StatelessWidget {
                   onTap: () {
                     if (state == 0) {
                       Navigator.pushNamed(
-                          context, RouteConstants.detailedItemCategoryView,
-                          arguments: AppConst.categoryModel(context)[
-                                  context.read<MainHomeCubit>().state][index]
-                              .index);
-                    } else  if (state == 2) {
-                      Navigator.pushNamed(
-                          context, RouteConstants.detailedPackagingView, 
-                          arguments:  AppConst.categoryModel(context)[state][index].index
-                      );
-                    }
-                    
-                     else {
-                      Navigator.pushNamed(
                         context,
-                        RouteConstants.otherDetailedView, 
-                        arguments: {  
-                          "image" :  AppConst.categoryModel(context)[state][index].image,
-                          "cat name" :  AppConst.homeCategoryStrings(context)[state], 
-                          "item name" : AppConst.categoryModel(context)[state][index].title,
-                        }
+                        RouteConstants.detailedItemCategoryView,
+                        arguments: AppConst.categoryModel(context)[
+                                context.read<MainHomeCubit>().state][index]
+                            .index,
                       );
+                    } else if (state == 2) {
+                      if (index > 3) {  
+                     
+                        Navigator.pushNamed(
+                          context,
+                          RouteConstants.detailedItemPackagingView,
+                          arguments: {
+                            "packageOrderIndex": AppConst.categoryModel(context)[state]
+                                      [index]
+                                  .index, 
+                            "title":AppConst.categoryModel(context)[state]
+                                      [index]
+                                  .title ,
+                          }, 
+
+                        );
+                      } else {
+                        Navigator.pushNamed(
+                            context, RouteConstants.detailedPackagingView,
+                            arguments: { 
+                                "innerIndex":2 ,
+                              "packageItemIndex": AppConst.categoryModel(context)[state]
+                                      [index]
+                                  .index,
+                              "title": AppConst.categoryModel(context)[state]
+                                      [index]
+                                  .title,
+                            });
+                      }
+                    } else {
+                      Navigator.pushNamed(
+                          context, RouteConstants.otherDetailedView,
+                          arguments: {
+                            "image": AppConst.categoryModel(context)[state]
+                                    [index]
+                                .image,
+                            "cat name":
+                                AppConst.homeCategoryStrings(context)[state],
+                            "item name": AppConst.categoryModel(context)[state]
+                                    [index]
+                                .title,
+                          });
                     }
                   },
                   imagePath:
