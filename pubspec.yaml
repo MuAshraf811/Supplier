@@ -52,7 +52,8 @@ flutter:
     - assets/jsons/Supplier Logo Final333-01.json 
     - assets/images/Molded Fiber Products/ 
     - assets/images/Carton Products/ 
-    - assets/images/Foam Products/ 
+    - assets/images/Foam Products/  
+    - assets/images/Tissue Products/
     - assets/images/Hygiene and protection/ 
     - assets/images/Alumium Products/Containers/
     - assets/images/Alumium Products/Foils/ 
