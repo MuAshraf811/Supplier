@@ -278,6 +278,8 @@ class ProfileInformation extends StatelessWidget {
           ),
         ); 
         
+        } else if(state is FetchUserDataErrorState){ 
+        return  Text(state.error);
         }
         return const InfoShimmer(); 
        

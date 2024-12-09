@@ -10,84 +10,81 @@ part 'orders_state.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit() : super(OrdersInitial());
-  late List<ClientOrderModel> clientOrders ;  
-  late List<ClientOrderModel> supplierOrders ; 
+  late List<ClientOrderModel> clientOrders;
+  late List<ClientOrderModel> supplierOrders;
 
-
- void deleteOrder({required String orderId})async{ 
-    
-   await FirebaseFirestore.instance.collection("accepted_orders").doc(orderId).delete(); 
-     fetchClientOrders();
- }
-
- void fetchSupplierAvailableOrders()async{ 
-   try {
-    emit(FetchingOrderState());
-
-   
-
-    // Query Firestore to fetch only documents matching the userId
-    final QuerySnapshot<Map<String, dynamic>> response = await FirebaseFirestore.instance
+  void deleteOrder({required String orderId}) async {
+    await FirebaseFirestore.instance
         .collection("accepted_orders")
-        
-        .get();
-     
-    // Map the documents to  model
-   supplierOrders = response.docs
-    .map((e) => ClientOrderModel.fromJson({
-          'id': e.id, // Add the document ID
-          ...e.data(), // Spread the document data
-        }))
-    .toList();
-
-    emit(FetchingOrderSuccessState());
-  } catch (error) {
-    log("Error fetching orders: $error");
-    emit(FetchingOrderErrorState(error: error.toString()));
+        .doc(orderId)
+        .delete();
+    fetchClientOrders();
   }
- }
 
-void fetchClientOrders() async {
-  try {
-    emit(FetchingOrderState());
+  void fetchSupplierAvailableOrders() async {
+    try {
+      emit(FetchingOrderState());
 
-    // Get the userId from SharedPreferences
-    final String userId = SharedPreferencesManager.getStringValue(
-      key: StorageConstants.userId,
-    );
+      // Query Firestore to fetch only documents matching the userId
+      final QuerySnapshot<Map<String, dynamic>> response =
+          await FirebaseFirestore.instance.collection("accepted_orders").get();
 
+      // Map the documents to  model
+      supplierOrders = response.docs
+          .map((e) => ClientOrderModel.fromJson({
+                'id': e.id, // Add the document ID
+                ...e.data(), // Spread the document data
+              }))
+          .toList();
 
-    // Query Firestore to fetch only documents matching the userId
-    final QuerySnapshot<Map<String, dynamic>> response = await FirebaseFirestore.instance
-        .collection("accepted_orders")
-        .where("userId", isEqualTo: userId)
-        .get();
-     
-    // Map the documents to  model
-   clientOrders = response.docs
-    .map((e) => ClientOrderModel.fromJson({
-          'id': e.id, // Add the document ID
-          ...e.data(), // Spread the document data
-        }))
-    .toList();
-
-    emit(FetchingOrderSuccessState());
-  } catch (error) {
-    log("Error fetching orders: $error");
-    emit(FetchingOrderErrorState(error: error.toString()));
+      emit(FetchingOrderSuccessState());
+    } catch (error) {
+      log("Error fetching orders: $error");
+      emit(FetchingOrderErrorState(error: error.toString()));
+    }
   }
-}
 
+  void fetchClientOrders() async {
+    try {
+      emit(FetchingOrderState());
+
+      // Get the userId from SharedPreferences
+      final String userId = SharedPreferencesManager.getStringValue(
+        key: StorageConstants.userId,
+      );
+
+      // Query Firestore to fetch only documents matching the userId
+      final QuerySnapshot<Map<String, dynamic>> response =
+          await FirebaseFirestore.instance
+              .collection("accepted_orders")
+              .where("userId", isEqualTo: userId)
+              .get();
+      // Map the documents to  model
+      clientOrders = response.docs
+          .map(
+            (e) => ClientOrderModel.fromJson({
+              'id': e.id, // Add the document ID
+              ...e.data(), // Spread the document data
+            }),
+          )
+          .toList();
+
+      emit(FetchingOrderSuccessState());
+    } catch (error) {
+      log("Error fetching orders: $error");
+      emit(FetchingOrderErrorState(error: error.toString()));
+    }
+  }
 
   void storeOrder({
     required String date,
     required String orderType,
     required String category,
     required String details,
-    required String extra, 
-    required String email, 
-    required String name, 
-    required String mobile, 
+    required String extra,
+    required String email,
+    required String name,
+    required String mobile,
     required String address,
   }) async {
     try {
@@ -101,11 +98,11 @@ void fetchClientOrders() async {
         "category": category,
         "orderType": orderType,
         "details": details,
-        "extra_details": extra, 
-        "name":name , 
-        "email" : email, 
-        "mobile": mobile,  
-        "address":address
+        "extra_details": extra,
+        "name": name,
+        "email": email,
+        "mobile": mobile,
+        "address": address
       });
 
       emit(AddingOrderSuccessState());
