@@ -73,7 +73,7 @@ class DetailedItemPackaging extends StatelessWidget {
                           Navigator.pushNamed(
                               context, RouteConstants.detailedPackagingView,
                               arguments: {
-                                "innerIndex": index,
+                                "innerIndex":index,
                                 "title": title,
                                 "packageItemIndex": packageOrderIndex,
                               });

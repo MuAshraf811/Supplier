@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
@@ -110,7 +109,7 @@ class MainView extends StatelessWidget {
                         Navigator.pushNamed(
                             context, RouteConstants.detailedPackagingView,
                             arguments: { 
-                                "innerIndex":2 ,
+                                "innerIndex":0 ,
                               "packageItemIndex": AppConst.categoryModel(context)[state]
                                       [index]
                                   .index,

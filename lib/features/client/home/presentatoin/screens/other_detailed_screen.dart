@@ -27,7 +27,8 @@ class _OtherDetailedScreenState extends State<OtherDetailedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
+      backgroundColor: ColorConsatnts.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -62,7 +63,7 @@ class _OtherDetailedScreenState extends State<OtherDetailedScreen> {
                         const VerticalSpacer(space: 8),
                           Text(
                            widget.data["item name"], 
-                           style:const  TextStyle( color: Colors.blue, fontSize: 18, fontWeight: FontWeight.bold),
+                           style:const  TextStyle( color: Colors.blue, fontSize: 12, fontWeight: FontWeight.bold),
                          
                         ),
                       ],

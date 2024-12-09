@@ -1,5 +1,6 @@
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/packaging_constants.dart';
+import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/features/client/chat/presentation/widgets/chat_app_bar.dart';
@@ -36,59 +37,120 @@ class DetailedPackagingView extends StatelessWidget {
               const VerticalSpacer(space: 12),
               Expanded(
                 child: GridView.builder(
-                  itemCount: PackagingConstants.showPackagingItems(
-                          loopIndex: 0, innerIndex: innerIndex)[packageItemIndex]
-                      .length,
+                  itemCount: packageItemIndex <= 3
+                      ? PackagingConstants.showPackagingItems(
+                              loopIndex: 1,
+                              innerIndex: innerIndex)[packageItemIndex]
+                          .length
+                      : PackagingConstants.showPackagingItems(
+                                  loopIndex: 1,
+                                  innerIndex: innerIndex)[packageItemIndex]
+                              [innerIndex]
+                          .length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10.h,
-                      childAspectRatio: 1.w / 1.4.h,
-                      crossAxisSpacing: 10.w),
-                  itemBuilder: (context, index) => Container(
-                    decoration: BoxDecoration(
-                      color: ColorConsatnts.white,
-                      border:
-                          Border.all(color: ColorConsatnts.grey, width: 0.5.h),
-                      borderRadius: BorderRadius.circular(10.r),
-                      boxShadow: [
-                        BoxShadow(
-                            color: ColorConsatnts.grey.withOpacity(0.5),
-                            blurRadius: 2.w,
-                            spreadRadius: 1,
-                            blurStyle: BlurStyle.normal,
-                            offset: Offset(1.5.w, 2.5.h)),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 130.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10.r),
-                                topRight: Radius.circular(10.r)),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                  PackagingConstants.showPackagingItems(
-                                              loopIndex: index + 1,
-                                              innerIndex: innerIndex)[packageItemIndex]
-                                          [index]
-                                      .image),
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10.h,
+                    childAspectRatio: 1.w / 1.4.h,
+                    crossAxisSpacing: 10.w,
+                  ),
+                  itemBuilder: (context, loopIndex) => InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        RouteConstants.otherDetailedView, 
+                        arguments:
+                        { 
+
+                            "image" : packageItemIndex <= 3
+                                    ? PackagingConstants.showPackagingItems(
+                                                loopIndex: loopIndex + 1,
+                                                innerIndex: innerIndex)[
+                                            packageItemIndex][loopIndex]
+                                        .image
+                                    : PackagingConstants.showPackagingItems(
+                                                    loopIndex: loopIndex + 1,
+                                                    innerIndex: innerIndex)[
+                                                packageItemIndex][innerIndex]
+                                            [loopIndex]
+                                        .image, 
+                            "cat name" : "Packaging\n$itemTitle", 
+                            "item name" :  packageItemIndex <= 3
+                                ? PackagingConstants.showPackagingItems(
+                                            loopIndex: loopIndex + 1,
+                                            innerIndex:
+                                                innerIndex)[packageItemIndex]
+                                        [loopIndex]
+                                    .title
+                                : PackagingConstants.showPackagingItems(
+                                            loopIndex: loopIndex + 1,
+                                            innerIndex:
+                                                innerIndex)[packageItemIndex]
+                                        [innerIndex][loopIndex]
+                                    .title
+                        },
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: ColorConsatnts.white,
+                        border: Border.all(
+                            color: ColorConsatnts.grey, width: 0.5.h),
+                        borderRadius: BorderRadius.circular(10.r),
+                        boxShadow: [
+                          BoxShadow(
+                              color: ColorConsatnts.grey.withOpacity(0.5),
+                              blurRadius: 2.w,
+                              spreadRadius: 2,
+                              blurStyle: BlurStyle.normal,
+                              offset: Offset(1.5.w, 2.5.h)),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 130.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.r),
+                                  topRight: Radius.circular(10.r)),
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(packageItemIndex <= 3
+                                    ? PackagingConstants.showPackagingItems(
+                                                loopIndex: loopIndex + 1,
+                                                innerIndex: innerIndex)[
+                                            packageItemIndex][loopIndex]
+                                        .image
+                                    : PackagingConstants.showPackagingItems(
+                                                    loopIndex: loopIndex + 1,
+                                                    innerIndex: innerIndex)[
+                                                packageItemIndex][innerIndex]
+                                            [loopIndex]
+                                        .image),
+                              ),
                             ),
                           ),
-                        ),
-                        const VerticalSpacer(space: 26),
-                        Text(
-                          PackagingConstants.showPackagingItems(
-                                  loopIndex: index,
-                                  innerIndex: innerIndex)[packageItemIndex][index]
-                              .title,
-                          textAlign: TextAlign.center,
-                          style: applySemiBoldStyle(
-                              fontSize: 16, fontColor: ColorConsatnts.black),
-                        ),
-                      ],
+                          const VerticalSpacer(space: 26),
+                          Text(
+                            packageItemIndex <= 3
+                                ? PackagingConstants.showPackagingItems(
+                                            loopIndex: loopIndex + 1,
+                                            innerIndex:
+                                                innerIndex)[packageItemIndex]
+                                        [loopIndex]
+                                    .title
+                                : PackagingConstants.showPackagingItems(
+                                            loopIndex: loopIndex + 1,
+                                            innerIndex:
+                                                innerIndex)[packageItemIndex]
+                                        [innerIndex][loopIndex]
+                                    .title,
+                            textAlign: TextAlign.center,
+                            style: applySemiBoldStyle(
+                                fontSize: 16, fontColor: ColorConsatnts.black),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -41,7 +41,6 @@ class UserTypeView extends StatelessWidget {
                       
                       Navigator.popAndPushNamed(
                           context, RouteConstants.logInView); 
-                                          
                     },
                     title: 'FIND SUPPLIER',
                     discription: '(Person / Company)',

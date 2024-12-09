@@ -1,3 +1,4 @@
+
 import 'package:e_printer/app.dart';
 import 'package:e_printer/core/utils/storage/shared_preferences.dart';
 import 'package:e_printer/firebase_options.dart';
@@ -9,6 +10,7 @@ void main() async {
   SharedPreferencesManager.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+  ); 
+
   runApp(const EPrinter());
 }
