@@ -55,3 +55,15 @@ final class FetchUserDataErrorState extends AuthenticationState {
 
   FetchUserDataErrorState({required this.error});
 }
+
+
+
+final class UpdatingUserDataState extends AuthenticationState {}
+
+final class UpdatingUserDataSuccessState extends AuthenticationState {}
+
+final class UpdateUserDataErrorState extends AuthenticationState {
+  final String error;
+
+  UpdateUserDataErrorState({required this.error});
+}

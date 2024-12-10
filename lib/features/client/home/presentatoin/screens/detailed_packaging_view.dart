@@ -5,14 +5,15 @@ import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/features/client/chat/presentation/widgets/chat_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; 
 
 class DetailedPackagingView extends StatelessWidget {
-  const DetailedPackagingView(
-      {super.key,
-      required this.packageItemIndex,
-      required this.itemTitle,
-      required this.innerIndex});
+  const DetailedPackagingView({
+    super.key,
+    required this.packageItemIndex,
+    required this.itemTitle,
+    required this.innerIndex,
+  });
   final int packageItemIndex;
   final String itemTitle;
   final int innerIndex;
@@ -57,36 +58,35 @@ class DetailedPackagingView extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        RouteConstants.otherDetailedView, 
-                        arguments:
-                        { 
-
-                            "image" : packageItemIndex <= 3
-                                    ? PackagingConstants.showPackagingItems(
-                                                loopIndex: loopIndex + 1,
-                                                innerIndex: innerIndex)[
-                                            packageItemIndex][loopIndex]
-                                        .image
-                                    : PackagingConstants.showPackagingItems(
-                                                    loopIndex: loopIndex + 1,
-                                                    innerIndex: innerIndex)[
-                                                packageItemIndex][innerIndex]
-                                            [loopIndex]
-                                        .image, 
-                            "cat name" : "Packaging\n$itemTitle", 
-                            "item name" :  packageItemIndex <= 3
-                                ? PackagingConstants.showPackagingItems(
-                                            loopIndex: loopIndex + 1,
-                                            innerIndex:
-                                                innerIndex)[packageItemIndex]
-                                        [loopIndex]
-                                    .title
-                                : PackagingConstants.showPackagingItems(
-                                            loopIndex: loopIndex + 1,
-                                            innerIndex:
-                                                innerIndex)[packageItemIndex]
-                                        [innerIndex][loopIndex]
-                                    .title
+                        RouteConstants.otherDetailedView,
+                        arguments: {
+                          "image": packageItemIndex <= 3
+                              ? PackagingConstants.showPackagingItems(
+                                          loopIndex: loopIndex + 1,
+                                          innerIndex:
+                                              innerIndex)[packageItemIndex]
+                                      [loopIndex]
+                                  .image
+                              : PackagingConstants.showPackagingItems(
+                                          loopIndex: loopIndex + 1,
+                                          innerIndex:
+                                              innerIndex)[packageItemIndex]
+                                      [innerIndex][loopIndex]
+                                  .image,
+                          "cat name": "Packaging\n$itemTitle",
+                          "item name": packageItemIndex <= 3
+                              ? PackagingConstants.showPackagingItems(
+                                          loopIndex: loopIndex + 1,
+                                          innerIndex:
+                                              innerIndex)[packageItemIndex]
+                                      [loopIndex]
+                                  .title
+                              : PackagingConstants.showPackagingItems(
+                                          loopIndex: loopIndex + 1,
+                                          innerIndex:
+                                              innerIndex)[packageItemIndex]
+                                      [innerIndex][loopIndex]
+                                  .title
                         },
                       );
                     },

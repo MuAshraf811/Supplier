@@ -13,7 +13,10 @@ class DropDownWithTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       onChanged: (value) { 
-        context.read<AuthenticationCubit>().citySelection = value??'Abu Dhabi';
+        context.read<AuthenticationCubit>().citySelection = value??'Abu Dhabi';  
+                context.read<AuthenticationCubit>().profileCitySelection = value??'Abu Dhabi'; 
+
+
       },
       borderRadius: BorderRadius.circular(12.r),
       dropdownColor: ColorConsatnts.white,

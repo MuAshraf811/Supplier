@@ -17,9 +17,11 @@ class AppTextField extends StatelessWidget {
     this.maxHeight,
     this.suffixColor,
     this.suffixSize, 
-    this.suffixSvg
+    this.suffixSvg , 
+    this.readOnly,
   });
-  final String label;
+  final String label; 
+  final bool? readOnly;
   final IconData suffixIcon;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -39,7 +41,8 @@ class AppTextField extends StatelessWidget {
       keyboardType: type,
       maxLines: maxLines,
       minLines: minLines,
-      autocorrect: true,
+      autocorrect: true, 
+      readOnly: readOnly?? false,
       scribbleEnabled: true,
       style: applySemiBoldStyle(
         fontSize: 16,
