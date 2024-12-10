@@ -67,3 +67,15 @@ final class UpdateUserDataErrorState extends AuthenticationState {
 
   UpdateUserDataErrorState({required this.error});
 }
+
+
+
+final class SendingPasswordResetEmailState extends AuthenticationState {}
+
+final class SendingPasswordResetEmailSuccessState extends AuthenticationState {}
+
+final class SendingPasswordResetEmailErrorState extends AuthenticationState {
+  final String error;
+
+  SendingPasswordResetEmailErrorState({required this.error});
+}

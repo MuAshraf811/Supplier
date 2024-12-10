@@ -28,20 +28,42 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       TextEditingController();
   TextEditingController lastNameRegisterController = TextEditingController();
   final registerFormKey = GlobalKey<FormState>();
-  final logInFormKey = GlobalKey<FormState>();
+  final logInFormKey = GlobalKey<FormState>(); 
+    final forgetPasswordViewFormKey = GlobalKey<FormState>();
+
   late UserDataModel userPersonalData;
   String citySelection = "";
   String profileCitySelection = "";
   TextEditingController emailProfileController = TextEditingController();
   TextEditingController firstNameProfileController = TextEditingController();
   TextEditingController lastNameProfileController = TextEditingController();
-  TextEditingController mobileProfileController = TextEditingController();
+  TextEditingController mobileProfileController = TextEditingController(); 
+    TextEditingController emailResetController = TextEditingController();
+
   final profileFormKey = GlobalKey<FormState>();
+
+  void changePassword() async {}
+  void forgetPassword() async { 
+    emit(SendingPasswordResetEmailState());
+   try {
+     await FirebaseAuth.instance.sendPasswordResetEmail(
+      email: emailResetController.text,
+    );   
+  
+    emit(SendingPasswordResetEmailSuccessState());
+   } catch (e) { 
+    log(e.toString());
+emit(SendingPasswordResetEmailErrorState(error: e.toString()));   }
+  }
+
   void updateUserInfo() async {
     try {
       emit(UpdatingUserDataState());
       final instance = FirebaseFirestore.instance.collection("Users");
-      await instance.doc(SharedPreferencesManager.getStringValue(key: StorageConstants.userDataId)).update(
+      await instance
+          .doc(SharedPreferencesManager.getStringValue(
+              key: StorageConstants.userDataId))
+          .update(
         {
           "first_name": firstNameProfileController.text,
           "last_name": lastNameProfileController.text,
@@ -50,14 +72,14 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         },
       );
       emit(UpdatingUserDataSuccessState());
-    } catch (e) { 
-      log("********************"); 
+    } catch (e) {
+      log("********************");
       log(e.toString());
       emit(UpdateUserDataErrorState(error: e.toString()));
     }
   }
 
-  addUserToDataBase() async {
+  void addUserToDataBase() async {
     try {
       emit(AddingUserDataState());
       final instance = FirebaseFirestore.instance.collection("Users");

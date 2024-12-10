@@ -8,6 +8,7 @@ import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
 import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/custom_drop_down.dart';
+import 'package:e_printer/features/client/settings/presentation/controller/cubit/settings_cubit.dart';
 import 'package:e_printer/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,17 +41,20 @@ class ProfileView extends StatelessWidget {
             style: applyBoldStyle(fontSize: 14, fontColor: ColorConsatnts.grey),
           ),
           const VerticalSpacer(space: 16),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SocialMdiaIcons(icon: AssetsConstants.facebookIcon),
-              HorizontalSpacer(space: 18),
-              SocialMdiaIcons(icon: AssetsConstants.instagramIcon),
-              HorizontalSpacer(space: 18),
-              SocialMdiaIcons(icon: AssetsConstants.whatsupIcon),
-              HorizontalSpacer(space: 18),
-              SocialMdiaIcons(icon: AssetsConstants.linkedInIcon),
-            ],
+          SizedBox(
+            height: 32.w,
+            child: ListView.builder( 
+              physics:const  NeverScrollableScrollPhysics(),  
+              padding: EdgeInsets.only(left: 85.w),
+              scrollDirection: Axis.horizontal,
+              itemCount: AppConst.socialMediaIcons.length,
+              itemBuilder: (context, index) => SocialMdiaIcons( 
+                onTap: () {
+                  context.read<SettingsCubit>().launchUrl(url: AppConst.socialMediaLinks[index]);
+                },
+                icon: AppConst.socialMediaIcons[index],
+              ),
+            ),
           ),
         ],
       ),
@@ -61,17 +65,24 @@ class ProfileView extends StatelessWidget {
 class SocialMdiaIcons extends StatelessWidget {
   const SocialMdiaIcons({
     super.key,
-    required this.icon,
+    required this.icon, required this.onTap,
   });
-  final String icon;
+  final String icon; 
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return SvgHandler(
-      imagePath: icon,
-      height: 24,
-      width: 24,
-      color: ColorConsatnts.primary,
+    return Padding(
+      padding:  EdgeInsets.only(left: 20.w),
+      child: InkWell( 
+        onTap: onTap,
+        child: SvgHandler(
+          imagePath: icon,
+          height: 24,
+          width: 24,
+          color: ColorConsatnts.primary,
+        ),
+      ),
     );
   }
 }
@@ -220,69 +231,68 @@ class ProfileInformation extends StatelessWidget {
           current is FetchUserDataErrorState ||
           current is FetchingUserDataState ||
           current is FetchingUserDataSuccessState,
-      builder: (context, state) { 
-        if (state is FetchingUserDataSuccessState){  
-          final userModel = context.read<AuthenticationCubit>().userPersonalData;
-         return   Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-          margin: EdgeInsets.only(top: 18.h, bottom: 20.h),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24.r),
-            border: Border.all(
-              color: ColorConsatnts.grey,
-              width: 0.5,
+      builder: (context, state) {
+        if (state is FetchingUserDataSuccessState) {
+          final userModel =
+              context.read<AuthenticationCubit>().userPersonalData;
+          return Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+            margin: EdgeInsets.only(top: 18.h, bottom: 20.h),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24.r),
+              border: Border.all(
+                color: ColorConsatnts.grey,
+                width: 0.5,
+              ),
             ),
-          ),
-          child: Row(
-            children: [
-              CircleAvatar(
-                backgroundColor: ColorConsatnts.primary,
-                radius: 32.w,
-              ),
-              const HorizontalSpacer(space: 24),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${userModel.firstName} ${userModel.lastName}",
-                    style: applyBoldStyle(
-                      fontSize: 16,
-                      fontColor: ColorConsatnts.black,
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: ColorConsatnts.primary,
+                  radius: 32.w,
+                ),
+                const HorizontalSpacer(space: 24),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${userModel.firstName} ${userModel.lastName}",
+                      style: applyBoldStyle(
+                        fontSize: 16,
+                        fontColor: ColorConsatnts.black,
+                      ),
                     ),
-                  ),
-                  Text(
-                    userModel.city,
-                    style: applySemiBoldStyle(
-                      fontSize: 16,
-                      fontColor: ColorConsatnts.lightBlack,
+                    Text(
+                      userModel.city,
+                      style: applySemiBoldStyle(
+                        fontSize: 16,
+                        fontColor: ColorConsatnts.lightBlack,
+                      ),
                     ),
-                  ), 
-                         Text(
-                    userModel.email,
-                    style: applySemiBoldStyle(
-                      fontSize: 16,
-                      fontColor: ColorConsatnts.primary,
+                    Text(
+                      userModel.email,
+                      style: applySemiBoldStyle(
+                        fontSize: 16,
+                        fontColor: ColorConsatnts.primary,
+                      ),
                     ),
-                  ),
-                  Text(
-                    userModel.mobileNumber,
-                    style: applySemiBoldStyle(
-                      fontSize: 16,
-                      fontColor: ColorConsatnts.lightBlack,
+                    Text(
+                      userModel.mobileNumber,
+                      style: applySemiBoldStyle(
+                        fontSize: 16,
+                        fontColor: ColorConsatnts.lightBlack,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ); 
-        
-        } else if(state is FetchUserDataErrorState){ 
-        return  Text(state.error);
+                  ],
+                ),
+              ],
+            ),
+          );
+        } else if (state is FetchUserDataErrorState) {
+          return Text(state.error);
         }
-        return const InfoShimmer(); 
-       
+        return const InfoShimmer();
       },
     );
   }
@@ -295,64 +305,63 @@ class InfoShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer.fromColors( 
-      baseColor: ColorConsatnts.grey.shade500, 
-      highlightColor: Colors.white, 
-      child: Container( 
-          margin: EdgeInsets.symmetric(horizontal: 12.w), 
-          padding: EdgeInsets.symmetric(horizontal: 14.w , vertical: 12.h),
-          width: double.infinity, 
-          decoration: BoxDecoration( 
-            borderRadius: BorderRadius.circular(12.r),
-          ), 
-          child: Row(  
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [ 
-              CircleAvatar(radius: 26.w, backgroundColor: Colors.grey.shade500,), 
-              const HorizontalSpacer(space: 24), 
-              Column(  
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [ 
-                  Container( 
-                    width: 140.w, 
-                    height: 4.h,  
-                    margin: EdgeInsets.only(bottom: 4.h),
-                    decoration: BoxDecoration( 
-                      color: Colors.grey.shade800, 
-                      borderRadius: BorderRadius.circular(14.r)
-                    ),
-                  ), 
-                    Container( 
-                    width: 180.w, 
-                    height: 4.h,  
-                    margin: EdgeInsets.only(bottom: 4.h),
-                    decoration: BoxDecoration( 
-                      color: Colors.grey.shade500, 
-                      borderRadius: BorderRadius.circular(14.r)
-                    ),
-                  ),
-                    Container( 
-                    width: 100.w, 
-                    height: 4.h,  
-                    margin: EdgeInsets.only(bottom: 4.h),
-                    decoration: BoxDecoration( 
-                      color: Colors.grey.shade500, 
-                      borderRadius: BorderRadius.circular(14.r)
-                    ),
-                  ), 
-                   Container( 
-                    width: 100.w, 
-                    height: 4.h,  
-                    margin: EdgeInsets.only(bottom: 4.h),
-                    decoration: BoxDecoration( 
-                      color: Colors.grey.shade500, 
-                      borderRadius: BorderRadius.circular(14.r)
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
+    return Shimmer.fromColors(
+      baseColor: ColorConsatnts.grey.shade500,
+      highlightColor: Colors.white,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 12.w),
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CircleAvatar(
+              radius: 26.w,
+              backgroundColor: Colors.grey.shade500,
+            ),
+            const HorizontalSpacer(space: 24),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 140.w,
+                  height: 4.h,
+                  margin: EdgeInsets.only(bottom: 4.h),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade800,
+                      borderRadius: BorderRadius.circular(14.r)),
+                ),
+                Container(
+                  width: 180.w,
+                  height: 4.h,
+                  margin: EdgeInsets.only(bottom: 4.h),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade500,
+                      borderRadius: BorderRadius.circular(14.r)),
+                ),
+                Container(
+                  width: 100.w,
+                  height: 4.h,
+                  margin: EdgeInsets.only(bottom: 4.h),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade500,
+                      borderRadius: BorderRadius.circular(14.r)),
+                ),
+                Container(
+                  width: 100.w,
+                  height: 4.h,
+                  margin: EdgeInsets.only(bottom: 4.h),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade500,
+                      borderRadius: BorderRadius.circular(14.r)),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -38,7 +38,16 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+	</array> 
+	<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>tel</string>
+    <string>mailto</string>
+    <string>sms</string>
+    <string>http</string>
+    <string>https</string>
+</array>
+
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

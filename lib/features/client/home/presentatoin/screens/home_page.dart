@@ -1,11 +1,12 @@
-
 import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
+import 'package:e_printer/core/utils/service_locator.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:e_printer/features/client/home/presentatoin/cubit/main_home_cubit.dart';
 import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
+import 'package:e_printer/features/client/settings/presentation/controller/cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,8 +30,16 @@ class HomePageView extends StatelessWidget {
       child: const OrdersView(),
     ),
     const NotificationsScreen(),
-    BlocProvider<AuthenticationCubit>(
-      create: (context) => AuthenticationCubit()..getUserData(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthenticationCubit>(
+          create: (context) =>
+              ServiceLocator.getIt.get<AuthenticationCubit>()..getUserData(),
+        ),
+        BlocProvider(
+          create: (context) =>  ServiceLocator.getIt.get<SettingsCubit>(),
+        ),
+      ],
       child: const ProfileView(),
     )
   ];
@@ -90,29 +99,27 @@ class MainView extends StatelessWidget {
                             .index,
                       );
                     } else if (state == 2) {
-                      if (index > 3) {  
-                     
+                      if (index > 3) {
                         Navigator.pushNamed(
                           context,
                           RouteConstants.detailedItemPackagingView,
                           arguments: {
-                            "packageOrderIndex": AppConst.categoryModel(context)[state]
-                                      [index]
-                                  .index, 
-                            "title":AppConst.categoryModel(context)[state]
-                                      [index]
-                                  .title ,
-                          }, 
-
+                            "packageOrderIndex":
+                                AppConst.categoryModel(context)[state][index]
+                                    .index,
+                            "title": AppConst.categoryModel(context)[state]
+                                    [index]
+                                .title,
+                          },
                         );
                       } else {
                         Navigator.pushNamed(
                             context, RouteConstants.detailedPackagingView,
-                            arguments: { 
-                                "innerIndex":0 ,
-                              "packageItemIndex": AppConst.categoryModel(context)[state]
-                                      [index]
-                                  .index,
+                            arguments: {
+                              "innerIndex": 0,
+                              "packageItemIndex":
+                                  AppConst.categoryModel(context)[state][index]
+                                      .index,
                               "title": AppConst.categoryModel(context)[state]
                                       [index]
                                   .title,
