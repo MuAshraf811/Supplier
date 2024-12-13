@@ -1,6 +1,5 @@
 import 'package:e_printer/core/cubit/app_config_cubit.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
-import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';

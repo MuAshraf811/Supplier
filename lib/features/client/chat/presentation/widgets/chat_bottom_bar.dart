@@ -166,7 +166,8 @@ class ChatBottomBar extends StatelessWidget {
                   suffixIcon: Icons.border_color_outlined,
                   maxHeight: 44,
                   suffixSize: 16,
-                  maxLines: 4,
+                  maxLines: 4, 
+                  minLines: 1,
                   suffixColor: ColorConsatnts.grey.shade400,
                 ),
               ),
@@ -180,7 +181,7 @@ class ChatBottomBar extends StatelessWidget {
                   .chatTextFieldKey
                   .currentState!
                   .validate()) {
-                context.read<ChatCubit>().sendMessage();
+                context.read<ChatCubit>().sendAMessage();
                 context.read<ChatCubit>().messageController.clear();
                 FocusScope.of(context).unfocus();
               }

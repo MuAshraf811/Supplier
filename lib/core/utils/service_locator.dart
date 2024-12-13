@@ -14,7 +14,7 @@ class ServiceLocator {
         getIt.registerLazySingleton<OrdersCubit>(() => OrdersCubit(),); 
                 getIt.registerLazySingleton<SettingsCubit>(() => SettingsCubit(),);
 
-    getIt.registerLazySingleton<ChatCubit>(() => ChatCubit(),);
+    getIt.registerFactory<ChatCubit>(() => ChatCubit(),);
 
   }
 

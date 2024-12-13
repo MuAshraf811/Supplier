@@ -28,32 +28,42 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       TextEditingController();
   TextEditingController lastNameRegisterController = TextEditingController();
   final registerFormKey = GlobalKey<FormState>();
-  final logInFormKey = GlobalKey<FormState>(); 
-    final forgetPasswordViewFormKey = GlobalKey<FormState>();
+  final logInFormKey = GlobalKey<FormState>();
+  final forgetPasswordViewFormKey = GlobalKey<FormState>();
 
   late UserDataModel userPersonalData;
   String citySelection = "";
-  String profileCitySelection = "";
+  String profileCitySelection = ""; 
+  bool isTextSecure = false;
   TextEditingController emailProfileController = TextEditingController();
   TextEditingController firstNameProfileController = TextEditingController();
   TextEditingController lastNameProfileController = TextEditingController();
-  TextEditingController mobileProfileController = TextEditingController(); 
-    TextEditingController emailResetController = TextEditingController();
+  TextEditingController mobileProfileController = TextEditingController();
+  TextEditingController emailResetController = TextEditingController();
 
   final profileFormKey = GlobalKey<FormState>();
 
-  void changePassword() async {}
-  void forgetPassword() async { 
+  void changePassword() async {} 
+  void deleteAccount()async{ 
+    try { 
+     
+   
+
+    } catch (e) {
+    }
+  }
+  void forgetPassword() async {
     emit(SendingPasswordResetEmailState());
-   try {
-     await FirebaseAuth.instance.sendPasswordResetEmail(
-      email: emailResetController.text,
-    );   
-  
-    emit(SendingPasswordResetEmailSuccessState());
-   } catch (e) { 
-    log(e.toString());
-emit(SendingPasswordResetEmailErrorState(error: e.toString()));   }
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: emailResetController.text,
+      );
+
+      emit(SendingPasswordResetEmailSuccessState());
+    } catch (e) {
+      log(e.toString());
+      emit(SendingPasswordResetEmailErrorState(error: e.toString()));
+    }
   }
 
   void updateUserInfo() async {

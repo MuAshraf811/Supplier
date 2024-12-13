@@ -18,7 +18,9 @@ class AppTextField extends StatelessWidget {
     this.suffixColor,
     this.suffixSize, 
     this.suffixSvg , 
-    this.readOnly,
+    this.readOnly,   
+    this.isSecured,
+    
   });
   final String label; 
   final bool? readOnly;
@@ -32,7 +34,8 @@ class AppTextField extends StatelessWidget {
   final double? maxHeight;
   final double? suffixSize;
   final  Widget? suffixSvg;
-  final Color? suffixColor;
+  final Color? suffixColor;  
+  final bool? isSecured;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -40,7 +43,8 @@ class AppTextField extends StatelessWidget {
       validator: validator,
       keyboardType: type,
       maxLines: maxLines,
-      minLines: minLines,
+      minLines: minLines, 
+      obscureText: isSecured?? false,
       autocorrect: true, 
       readOnly: readOnly?? false,
       scribbleEnabled: true,

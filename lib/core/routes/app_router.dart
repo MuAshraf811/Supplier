@@ -23,7 +23,6 @@ import '../../features/client/chat/presentation/views/chat_view.dart';
 import '../../features/client/home/presentatoin/cubit/main_home_cubit.dart';
 import '../../features/client/home/presentatoin/screens/detailed_category_item_view.dart';
 import '../../features/client/home/presentatoin/screens/home_page.dart';
-import '../../features/supplier/Authentication/presentation/screens/forget_password_view.dart';
 import '../../features/supplier/settings/presentation/views/terms_conditions.dart';
 
 class AppRouter {
@@ -101,7 +100,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ChatCubit>(
             create: (context) => ServiceLocator.getIt.get<ChatCubit>()
-              ..setUpScrollControllerConfigs(),
+              ..setUpScrollControllerConfigs()..getAllmessages(),
             child: const ChatView(),
           ),
         );

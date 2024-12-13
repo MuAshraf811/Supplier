@@ -1,9 +1,12 @@
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
+import 'package:e_printer/core/utils/constants/storage_const.dart';
+import 'package:e_printer/core/utils/widgets/snack_bar.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/features/client/chat/presentation/cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/utils/storage/shared_preferences.dart';
 import '../widgets/chat_app_bar.dart';
 import '../widgets/chat_bottom_bar.dart';
 import '../widgets/message_item.dart';
@@ -24,26 +27,40 @@ class ChatView extends StatelessWidget {
                 title: "SUPPLIER ADMIN",
               ),
               Expanded(
-                child: BlocBuilder<ChatCubit, ChatState>(
-                  buildWhen: (previous, current) => current is NewMessageState,
-                  builder: (context, state) {
-                    return ListView.builder(
+                child: BlocConsumer<ChatCubit, ChatState>( 
+                  listenWhen: (previous, current) => current is FetchingMessagesErrorState,
+                  buildWhen: (previous, current) => current is FetchingMessagesErrorState|| current is FetchingMessagesState|| current is FetchingMessagesSuccessState,
+                  listener: (context, state) { 
+                    if(state is FetchingMessagesErrorState){ 
+                    showCustomSnackBar(context, state.error, ColorConsatnts.red);
+
+                    }
+                  },
+                  builder: (context, state) { 
+                    if (state is FetchingMessagesSuccessState){  
+                       return ListView.builder(   
+                        reverse: false,
                       padding: EdgeInsets.only(top: 12.h),
-                      itemCount: context.read<ChatCubit>().allMessages.length,
+                      itemCount: context.read<ChatCubit>().allChatMessages!.length,
                       controller:
                           context.read<ChatCubit>().chatScrollController,
                       itemBuilder: (context, index) => MessageItem(
                         isSender: context
                             .read<ChatCubit>()
-                            .allMessages[index]
-                            .isSender,
+                            .allChatMessages![index]
+                            .userId==SharedPreferencesManager.getStringValue(key: StorageConstants.userId),
                         message: context
                             .read<ChatCubit>()
-                            .allMessages[index]
+                            .allChatMessages![index]
                             .message,
-                        time: context.read<ChatCubit>().allMessages[index].time,
+                        time: context.read<ChatCubit>().allChatMessages![index].time,
                       ),
                     );
+                     
+                    }
+                   return Center( 
+                        child: Transform.scale( scale: 0.8 , child: const CircularProgressIndicator.adaptive()),
+                      );
                   },
                 ),
               ),

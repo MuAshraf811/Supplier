@@ -58,17 +58,38 @@ class LoginView extends StatelessWidget {
                 },
               ),
               const VerticalSpacer(space: 14),
-              AppTextField(
-                label: "Enter Your Password",
-                type: TextInputType.visiblePassword,
-                suffixIcon: Icons.remove_red_eye_rounded,
-                controller:
-                    context.read<AuthenticationCubit>().passwordLogInController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "This Field Shouldn't be empty";
-                  }
-                  return null;
+              StatefulBuilder(
+                builder: (context, changeState) {
+                  return AppTextField(
+                    label: "Enter Your Password",
+                    type: TextInputType.visiblePassword,
+                    isSecured:   context.read<AuthenticationCubit>().isTextSecure, 
+                    maxLines: 1, 
+                    minLines: 1,
+                    suffixIcon: Icons.remove_red_eye_rounded,
+                    suffixSvg: InkWell(
+                      onTap: () {
+                        changeState(() {
+                            context.read<AuthenticationCubit>().isTextSecure = !  context.read<AuthenticationCubit>().isTextSecure;
+                        });
+                      },
+                      child: Icon(
+                        !context.read<AuthenticationCubit>().isTextSecure
+                            ? Icons.remove_red_eye_outlined
+                            : Icons.visibility_off_outlined, 
+                            color: ColorConsatnts.primary,
+                      ),
+                    ),
+                    controller: context
+                        .read<AuthenticationCubit>()
+                        .passwordLogInController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "This Field Shouldn't be empty";
+                      }
+                      return null;
+                    },
+                  );
                 },
               ),
               const VerticalSpacer(space: 8),
@@ -125,9 +146,7 @@ class LoginView extends StatelessWidget {
                       child: Center(
                         child: Transform.scale(
                           scale: 0.7,
-                          child:const CircularProgressIndicator.adaptive(
-                          
-                          ),
+                          child: const CircularProgressIndicator.adaptive(),
                         ),
                       ),
                     );
