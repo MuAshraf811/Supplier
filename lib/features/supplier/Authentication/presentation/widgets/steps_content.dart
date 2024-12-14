@@ -1,5 +1,7 @@
 import 'package:e_printer/core/utils/native/image_picker.dart';
+import 'package:e_printer/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/constants/color_consatnts.dart';
@@ -15,44 +17,91 @@ class StepOneContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const AppTextField(
-            label: "Example12@email.com", suffixIcon: Icons.email),
-        const VerticalSpacer(space: 10),
-        const AppTextField(
-            label: "Enter Password", suffixIcon: Icons.remove_red_eye),
-        const VerticalSpacer(space: 6),
-        PasswordValidationPart(
-          ctx: context,
-        ),
-        const VerticalSpacer(space: 10),
-        const AppTextField(
+    return Form(
+      key: context.read<SupplierAuthCubit>().stepOneFormKey,
+      child: Column(
+        children: [
+          AppTextField(
+            label: "Example12@email.com", 
+             validator: (val) {
+              if (val == null || val.isEmpty) {
+                return "This field should not be null";
+              }
+              return null;
+            },
+            suffixIcon: Icons.email,
+            controller:
+                context.read<SupplierAuthCubit>().emailRegisterController,
+          ),
+          const VerticalSpacer(space: 10),
+          AppTextField(
+            label: "Enter Password",
+            validator: (val) {
+              if (val == null || val.isEmpty) {
+                return "This field should not be null";
+              }
+              return null;
+            },
+            suffixIcon: Icons.remove_red_eye,
+            controller:
+                context.read<SupplierAuthCubit>().passwordRegisterController,
+          ),
+          const VerticalSpacer(space: 6),
+          // PasswordValidationPart(
+          //   ctx: context,
+          // ),
+          const VerticalSpacer(space: 10),
+          AppTextField(
             label: "Confirm Password",
-            suffixIcon: Icons.remove_red_eye_rounded),
-        const VerticalSpacer(space: 10),
-        const AppTextField(
+            validator: (val) {
+              if (val == null || val.isEmpty) {
+                return "This field should not be null";
+              }
+              return null;
+            },
+            suffixIcon: Icons.remove_red_eye_rounded,
+            controller: context
+                .read<SupplierAuthCubit>()
+                .confirmPasswordRegisterController,
+          ),
+          const VerticalSpacer(space: 10),
+          AppTextField(
             label: "Mobile Number",
+            validator: (val) {
+              if (val == null || val.isEmpty) {
+                return "This field should not be null";
+              }
+              return null;
+            },
             type: TextInputType.phone,
-            suffixIcon: Icons.phone_android_outlined),
-        const VerticalSpacer(space: 10),
-        Row(
-          children: [
-            Text(
-              " City :",
-              style: applySemiBoldStyle(
-                fontSize: 16,
-                fontColor: ColorConsatnts.black,
+            suffixIcon: Icons.phone_android_outlined,
+            controller:
+                context.read<SupplierAuthCubit>().mobileNumberController,
+          ),
+          const VerticalSpacer(space: 10),
+          Row(
+            children: [
+              Text(
+                " City :",
+                style: applySemiBoldStyle(
+                  fontSize: 16,
+                  fontColor: ColorConsatnts.black,
+                ),
               ),
-            ),
-            const HorizontalSpacer(space: 10),
-            const Expanded(
-              child: DropDownWithTextField(),
-            ),
-          ],
-        ),
-        const VerticalSpacer(space: 24),
-      ],
+              const HorizontalSpacer(space: 10),
+              Expanded(
+                child: DropDownWithTextField(
+                  onchanged: (p0) {
+                    context.read<SupplierAuthCubit>().citySelection =
+                        p0 ?? "Dubai";
+                  },
+                ),
+              ),
+            ],
+          ),
+          const VerticalSpacer(space: 24),
+        ],
+      ),
     );
   }
 }
@@ -62,54 +111,95 @@ class StepTwoContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const VerticalSpacer(space: 16),
-        InkWell(
-          onTap: () {
-            ImagePickerHelper.pick(false);
-          },
-          child: Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(bottom: 22.h),
-            height: 80.h,
-            decoration: BoxDecoration(
-              border: Border.all(color: ColorConsatnts.primary),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Upload Trade License",
-                  style: applySemiBoldStyle(
-                    fontSize: 16,
-                    fontColor: ColorConsatnts.black,
+    return Form(
+      key: context.read<SupplierAuthCubit>().stepTwoFormKey,
+      child: Column(
+        children: [
+          const VerticalSpacer(space: 16),
+          InkWell(
+            onTap: () {
+              ImagePickerHelper.pick(false);
+            },
+            child: Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(bottom: 22.h),
+              height: 80.h,
+              decoration: BoxDecoration(
+                border: Border.all(color: ColorConsatnts.primary),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Upload Trade License",
+                    style: applySemiBoldStyle(
+                      fontSize: 16,
+                      fontColor: ColorConsatnts.black,
+                    ),
                   ),
-                ),
-                const VerticalSpacer(space: 10),
-                const SvgHandler(
-                    imagePath: "assets/svgs/export2.svg",
-                    height: 24,
-                    width: 24),
-              ],
+                  const VerticalSpacer(space: 10),
+                  const SvgHandler(
+                      imagePath: "assets/svgs/export2.svg",
+                      height: 24,
+                      width: 24),
+                ],
+              ),
             ),
           ),
-        ),
-        const AppTextField(
-            label: "Company Name", suffixIcon: Icons.password_sharp),
-        const VerticalSpacer(space: 12),
-        const AppTextField(
-            label: "Tax Number", suffixIcon: Icons.password_sharp),
-        const VerticalSpacer(space: 12),
-        const AppTextField(
-            label: "Bank Name", suffixIcon: Icons.account_balance_outlined),
-        const VerticalSpacer(space: 12),
-        const AppTextField(
-            label: "Ipan Number", suffixIcon: Icons.credit_card_sharp),
-        const VerticalSpacer(space: 24),
-      ],
+          AppTextField(
+            label: "Company Name",
+            suffixIcon: Icons.password_sharp,
+            validator: (val) {
+              if (val == null || val.isEmpty) {
+                return "This field should not be null";
+              }
+              return null;
+            },
+            controller:
+                context.read<SupplierAuthCubit>().companyNameRegisterController,
+          ),
+          const VerticalSpacer(space: 12),
+          AppTextField(
+            label: "Tax Number",
+            suffixIcon: Icons.password_sharp,
+            validator: (val) {
+              if (val == null || val.isEmpty) {
+                return "This field should not be null";
+              }
+              return null;
+            },
+            controller: context.read<SupplierAuthCubit>().taxNumberController,
+          ),
+          const VerticalSpacer(space: 12),
+          AppTextField(
+            label: "Bank Name",
+            validator: (val) {
+              if (val == null || val.isEmpty) {
+                return "This field should not be null";
+              }
+              return null;
+            },
+            suffixIcon: Icons.account_balance_outlined,
+            controller:
+                context.read<SupplierAuthCubit>().bankNameRegisterController,
+          ),
+          const VerticalSpacer(space: 12),
+          AppTextField(
+            label: "Ipan Number",
+            validator: (val) {
+              if (val == null || val.isEmpty) {
+                return "This field should not be null";
+              }
+              return null;
+            },
+            suffixIcon: Icons.credit_card_sharp,
+            controller: context.read<SupplierAuthCubit>().ipanNumberController,
+          ),
+          const VerticalSpacer(space: 24),
+        ],
+      ),
     );
   }
 }

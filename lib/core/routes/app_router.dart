@@ -10,6 +10,7 @@ import 'package:e_printer/features/client/home/presentatoin/screens/other_detail
 import 'package:e_printer/features/client/settings/presentation/views/account_view.dart';
 import 'package:e_printer/features/onboarding&splash/on_boarding_view.dart';
 import 'package:e_printer/features/onboarding&splash/user_type_view.dart';
+import 'package:e_printer/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
 import 'package:e_printer/features/supplier/Authentication/presentation/screens/supplier_register_view.dart';
 import 'package:e_printer/features/supplier/home/presentation/cubit/supplier_nav_bar_cubit.dart';
 import 'package:e_printer/features/supplier/home/presentation/screens/filter_view.dart';
@@ -120,9 +121,9 @@ class AppRouter {
         );
       case RouteConstants.supplierRegistererView:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<AuthenticationCubit>(
+          builder: (context) => BlocProvider<SupplierAuthCubit>(
             create: (context) =>
-                ServiceLocator.getIt.get<AuthenticationCubit>(),
+                ServiceLocator.getIt.get<SupplierAuthCubit>(),
             child: const SupplierRegisterView(),
           ),
         );

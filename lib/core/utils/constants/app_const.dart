@@ -8,7 +8,7 @@ import '../../../features/client/chat/model/message_model.dart';
 
 class AppConst { 
 
-
+static const supabaseUrl = "https://qbdocjfxxicowxabtaiq.supabase.co";
 
 static const socialMediaLinks =[ 
   "https://www.facebook.com/supplieruae1/", 

@@ -1,7 +1,10 @@
+import 'package:e_printer/core/cubit/app_config_cubit.dart';
 import 'package:e_printer/core/utils/widgets/app_button.dart';
 import 'package:e_printer/core/utils/widgets/terms_and_conditions_dialog.dart';
+import 'package:e_printer/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
 import 'package:e_printer/features/supplier/Authentication/presentation/widgets/steps_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/constants/color_consatnts.dart';
 import '../../../../../core/utils/styles/text_styles.dart';
@@ -31,13 +34,25 @@ class _RegisterStepperState extends State<RegisterStepper> {
                 text: details.currentStep == 0 ? "Continue" : "Register",
                 onTap: () {
                   if (stepIndex == 0) {
-                    setState(
-                      () {
-                        stepIndex++;
-                      },
-                    );
+                    if (context
+                        .read<SupplierAuthCubit>()
+                        .stepOneFormKey
+                        .currentState!
+                        .validate()) {
+                      setState(
+                        () {
+                          stepIndex++;
+                        },
+                      );
+                    }
                   } else {
-                    showTermsAndConditionsDialog(context, true);
+                    if (context
+                        .read<SupplierAuthCubit>()
+                        .stepTwoFormKey
+                        .currentState!
+                        .validate()) {
+                      showTermsAndConditionsDialog(context, true);
+                    }
                   }
                 },
                 width: 100.w,

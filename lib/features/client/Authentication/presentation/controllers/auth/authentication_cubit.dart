@@ -97,7 +97,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         "first_name": firstNameRegisterController.text,
         "last_name": lastNameRegisterController.text,
         "email": emailRegisterController.text,
-        "password": passwordRegisterController.text,
+        "password": passwordRegisterController.text, 
+        "role" : "client",
         "mobile_number": mobileNumberRegisterController.text,
         "city": citySelection,
       });

@@ -7,14 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DropDownWithTextField extends StatelessWidget {
-  const DropDownWithTextField({super.key});
-
+  const DropDownWithTextField({super.key , this.onchanged});
+ final void Function(String?)? onchanged;
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
-      onChanged: (value) { 
-        context.read<AuthenticationCubit>().citySelection = value??'Abu Dhabi';  
-                context.read<AuthenticationCubit>().profileCitySelection = value??'Abu Dhabi'; 
+      onChanged:onchanged?? (value) { 
+        context.read<AuthenticationCubit>().citySelection = value as String? ??'Abu Dhabi';  
+                context.read<AuthenticationCubit>().profileCitySelection = value ??'Abu Dhabi'; 
 
 
       },
