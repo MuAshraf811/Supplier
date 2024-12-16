@@ -25,34 +25,31 @@ class SupplierAuthCubit extends Cubit<SupplierAuthState> {
   final stepTwoFormKey = GlobalKey<FormState>();
   late File? imageFile;
 
-  getTradeLisence() async { 
+  getTradeLisence() async {
     try {
-  final image = await ImagePickerHelper.pick(false);
-    if (image != null) {
-      imageFile = File(image.path); 
-      emit(FetchingTradeLisenceSuccessState());
-    }     else{ 
-            emit(FetchingTradeLisenceErrorState(error: "Can not pick image"));
-
-    }
-    
-     } catch (e) { 
-              log(e.toString());
+      final image = await ImagePickerHelper.pick(false);
+      if (image != null) {
+        imageFile = File(image.path);
+        emit(FetchingTradeLisenceSuccessState());
+      } else {
+        emit(FetchingTradeLisenceErrorState(error: "Can not pick image"));
+      }
+    } catch (e) {
+      log(e.toString());
       emit(FetchingTradeLisenceErrorState(error: e.toString()));
     }
-  
   }
 
   uploadTradeLisence() async {
     final imageName =
         "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().second}.jpg";
-    try { 
-      emit(UploadingTradeLisenceState()); 
+    try {
+      emit(UploadingTradeLisenceState());
       await RemoteDataBase.createSupaBaseBucket();
       await RemoteDataBase.insertImageIntoBacket(
-          imageFile: imageFile!, imagePath: imageName); 
-          emit(UploadingTradeLisenceSuccessState());
-    }  catch (e) { 
+          imageFile: imageFile!, imagePath: imageName);
+      emit(UploadingTradeLisenceSuccessState());
+    } catch (e) {
       emit(UploadingTradeLisenceErrorState(error: e.toString()));
     }
   }

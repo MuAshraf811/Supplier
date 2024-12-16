@@ -18,8 +18,7 @@ void main() async {
   ServiceLocator.setObjects(); 
    await Supabase.initialize(
     url: AppConst.supabaseUrl, // Replace with your Supabase project URL
-    anonKey:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFiZG9jamZ4eGljb3d4YWJ0YWlxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDEzNTM2MiwiZXhwIjoyMDQ5NzExMzYyfQ.CS7d0Azw6yj4HkqUtUpB2LeOKuX1nB263FNjVMafz_k"
-    // dotenv.env["SUPA_BASE_KEY"]??"NO KEY FOUND", // Replace with your Supabase Anon Key
+    anonKey: dotenv.env["SUPA_BASE_KEY"]??"NO KEY FOUND", // Replace with your Supabase Anon Key
   ); 
   
   await Firebase.initializeApp(

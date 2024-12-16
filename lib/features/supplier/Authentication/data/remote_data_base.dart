@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:e_printer/core/utils/constants/app_const.dart';
@@ -10,20 +9,12 @@ class RemoteDataBase {
   static Future<void> createSupaBaseBucket() async {
     const bucketName = AppConst.supaBaseStorageBacketName;
 
-    try {
-      // List all buckets
-      final response = await Supabase.instance.client.storage.listBuckets();
+    final response = await Supabase.instance.client.storage.listBuckets();
 
-      // Check if the bucket already exists
-      final bucketExists = response.any((bucket) => bucket.name == bucketName);
+    final bucketExists = response.any((bucket) => bucket.name == bucketName);
 
-      if (bucketExists) {
-      } else {
-        // Create the bucket if it does not exist
-        await Supabase.instance.client.storage.createBucket(bucketName);
-      }
-    } catch (e) {
-      log('Error in createSupaBaseBucket: $e');
+    if (!bucketExists) {
+      await Supabase.instance.client.storage.createBucket(bucketName);
     }
   }
 
