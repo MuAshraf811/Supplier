@@ -92,7 +92,8 @@ flutter:
     - assets/images/Hygiene and protection/ Dispenser/
     - assets/images/Hygiene and protection/Cleaner/
     - assets/images/Hygiene and protection/Gloves/
-    - assets/images/Hygiene and protection/Hygiene/
+    - assets/images/Hygiene and protection/Hygiene/ 
+    - supa_keys.env
   fonts:
     - family: Quicksand
       fonts:

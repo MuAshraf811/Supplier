@@ -4,6 +4,7 @@ import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit
 import 'package:e_printer/features/client/settings/presentation/controller/cubit/settings_cubit.dart';
 import 'package:e_printer/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
 import 'package:get_it/get_it.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ServiceLocator {
   static GetIt getIt = GetIt.instance;
@@ -15,6 +16,7 @@ class ServiceLocator {
     getIt.registerLazySingleton<SupplierAuthCubit>(
       () => SupplierAuthCubit(),
     );
+    
 
     getIt.registerLazySingleton<OrdersCubit>(
       () => OrdersCubit(),

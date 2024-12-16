@@ -1,4 +1,3 @@
-import 'package:e_printer/core/cubit/app_config_cubit.dart';
 import 'package:e_printer/core/utils/widgets/app_button.dart';
 import 'package:e_printer/core/utils/widgets/terms_and_conditions_dialog.dart';
 import 'package:e_printer/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/constants/color_consatnts.dart';
 import '../../../../../core/utils/styles/text_styles.dart';
+import '../../../../../core/utils/widgets/snack_bar.dart';
 import '../../../../../core/utils/widgets/spacers.dart';
 
 class RegisterStepper extends StatefulWidget {
@@ -30,34 +30,65 @@ class _RegisterStepperState extends State<RegisterStepper> {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AppButton(
-                text: details.currentStep == 0 ? "Continue" : "Register",
-                onTap: () {
-                  if (stepIndex == 0) {
-                    if (context
-                        .read<SupplierAuthCubit>()
-                        .stepOneFormKey
-                        .currentState!
-                        .validate()) {
-                      setState(
-                        () {
-                          stepIndex++;
-                        },
-                      );
-                    }
-                  } else {
-                    if (context
-                        .read<SupplierAuthCubit>()
-                        .stepTwoFormKey
-                        .currentState!
-                        .validate()) {
-                      showTermsAndConditionsDialog(context, true);
-                    }
+              BlocConsumer<SupplierAuthCubit, SupplierAuthState>(
+                buildWhen: (previous, current) =>
+                    current is UploadingTradeLisenceErrorState ||
+                    current is UploadingTradeLisenceState ||
+                    current is UploadingTradeLisenceSuccessState,
+                listenWhen: (previous, current) =>
+                    current is UploadingTradeLisenceErrorState ||
+                    current is UploadingTradeLisenceState ||
+                    current is UploadingTradeLisenceSuccessState,
+                listener: (context, state) {
+                  if (state is UploadingTradeLisenceErrorState) {
+                    showCustomSnackBar(
+                        context, state.error, ColorConsatnts.red);
+                  } 
+                  if (state is UploadingTradeLisenceSuccessState){ 
+                                              showTermsAndConditionsDialog(context, true);
+
                   }
                 },
-                width: 100.w,
-                raduis: 6.r,
-                fontSize: 15,
+                builder: (context, state) {
+                  if (state is UploadingTradeLisenceState) {
+                    return Container( 
+                      margin: EdgeInsets.only(right: 24.w), 
+                      width: 20.w, 
+                      height: 20.h,
+                        child: const CircularProgressIndicator.adaptive());
+                  }
+                  return AppButton(
+                    text: details.currentStep == 0 ? "Continue" : "Register",
+                    onTap: () {
+                      if (stepIndex == 0) {
+                        if (context
+                            .read<SupplierAuthCubit>()
+                            .stepOneFormKey
+                            .currentState!
+                            .validate()) {
+                          setState(
+                            () {
+                              stepIndex++;
+                            },
+                          );
+                        }
+                      } else {
+                        if (context
+                            .read<SupplierAuthCubit>()
+                            .stepTwoFormKey
+                            .currentState!
+                            .validate()) { 
+                          context
+                              .read<SupplierAuthCubit>()
+                              .uploadTradeLisence();
+                        }
+                      }
+                    },
+                    width: 100.w,
+                    raduis: 6.r,
+                    fontSize: 15,
+                  );
+                },
               ),
               const HorizontalSpacer(space: 12),
               AppButton(

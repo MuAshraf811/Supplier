@@ -91,7 +91,7 @@ class ChatCubit extends Cubit<ChatState> {
   // }
 
   void pickImage({required isFromCamera}) async {
-    imagepath = await ImagePickerHelper.pick(isFromCamera);
+    imagepath = await ImagePickerHelper.pick(isFromCamera).then((val)=> val?.path);
   }
 
   @override

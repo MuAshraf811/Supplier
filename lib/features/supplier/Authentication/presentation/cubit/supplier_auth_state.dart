@@ -4,3 +4,23 @@ part of 'supplier_auth_cubit.dart';
 sealed class SupplierAuthState {}
 
 final class SupplierAuthInitial extends SupplierAuthState {}
+final class FetchingTradeLisenceState extends SupplierAuthState{} 
+final class FetchingTradeLisenceSuccessState extends SupplierAuthState{}
+final class FetchingTradeLisenceErrorState extends SupplierAuthState{ 
+  final String error;
+
+  FetchingTradeLisenceErrorState({required this.error}); 
+
+}
+
+
+
+final class UploadingTradeLisenceState extends SupplierAuthState{} 
+final class  UploadingTradeLisenceSuccessState extends SupplierAuthState{}
+final class  UploadingTradeLisenceErrorState extends SupplierAuthState{ 
+  final String error;
+
+  UploadingTradeLisenceErrorState({required this.error}); 
+
+}
+

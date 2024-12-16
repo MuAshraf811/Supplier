@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../features/client/chat/model/message_model.dart';
 
 class AppConst { 
-
+static const supaBaseStorageBacketName = "trade_license";
 static const supabaseUrl = "https://qbdocjfxxicowxabtaiq.supabase.co";
 
 static const socialMediaLinks =[ 

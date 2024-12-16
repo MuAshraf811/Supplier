@@ -1,4 +1,4 @@
-import 'package:e_printer/core/utils/native/image_picker.dart';
+import 'package:e_printer/core/utils/widgets/snack_bar.dart';
 import 'package:e_printer/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +22,8 @@ class StepOneContent extends StatelessWidget {
       child: Column(
         children: [
           AppTextField(
-            label: "Example12@email.com", 
-             validator: (val) {
+            label: "Example12@email.com",
+            validator: (val) {
               if (val == null || val.isEmpty) {
                 return "This field should not be null";
               }
@@ -118,7 +118,7 @@ class StepTwoContent extends StatelessWidget {
           const VerticalSpacer(space: 16),
           InkWell(
             onTap: () {
-              ImagePickerHelper.pick(false);
+              context.read<SupplierAuthCubit>().getTradeLisence();
             },
             child: Container(
               width: double.infinity,
@@ -132,12 +132,58 @@ class StepTwoContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Upload Trade License",
-                    style: applySemiBoldStyle(
-                      fontSize: 16,
-                      fontColor: ColorConsatnts.black,
-                    ),
+                  Row( 
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      BlocConsumer<SupplierAuthCubit, SupplierAuthState>( 
+                        buildWhen: (previous, current) => current is FetchingTradeLisenceErrorState|| current is FetchingTradeLisenceState || current is FetchingTradeLisenceSuccessState,
+                        listenWhen: (previous, current) => current is FetchingTradeLisenceErrorState|| current is FetchingTradeLisenceState || current is FetchingTradeLisenceSuccessState,
+                        listener: (context, state) {
+                          if (state is FetchingTradeLisenceErrorState){ 
+                            showCustomSnackBar(context, state.error, ColorConsatnts.red);
+                          }
+                        },
+                        builder: (context, state) { 
+                          if (state is FetchingTradeLisenceSuccessState){
+                             return Container(
+                            width: 60.w,
+                            height: 30.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2.r),
+                              color: ColorConsatnts.white,
+                              image: 
+
+                                  DecorationImage( 
+                                    fit: BoxFit.cover,
+                                          image: FileImage(
+                                            context
+                                                .read<SupplierAuthCubit>()
+                                                .imageFile!,
+                                          ),
+                                        ),
+                                      
+                            ),
+                          );
+                          }
+                          return Container(
+                            width: 40.w,
+                            height: 30.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              color: ColorConsatnts.white,
+                             
+                            ),
+                          );
+                        },
+                      ),
+                      Text(
+                        "Upload Trade License",
+                        style: applySemiBoldStyle(
+                          fontSize: 16,
+                          fontColor: ColorConsatnts.black,
+                        ),
+                      ),
+                    ],
                   ),
                   const VerticalSpacer(space: 10),
                   const SvgHandler(
