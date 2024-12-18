@@ -8,12 +8,14 @@ class SupplierUserModel {
   final String companyName;
   final String taxNumber;
   final String bankName;
-  final String ipanNumber;
+  final String ipanNumber; 
+  final String imagePath;
 
   SupplierUserModel(
       {required this.email,
       required this.mobile,
       required this.city,
+      required this.imagePath, 
       required this.companyName,
       required this.taxNumber,
       required this.bankName,
@@ -23,7 +25,8 @@ class SupplierUserModel {
       factory SupplierUserModel.fromJson(Map<String, dynamic> json) {
     return SupplierUserModel(
       email: json['email'],
-      mobile: json['mobile'],
+      mobile: json['mobile'], 
+      imagePath: json["imagePath"],
       city: json['city'],
       companyName: json['companyName'],
       taxNumber: json['taxNumber'],
@@ -37,6 +40,7 @@ class SupplierUserModel {
     return {
       'email': email,
       'mobile': mobile,
+      'imagePath': imagePath,
       'city': city,
       'companyName': companyName,
       'taxNumber': taxNumber,

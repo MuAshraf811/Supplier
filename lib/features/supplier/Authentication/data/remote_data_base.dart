@@ -17,7 +17,10 @@ class RemoteDataBase {
       await Supabase.instance.client.storage.createBucket(bucketName);
     }
   }
-
+  static getImageUrl({required String path}){ 
+     return  Supabase.instance.client.storage.from(AppConst.supaBaseStorageBacketName).getPublicUrl(path); 
+       
+  }
   static insertImageIntoBacket(
       {required File imageFile, required String imagePath}) async {
     await Supabase.instance.client.storage

@@ -26,6 +26,10 @@ class StepOneContent extends StatelessWidget {
             validator: (val) {
               if (val == null || val.isEmpty) {
                 return "This field should not be null";
+              }else if(val.endsWith(".com")==false && !val.endsWith(".net") ){ 
+                return "Enter Valid Email";
+              } else if (val.contains("@")==false){ 
+                return "Enter Valid Email";
               }
               return null;
             },
@@ -39,6 +43,8 @@ class StepOneContent extends StatelessWidget {
             validator: (val) {
               if (val == null || val.isEmpty) {
                 return "This field should not be null";
+              }else if(val.length<=7){ 
+                return "Password should be 8 or more digits";
               }
               return null;
             },
@@ -56,7 +62,11 @@ class StepOneContent extends StatelessWidget {
             validator: (val) {
               if (val == null || val.isEmpty) {
                 return "This field should not be null";
-              }
+              } else if (context.read<SupplierAuthCubit>().passwordRegisterController.text !=context
+                .read<SupplierAuthCubit>()
+                .confirmPasswordRegisterController.text ){ 
+                  return"Passwords don't match" ; 
+                }
               return null;
             },
             suffixIcon: Icons.remove_red_eye_rounded,
@@ -70,6 +80,8 @@ class StepOneContent extends StatelessWidget {
             validator: (val) {
               if (val == null || val.isEmpty) {
                 return "This field should not be null";
+              }if(val.length != 10){ 
+                return "Enter Valid Mobile Number" ;
               }
               return null;
             },
@@ -82,7 +94,7 @@ class StepOneContent extends StatelessWidget {
           Row(
             children: [
               Text(
-                " City :",
+                " City : ",
                 style: applySemiBoldStyle(
                   fontSize: 16,
                   fontColor: ColorConsatnts.black,
@@ -118,7 +130,8 @@ class StepTwoContent extends StatelessWidget {
           const VerticalSpacer(space: 16),
           InkWell(
             onTap: () {
-              context.read<SupplierAuthCubit>().getTradeLisence();
+              context.read<SupplierAuthCubit>().getTradeLisence();  
+
             },
             child: Container(
               width: double.infinity,

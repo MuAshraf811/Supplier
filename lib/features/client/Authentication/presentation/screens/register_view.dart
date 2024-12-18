@@ -31,7 +31,7 @@ class RegisterView extends StatelessWidget {
             child: ListView(
               children: [
                 const VerticalSpacer(space: 18),
-                const GeneralAppBar(title: "Register Page"),
+                const GeneralAppBar(title: "Register Page", isBackArrowShown: true,),
                 const VerticalSpacer(space: 20),
                 Row(
                   children: [

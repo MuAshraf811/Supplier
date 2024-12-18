@@ -23,4 +23,15 @@ final class  UploadingTradeLisenceErrorState extends SupplierAuthState{
   UploadingTradeLisenceErrorState({required this.error}); 
 
 }
+ 
+
+
+final class UploadingUserState extends SupplierAuthState{} 
+final class  UploadingUserStateSuccessState extends SupplierAuthState{}
+final class  UploadingUserStateErrorState extends SupplierAuthState{ 
+  final String error;
+
+  UploadingUserStateErrorState({required this.error}); 
+
+}
 

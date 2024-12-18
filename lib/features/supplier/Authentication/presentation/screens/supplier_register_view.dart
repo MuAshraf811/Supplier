@@ -18,7 +18,7 @@ class SupplierRegisterView extends StatelessWidget {
           child: const Column(
             children: [
               VerticalSpacer(space: 24),
-              GeneralAppBar(title: "Supplier Register Page"),
+              GeneralAppBar(title: "Supplier Register Page", isBackArrowShown: false,),
               VerticalSpacer(space: 26),
               Expanded(
                 child: RegisterStepper(),

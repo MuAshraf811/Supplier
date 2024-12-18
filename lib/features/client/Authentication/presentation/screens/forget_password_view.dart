@@ -24,7 +24,7 @@ class ForgetPasswordClientView extends StatelessWidget {
             child: Column(
               children: [
                 const VerticalSpacer(space: 32),
-                const GeneralAppBar(title: "Reset Password Screen"),
+                const GeneralAppBar(title: "Reset Password Screen", isBackArrowShown: true,),
                 const VerticalSpacer(space: 24),
                  AppTextField(
                   label: "Enter Your Email",

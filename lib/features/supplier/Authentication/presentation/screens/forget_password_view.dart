@@ -21,7 +21,7 @@ class ForgetPasswordView extends StatelessWidget {
           child: Column(
             children: [
               const VerticalSpacer(space: 32),
-              const GeneralAppBar(title: "Reset Password View"),
+              const GeneralAppBar(title: "Reset Password View", isBackArrowShown: true,),
               const VerticalSpacer(space: 24),
               const AppTextField(
                   label: "Enter password",

@@ -8,14 +8,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class GeneralAppBar extends StatelessWidget {
   const GeneralAppBar({
     super.key,
-    required this.title,
+    required this.title, required this.isBackArrowShown,
   });
-  final String title;
+  final String title; 
+  final bool isBackArrowShown;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        InkWell(
+      isBackArrowShown?  InkWell(
           onTap: () {
             Navigator.pop(context);
           },
@@ -27,7 +28,7 @@ class GeneralAppBar extends StatelessWidget {
               width: 20,
             ),
           ),
-        ),
+        ): const SizedBox.shrink(),
         const Spacer(),
         Text(
           title,

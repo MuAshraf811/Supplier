@@ -34,23 +34,27 @@ class _RegisterStepperState extends State<RegisterStepper> {
                 buildWhen: (previous, current) =>
                     current is UploadingTradeLisenceErrorState ||
                     current is UploadingTradeLisenceState ||
-                    current is UploadingTradeLisenceSuccessState,
+                    current is UploadingTradeLisenceSuccessState||   current is UploadingUserState ||    current is UploadingUserStateSuccessState || current is UploadingUserStateErrorState,
                 listenWhen: (previous, current) =>
                     current is UploadingTradeLisenceErrorState ||
                     current is UploadingTradeLisenceState ||
-                    current is UploadingTradeLisenceSuccessState,
+                    current is UploadingTradeLisenceSuccessState ||  current is UploadingUserState ||    current is UploadingUserStateSuccessState || current is UploadingUserStateErrorState ,
                 listener: (context, state) {
                   if (state is UploadingTradeLisenceErrorState) {
                     showCustomSnackBar(
                         context, state.error, ColorConsatnts.red);
+                  }  
+                    if (state is UploadingUserStateErrorState) {
+                    showCustomSnackBar(
+                        context, state.error, ColorConsatnts.red);
                   } 
-                  if (state is UploadingTradeLisenceSuccessState){ 
+                  if (state is UploadingUserStateSuccessState){ 
                                               showTermsAndConditionsDialog(context, true);
 
                   }
                 },
                 builder: (context, state) {
-                  if (state is UploadingTradeLisenceState) {
+                  if ( state is UploadingUserState) {
                     return Container( 
                       margin: EdgeInsets.only(right: 24.w), 
                       width: 20.w, 
@@ -77,10 +81,16 @@ class _RegisterStepperState extends State<RegisterStepper> {
                             .read<SupplierAuthCubit>()
                             .stepTwoFormKey
                             .currentState!
-                            .validate()) { 
-                          context
-                              .read<SupplierAuthCubit>()
-                              .uploadTradeLisence();
+                            .validate()) {   
+                              //   context
+                              // .read<SupplierAuthCubit>()
+                              // .uploadTradeLisence();
+                              if(context.read<SupplierAuthCubit>().imageFile==null){ 
+                                       showCustomSnackBar(context, "Upload Lisence", ColorConsatnts.red); 
+                              } 
+                                                                     context.read<SupplierAuthCubit>().registerUserData();
+
+                        
                         }
                       }
                     },

@@ -1,8 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_printer/core/utils/native/image_picker.dart';
 import 'package:e_printer/features/supplier/Authentication/data/remote_data_base.dart';
+import 'package:e_printer/features/supplier/Authentication/model/supplier_user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,10 +23,45 @@ class SupplierAuthCubit extends Cubit<SupplierAuthState> {
   TextEditingController taxNumberController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  String citySelection = "";
+  String citySelection = "Dubai";
   final stepOneFormKey = GlobalKey<FormState>();
   final stepTwoFormKey = GlobalKey<FormState>();
-  late File? imageFile;
+  File? imageFile;
+
+  registerUserData() async {
+   try { 
+    emit(UploadingUserState());
+      final imageName =
+        "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().second}.jpg";
+
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailRegisterController.text,
+        password: passwordRegisterController.text);
+    await RemoteDataBase.createSupaBaseBucket();
+    await RemoteDataBase.insertImageIntoBacket(
+        imageFile: imageFile!, imagePath: imageName); 
+       
+    final supplierData = SupplierUserModel(
+      email: emailRegisterController.text,
+      imagePath:  RemoteDataBase.getImageUrl(path: imageName)??"",
+      mobile: mobileNumberController.text,
+      city: citySelection,
+      companyName: companyNameRegisterController.text,
+      taxNumber: taxNumberController.text,
+      bankName: bankNameRegisterController.text,
+      ipanNumber: ipanNumberController.text,
+    );
+    await FirebaseFirestore.instance
+        .collection("Suppliers")
+        .add(supplierData.toMap());  
+            emit(UploadingUserStateSuccessState());
+
+   } catch (e) {  
+    log("********"); 
+    log(e.toString());
+    UploadingUserStateErrorState(error: e.toString());
+   }
+  }
 
   getTradeLisence() async {
     try {
@@ -47,7 +85,7 @@ class SupplierAuthCubit extends Cubit<SupplierAuthState> {
       emit(UploadingTradeLisenceState());
       await RemoteDataBase.createSupaBaseBucket();
       await RemoteDataBase.insertImageIntoBacket(
-          imageFile: imageFile!, imagePath: imageName);
+          imageFile: imageFile ?? File(""), imagePath: imageName);
       emit(UploadingTradeLisenceSuccessState());
     } catch (e) {
       emit(UploadingTradeLisenceErrorState(error: e.toString()));
