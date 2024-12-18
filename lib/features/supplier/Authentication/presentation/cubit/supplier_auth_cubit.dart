@@ -23,44 +23,61 @@ class SupplierAuthCubit extends Cubit<SupplierAuthState> {
   TextEditingController taxNumberController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController cityController = TextEditingController();
+  TextEditingController emailLogInController = TextEditingController();
+  TextEditingController passwordLogInController = TextEditingController();
+
   String citySelection = "Dubai";
   final stepOneFormKey = GlobalKey<FormState>();
-  final stepTwoFormKey = GlobalKey<FormState>();
+  final stepTwoFormKey = GlobalKey<FormState>(); 
+    final logInFormKey = GlobalKey<FormState>();
+
   File? imageFile;
 
+  logInSupplier() async { 
+
+    try { 
+      emit(LogingInState());
+       await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailLogInController.text,
+      password: passwordLogInController.text,
+    ); 
+    emit(LogingInSuccessState());
+    } catch (e) { 
+      emit(LogingInErrorState(error: e.toString()));
+    }
+   
+  }
+
   registerUserData() async {
-   try { 
-    emit(UploadingUserState());
+    try {
+      emit(UploadingUserState());
       final imageName =
-        "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().second}.jpg";
+          "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().second}.jpg";
 
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailRegisterController.text,
+          password: passwordRegisterController.text);
+      await RemoteDataBase.createSupaBaseBucket();
+      await RemoteDataBase.insertImageIntoBacket(
+          imageFile: imageFile!, imagePath: imageName);
+
+      final supplierData = SupplierUserModel(
         email: emailRegisterController.text,
-        password: passwordRegisterController.text);
-    await RemoteDataBase.createSupaBaseBucket();
-    await RemoteDataBase.insertImageIntoBacket(
-        imageFile: imageFile!, imagePath: imageName); 
-       
-    final supplierData = SupplierUserModel(
-      email: emailRegisterController.text,
-      imagePath:  RemoteDataBase.getImageUrl(path: imageName)??"",
-      mobile: mobileNumberController.text,
-      city: citySelection,
-      companyName: companyNameRegisterController.text,
-      taxNumber: taxNumberController.text,
-      bankName: bankNameRegisterController.text,
-      ipanNumber: ipanNumberController.text,
-    );
-    await FirebaseFirestore.instance
-        .collection("Suppliers")
-        .add(supplierData.toMap());  
-            emit(UploadingUserStateSuccessState());
-
-   } catch (e) {  
-    log("********"); 
-    log(e.toString());
-    UploadingUserStateErrorState(error: e.toString());
-   }
+        imagePath: RemoteDataBase.getImageUrl(path: imageName) ?? "",
+        mobile: mobileNumberController.text,
+        city: citySelection,
+        companyName: companyNameRegisterController.text,
+        taxNumber: taxNumberController.text,
+        bankName: bankNameRegisterController.text,
+        ipanNumber: ipanNumberController.text,
+      );
+      await FirebaseFirestore.instance
+          .collection("Suppliers")
+          .add(supplierData.toMap());
+      emit(UploadingUserStateSuccessState());
+    } catch (e) {
+      UploadingUserStateErrorState(error: e.toString());
+    }
   }
 
   getTradeLisence() async {

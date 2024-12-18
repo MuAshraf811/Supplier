@@ -17,5 +17,6 @@ class RouteConstants {
   static const supplierHomeView = "/SupplierHomeView";
   static const supplierFilterView = "/SupplierFilterView";
   static const supplierRegistererView = "/SupplierRegisterView"; 
-  static const detailedItemPackagingView = "/DetailedItemPackaging";
+  static const detailedItemPackagingView = "/DetailedItemPackaging"; 
+  static const supplierLogInView = "/SupplierLogInView";
 }

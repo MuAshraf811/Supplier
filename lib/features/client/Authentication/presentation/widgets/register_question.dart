@@ -6,9 +6,9 @@ import '../../../../../core/utils/styles/text_styles.dart';
 
 class RegisterQuestion extends StatelessWidget {
   const RegisterQuestion({
-    super.key,
+    super.key, required this.isSupplier,
   });
-
+ final bool isSupplier;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -22,7 +22,7 @@ class RegisterQuestion extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, RouteConstants.registerView);
+            isSupplier?   Navigator.pushNamed(context, RouteConstants.supplierRegistererView) :Navigator.pushNamed(context, RouteConstants.registerView);
             },
             child: Text("Create account",
                 style: applySemiBoldStyle(

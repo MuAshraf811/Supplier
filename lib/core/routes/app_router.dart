@@ -11,6 +11,7 @@ import 'package:e_printer/features/client/settings/presentation/views/account_vi
 import 'package:e_printer/features/onboarding&splash/on_boarding_view.dart';
 import 'package:e_printer/features/onboarding&splash/user_type_view.dart';
 import 'package:e_printer/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
+import 'package:e_printer/features/supplier/Authentication/presentation/screens/login_view.dart';
 import 'package:e_printer/features/supplier/Authentication/presentation/screens/supplier_register_view.dart';
 import 'package:e_printer/features/supplier/home/presentation/cubit/supplier_nav_bar_cubit.dart';
 import 'package:e_printer/features/supplier/home/presentation/screens/filter_view.dart';
@@ -46,8 +47,7 @@ class AppRouter {
       case RouteConstants.logInView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<AuthenticationCubit>(
-            create: (context) =>
-                AuthenticationCubit(),
+            create: (context) => AuthenticationCubit(),
             child: const LoginView(),
           ),
         );
@@ -101,7 +101,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ChatCubit>(
             create: (context) => ServiceLocator.getIt.get<ChatCubit>()
-              ..setUpScrollControllerConfigs()..getAllmessages(),
+              ..setUpScrollControllerConfigs()
+              ..getAllmessages(),
             child: const ChatView(),
           ),
         );
@@ -119,11 +120,17 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const FilterView(),
         );
+      case RouteConstants.supplierLogInView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<SupplierAuthCubit>(
+            create: (context) => SupplierAuthCubit(),
+            child: const SupplierLoginView(),
+          ),
+        );
       case RouteConstants.supplierRegistererView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<SupplierAuthCubit>(
-            create: (context) =>
-                ServiceLocator.getIt.get<SupplierAuthCubit>(),
+            create: (context) => ServiceLocator.getIt.get<SupplierAuthCubit>(),
             child: const SupplierRegisterView(),
           ),
         );
@@ -137,8 +144,7 @@ class AppRouter {
       case RouteConstants.registerView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<AuthenticationCubit>(
-            create: (context) =>
-               AuthenticationCubit(),
+            create: (context) => AuthenticationCubit(),
             child: const RegisterView(),
           ),
         );

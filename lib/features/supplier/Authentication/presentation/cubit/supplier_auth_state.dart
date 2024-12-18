@@ -35,3 +35,13 @@ final class  UploadingUserStateErrorState extends SupplierAuthState{
 
 }
 
+
+final class LogingInState extends SupplierAuthState{} 
+final class  LogingInSuccessState extends SupplierAuthState{}
+final class  LogingInErrorState extends SupplierAuthState{ 
+  final String error;
+
+  LogingInErrorState({required this.error}); 
+
+}
+

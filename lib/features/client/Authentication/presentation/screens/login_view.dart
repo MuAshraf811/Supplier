@@ -166,7 +166,7 @@ class LoginView extends StatelessWidget {
                 },
               ),
               const VerticalSpacer(space: 16),
-              const RegisterQuestion(),
+              const RegisterQuestion(isSupplier: false,),
               const VerticalSpacer(space: 32),
               const OrDivider(),
               const VerticalSpacer(space: 24),
