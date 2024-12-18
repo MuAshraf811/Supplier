@@ -15,7 +15,7 @@ void main() async {
   await dotenv.load(fileName: "supa_keys.env");
 
   SharedPreferencesManager.init(); 
-  ServiceLocator.setObjects(); 
+  ServiceLocator.setObjects();  
    await Supabase.initialize(
     url: AppConst.supabaseUrl, // Replace with your Supabase project URL
     anonKey: dotenv.env["SUPA_BASE_KEY"]??"NO KEY FOUND", // Replace with your Supabase Anon Key

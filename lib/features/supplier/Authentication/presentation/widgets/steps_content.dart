@@ -10,7 +10,6 @@ import '../../../../../core/utils/widgets/app_text_field.dart';
 import '../../../../../core/utils/widgets/spacers.dart';
 import '../../../../../core/utils/widgets/svg_handler.dart';
 import '../../../../client/Authentication/presentation/widgets/drop_down_text_field.dart';
-import '../../../../client/Authentication/presentation/widgets/password_validation_coulmn.dart';
 
 class StepOneContent extends StatelessWidget {
   const StepOneContent({super.key});

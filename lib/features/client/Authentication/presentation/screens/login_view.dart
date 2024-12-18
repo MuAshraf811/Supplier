@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/utils/constants/app_const.dart';
+import '../../../../../core/utils/storage/shared_preferences.dart';
 import '../../../../../core/utils/widgets/snack_bar.dart';
 import '../widgets/register_question.dart';
 
@@ -125,7 +127,9 @@ class LoginView extends StatelessWidget {
                     showCustomSnackBar(context, state.error, Colors.red,
                         duration: 8);
                   }
-                  if (state is SuccessLogInWithEmailState) {
+                  if (state is SuccessLogInWithEmailState) { 
+                      SharedPreferencesManager.storeBoolValue(key: AppConst.isUserLogged, value: true); 
+                                        SharedPreferencesManager.storeBoolValue(key: AppConst.isSupplier, value: false);
                     Navigator.pushReplacementNamed(
                         context, RouteConstants.homePage);
                   }

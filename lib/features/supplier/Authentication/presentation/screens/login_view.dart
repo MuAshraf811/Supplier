@@ -1,7 +1,8 @@
-import 'package:e_printer/core/cubit/app_config_cubit.dart';
+import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
+import 'package:e_printer/core/utils/storage/shared_preferences.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/snack_bar.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
@@ -97,21 +98,31 @@ class SupplierLoginView extends StatelessWidget {
                 ),
               ),
               const VerticalSpacer(space: 24),
-              BlocConsumer<SupplierAuthCubit, SupplierAuthState>( 
-                buildWhen: (previous, current) => current is LogingInErrorState|| current is LogingInState|| current is LogingInSuccessState, 
-                                listenWhen: (previous, current) => current is LogingInErrorState|| current is LogingInState|| current is LogingInSuccessState,
+              BlocConsumer<SupplierAuthCubit, SupplierAuthState>(
+                buildWhen: (previous, current) =>
+                    current is LogingInErrorState ||
+                    current is LogingInState ||
+                    current is LogingInSuccessState,
+                listenWhen: (previous, current) =>
+                    current is LogingInErrorState ||
+                    current is LogingInState ||
+                    current is LogingInSuccessState,
+                listener: (context, state) {
+                  if (state is LogingInErrorState) {
+                    showCustomSnackBar(
+                        context, state.error, ColorConsatnts.red);
+                  } else if (state is LogingInSuccessState) {
+                    SharedPreferencesManager.storeBoolValue(
+                        key: AppConst.isUserLogged, value: true);
+                    SharedPreferencesManager.storeBoolValue(
+                        key: AppConst.isSupplier, value: true);
 
-                listener: (context, state) { 
-                  if(state is LogingInErrorState){ 
-                    showCustomSnackBar(context, state.error, ColorConsatnts.red);
-                  } 
-                  else if (state is LogingInSuccessState){ 
-                     Navigator.popAndPushNamed(
-                          context, RouteConstants.supplierHomeView);
+                    Navigator.popAndPushNamed(
+                        context, RouteConstants.supplierHomeView);
                   }
                 },
-                builder: (context, state) { 
-                  if(state is LogingInState){ 
+                builder: (context, state) {
+                  if (state is LogingInState) {
                     return const LoadingButton();
                   }
                   return AppButton(
@@ -124,7 +135,6 @@ class SupplierLoginView extends StatelessWidget {
                           .validate()) {
                         context.read<SupplierAuthCubit>().logInSupplier();
                       }
-                     
                     },
                   );
                 },

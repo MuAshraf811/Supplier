@@ -1,5 +1,7 @@
+import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
+import 'package:e_printer/core/utils/storage/shared_preferences.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/app_button.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
@@ -48,8 +50,22 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   alignment: Alignment.centerRight,
                   child: InkWell(
                     onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, RouteConstants.userTypeView);
+                      if (SharedPreferencesManager.getBoolValue(
+                              key: AppConst.isUserLogged) &&
+                          SharedPreferencesManager.getBoolValue(
+                              key: AppConst.isSupplier)) {
+                        Navigator.pushReplacementNamed(
+                            context, RouteConstants.supplierHomeView);
+                      } else   if (SharedPreferencesManager.getBoolValue(
+                              key: AppConst.isUserLogged) &&
+                          !SharedPreferencesManager.getBoolValue(
+                              key: AppConst.isSupplier)) {
+                        Navigator.pushReplacementNamed(
+                            context, RouteConstants.homePage);
+                      } else   {
+                        Navigator.pushReplacementNamed(
+                            context, RouteConstants.userTypeView);
+                      }
                     },
                     child: Text(
                       "Skip",

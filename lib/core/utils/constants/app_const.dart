@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 
 import '../../../features/client/chat/model/message_model.dart';
 
-class AppConst { 
+class AppConst {  
+  static const isUserLogged = "isUserLogged"; 
+    static const isSupplier = "isSupplier";
+
 static const supaBaseStorageBacketName = "trade_license";
 static const supabaseUrl = "https://qbdocjfxxicowxabtaiq.supabase.co";
 
