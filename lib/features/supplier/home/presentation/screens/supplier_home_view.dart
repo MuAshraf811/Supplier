@@ -13,7 +13,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/constants/color_consatnts.dart';
+import '../../../../../core/utils/service_locator.dart';
 import '../../../../../core/utils/widgets/svg_handler.dart';
+import '../../../../client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
+import '../../../../client/settings/presentation/controller/cubit/settings_cubit.dart';
 import '../cubit/supplier_nav_bar_cubit.dart';
 
 class SupplierHomeView extends StatelessWidget {
@@ -32,7 +35,18 @@ class SupplierHomeView extends StatelessWidget {
     ),
     const SupplierOrdersView(),
     const NotificationsScreen(),
-    const ProfileView(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthenticationCubit>(
+          create: (context) =>
+              ServiceLocator.getIt.get<AuthenticationCubit>()..getUserData(),
+        ),
+        BlocProvider(
+          create: (context) =>  ServiceLocator.getIt.get<SettingsCubit>(),
+        ),
+      ],
+      child: const ProfileView(),
+    )
   ];
   @override
   Widget build(BuildContext context) {
@@ -100,7 +114,10 @@ class SupplierOrdersView extends StatelessWidget {
                     onTap: () {
                       context.read<QuotationCubit>().orderNumber =
                           res[index].orderId;
-                      showQuotationDialog(context, BlocProvider.of<QuotationCubit>(context),);
+                      showQuotationDialog(
+                        context,
+                        BlocProvider.of<QuotationCubit>(context),
+                      );
                     },
                   ),
                 ),
@@ -108,8 +125,9 @@ class SupplierOrdersView extends StatelessWidget {
             }
             return Expanded(
               child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index) => const ShimmerOrderItem()),
+                itemCount: 3,
+                itemBuilder: (context, index) => const ShimmerOrderItem(),
+              ),
             );
           },
         ),

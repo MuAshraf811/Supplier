@@ -2,13 +2,15 @@ import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
+import 'package:e_printer/core/utils/constants/storage_const.dart';
+import 'package:e_printer/core/utils/storage/shared_preferences.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
+import 'package:e_printer/core/utils/widgets/custom_dialog.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
 import 'package:e_printer/core/utils/widgets/svg_handler.dart';
 import 'package:e_printer/features/client/home/presentatoin/widgets/custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -91,8 +93,22 @@ class SettingsItem extends StatelessWidget {
               Navigator.pushNamed(
                   context, RouteConstants.termsAndConditionsView);
             case 2:
-            case 4: Navigator.pushReplacementNamed(context, RouteConstants.logInView);
-            default:
+            case 3:
+              showCustomDialog(context, title: "Delete Account", onConfirm: () {
+                SharedPreferencesManager.storeBoolValue(
+                    key: AppConst.isUserLogged, value: false);
+                Navigator.pushReplacementNamed(
+                    context, RouteConstants.userTypeView);
+              }, buttonText: "Yes");
+            case 4:
+              showCustomDialog(context, title: "Log Out", onConfirm: () {
+                SharedPreferencesManager.storeBoolValue(
+                    key: AppConst.isUserLogged, value: false);
+
+                Navigator.pushReplacementNamed(
+                    context, RouteConstants.userTypeView);
+              }, buttonText: "Log Out");
+
           }
         },
         child: Row(
@@ -141,10 +157,8 @@ class LanguageDropDown extends StatelessWidget {
             style:
                 applyBoldStyle(fontSize: 15, fontColor: ColorConsatnts.black),
           ),
-           CustomDropDown( 
-            onSelected: (p0) {
-              
-            },
+          CustomDropDown(
+            onSelected: (p0) {},
             text: "",
             entries: const [
               "English",

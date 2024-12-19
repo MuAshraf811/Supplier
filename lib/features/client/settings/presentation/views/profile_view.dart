@@ -14,6 +14,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../../core/utils/storage/shared_preferences.dart';
+import '../../../../../core/utils/widgets/custom_dialog.dart';
+
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
@@ -105,10 +108,21 @@ class SettingsItem extends StatelessWidget {
             case 1:
               Navigator.pushNamed(
                   context, RouteConstants.termsAndConditionsView);
-            case 3:
+             case 3:
+              showCustomDialog(context, title: "Delete Account", onConfirm: () {
+                SharedPreferencesManager.storeBoolValue(
+                    key: AppConst.isUserLogged, value: false);
+                Navigator.pushReplacementNamed(
+                    context, RouteConstants.userTypeView);
+              }, buttonText: "Delete");
             case 4:
-              Navigator.pushReplacementNamed(context, RouteConstants.logInView);
-            default:
+              showCustomDialog(context, title: "Log Out", onConfirm: () {
+                SharedPreferencesManager.storeBoolValue(
+                    key: AppConst.isUserLogged, value: false);
+
+                Navigator.pushReplacementNamed(
+                    context, RouteConstants.userTypeView);
+              }, buttonText: "Log Out");
           }
         },
         child: Row(

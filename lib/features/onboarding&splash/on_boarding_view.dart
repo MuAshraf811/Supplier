@@ -1,6 +1,7 @@
 import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
+import 'package:e_printer/core/utils/constants/storage_const.dart';
 import 'package:e_printer/core/utils/storage/shared_preferences.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/app_button.dart';
@@ -50,22 +51,25 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   alignment: Alignment.centerRight,
                   child: InkWell(
                     onTap: () {
-                      if (SharedPreferencesManager.getBoolValue(
-                              key: AppConst.isUserLogged) &&
-                          SharedPreferencesManager.getBoolValue(
-                              key: AppConst.isSupplier)) {
-                        Navigator.pushReplacementNamed(
-                            context, RouteConstants.supplierHomeView);
-                      } else   if (SharedPreferencesManager.getBoolValue(
-                              key: AppConst.isUserLogged) &&
-                          !SharedPreferencesManager.getBoolValue(
-                              key: AppConst.isSupplier)) {
-                        Navigator.pushReplacementNamed(
-                            context, RouteConstants.homePage);
-                      } else   {
-                        Navigator.pushReplacementNamed(
-                            context, RouteConstants.userTypeView);
-                      }
+                      SharedPreferencesManager.storeBoolValue(
+                          key: StorageConstants.isFirstTime, value: false);
+
+                      // if (SharedPreferencesManager.getBoolValue(
+                      //         key: AppConst.isUserLogged) &&
+                      //     SharedPreferencesManager.getBoolValue(
+                      //         key: AppConst.isSupplier)) {
+                      //   Navigator.pushReplacementNamed(
+                      //       context, RouteConstants.supplierHomeView);
+                      // } else if (SharedPreferencesManager.getBoolValue(
+                      //         key: AppConst.isUserLogged) &&
+                      //     !SharedPreferencesManager.getBoolValue(
+                      //         key: AppConst.isSupplier)) {
+                      //   Navigator.pushReplacementNamed(
+                      //       context, RouteConstants.homePage);
+                      // } else {
+                      //   Navigator.pushReplacementNamed(
+                      //       context, RouteConstants.userTypeView);
+                      // }
                     },
                     child: Text(
                       "Skip",
@@ -144,6 +148,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     if (_onBoardingController.page == 2) {
                       rebuild(
                         () {
+                          SharedPreferencesManager.storeBoolValue(
+                              key: StorageConstants.isFirstTime, value: false);
                           Navigator.pushReplacementNamed(
                               context, RouteConstants.userTypeView);
                         },
