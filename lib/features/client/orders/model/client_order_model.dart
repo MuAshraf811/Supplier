@@ -4,14 +4,16 @@ class ClientOrderModel {
   final String orderDescription;
   final String orderDate;
   final String userId;
-  final String orderId;
+  final String orderId; 
+  final String category;
  // final String email;
  // final String mobile;
  // final String name;
  // final String address;
 
   ClientOrderModel(
-      {required this.orderName,
+      {required this.orderName, 
+      required this.category,
       required this.userId,
      // required this.address,
       required this.orderId,
@@ -24,7 +26,8 @@ class ClientOrderModel {
 
   factory ClientOrderModel.fromJson(Map<String, dynamic> res) {
     return ClientOrderModel(
-      orderId: res["id"] ?? '',
+      orderId: res["id"] ?? '', 
+      category: res['category']??"",
      // email: res["email"] ?? '',
      // address: res["address"],
      // mobile: res["mobile"] ?? '',

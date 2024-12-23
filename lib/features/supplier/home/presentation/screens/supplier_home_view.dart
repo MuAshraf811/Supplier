@@ -107,10 +107,13 @@ class SupplierOrdersView extends StatelessWidget {
                   itemCount: context.read<OrdersCubit>().supplierOrders.length,
                   itemBuilder: (context, index) => SupplierOrderItem(
                     index: index + 1,
-                    orderName: res[index].orderName,
+                    orderName: res[index].orderName, 
+                    orderId: res[index].orderId, 
+                    category: res[index].category,
                     orderDetails: res[index].orderDetails,
                     orderDescription: res[index].orderDescription,
-                    orderDate: res[index].orderDate,
+                    orderDate: res[index].orderDate, 
+                    clientId: res[index].userId,
                     onTap: () {
                       context.read<QuotationCubit>().orderNumber =
                           res[index].orderId;

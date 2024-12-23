@@ -1,10 +1,40 @@
 
+import 'dart:developer';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class Configurations { 
   Configurations._();
- 
+  // handle FCM  
+ static Future<void> initializeFCM() async { 
+    final FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    // Request permissions
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    log('User granted permission: ${settings.authorizationStatus}');
+
+    // Get token
+    String? token = await messaging.getToken();
+    log('FCM Token: $token');
+
+    // Listen for messages
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      log('Message received: ${message.notification?.title}');
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      log('Message opened: ${message.notification?.title}');
+    });
+  }
+
+
+
 
  // determine if the app needs to be updated or not .
  // by copmaring the 2 values fetched from info_plus & firebase_remote_config Packages.

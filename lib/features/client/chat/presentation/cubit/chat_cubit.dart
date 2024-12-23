@@ -32,11 +32,13 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   void getAllmessages() async {
-    try {
-       emit(FetchingMessagesState());
+    try { 
+       emit(FetchingMessagesState()); 
+       log('=====================');
+       log(SharedPreferencesManager.getStringValue(key: StorageConstants.userDataId));
       final res = await FirebaseFirestore.instance
-          .collection("chats")
-          .doc(SharedPreferencesManager.getStringValue(key: StorageConstants.userId))
+          .collection("Chat")
+          .doc(SharedPreferencesManager.getStringValue(key: StorageConstants.userDataId))
           .collection("messages").orderBy("time"  , descending: false)
           .get();
       final List<QueryDocumentSnapshot<Map<String, dynamic>>> response =
@@ -44,7 +46,7 @@ class ChatCubit extends Cubit<ChatState> {
       final chats =
           response.map((e) => MessageprodModel.fromJson(e.data())).toList();
      
-  allChatMessages?.addAll(chats);
+  allChatMessages =[...chats];
   // chatScrollController
   //         .jumpTo(chatScrollController.position.maxScrollExtent);
        emit(FetchingMessagesSuccessState());
@@ -54,16 +56,23 @@ class ChatCubit extends Cubit<ChatState> {
     }
   }
 
-  void sendAMessage() async {
-    try {
+  void sendAMessage() async {   
+
+    final QuerySnapshot a = await FirebaseFirestore.instance.collection("Chat").get(); 
+    log("***@@@@@@@@@@@@*"); 
+    log(a.docs.toString());
+    try {  
+      log("******************");
+             log(SharedPreferencesManager.getStringValue(key: StorageConstants.userDataId));
+
       MessageprodModel message = MessageprodModel(
         message: messageController.text,
         time: "${DateTime.now().hour.toString().padLeft(2,'0')}:${DateTime.now().minute.toString().padLeft(2,'0')}:${DateTime.now().second.toString().padLeft(2,'0')}",
-        userId: SharedPreferencesManager.getStringValue(key: StorageConstants.userId),
+        userId: SharedPreferencesManager.getStringValue(key: StorageConstants.userDataId),
       );
       await FirebaseFirestore.instance
-          .collection("chats")
-          .doc(SharedPreferencesManager.getStringValue(key: StorageConstants.userId))
+          .collection("Chat")
+          .doc(SharedPreferencesManager.getStringValue(key: StorageConstants.userDataId))
           .collection("messages")
           .add(
             message.toMap(),
