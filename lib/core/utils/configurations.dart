@@ -1,14 +1,10 @@
-
 import 'dart:developer';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
-class Configurations { 
+class Configurations {
   Configurations._();
-  // handle FCM  
- static Future<void> initializeFCM() async { 
+
+  static Future<void> initializeFCM() async {
     final FirebaseMessaging messaging = FirebaseMessaging.instance;
 
     // Request permissions
@@ -19,9 +15,25 @@ class Configurations {
     );
     log('User granted permission: ${settings.authorizationStatus}');
 
-    // Get token
-    String? token = await messaging.getToken();
-    log('FCM Token: $token');
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      // Get the APNs token for iOS
+      String? apnsToken = await messaging.getAPNSToken();
+      if (apnsToken != null) {
+        log('APNs Token: $apnsToken');
+      } else {
+        log('APNs Token is not available yet.');
+      }
+
+      // Get the FCM token
+      String? fcmToken = await messaging.getToken();
+      if (fcmToken != null) {
+        log('FCM Token: $fcmToken');
+      } else {
+        log('FCM Token is not available yet.');
+      }
+    } else {
+      log('User denied notification permissions.');
+    }
 
     // Listen for messages
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -31,42 +43,5 @@ class Configurations {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       log('Message opened: ${message.notification?.title}');
     });
-  }
-
-
-
-
- // determine if the app needs to be updated or not .
- // by copmaring the 2 values fetched from info_plus & firebase_remote_config Packages.
-static Future<bool> shouldUpdateApp()async{ 
-  final remoteVersion = await getFirebaseRemoteConfigs(); 
-  final appVersion = await getAppCurrentVersion(); 
-  return appVersion.compareTo(remoteVersion)==1 ;
-}
- 
-
- // get User current app version.
- // this is from info_plus package.
- static Future<String> getAppCurrentVersion()async{ 
-  final appInfo =await PackageInfo.fromPlatform(); 
-  return appInfo.version ;
- }
-   
-
-
-   // get the version stored in firebase.
-   // this is from firebase_remote_config package.
-  static Future<String> getFirebaseRemoteConfigs() async {
-    final config = FirebaseRemoteConfig.instance;
-    await config.setConfigSettings(
-      RemoteConfigSettings(
-        fetchTimeout: const Duration(minutes: 1),
-        minimumFetchInterval: const Duration(seconds: 1),
-      ),
-    ); 
-    await config.fetchAndActivate();  
-    // value I have stored in firebase console , and set its intial value for 1.0.0 
-    String remoteConfigAppVersion = config.getString("app_version");  
-    return remoteConfigAppVersion ;
   }
 }

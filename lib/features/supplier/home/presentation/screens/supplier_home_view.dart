@@ -4,7 +4,9 @@ import 'package:e_printer/features/client/orders/notifications/presentation/scre
 import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
 import 'package:e_printer/features/client/orders/presentation/widget/order_shimmer.dart';
 import 'package:e_printer/features/client/settings/presentation/views/profile_view.dart';
+import 'package:e_printer/features/supplier/home/presentation/cubit/offer/offers_cubit.dart';
 import 'package:e_printer/features/supplier/home/presentation/cubit/quotation/quotation_cubit.dart';
+import 'package:e_printer/features/supplier/home/presentation/screens/offers_view.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/quotation_dialog.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_bottom_bar.dart';
 import 'package:e_printer/features/supplier/home/presentation/widgets/supplier_home_app_bar.dart';
@@ -33,7 +35,10 @@ class SupplierHomeView extends StatelessWidget {
       ],
       child: const SupplierOrdersView(),
     ),
-    const SupplierOrdersView(),
+    BlocProvider<OffersCubit>(
+      create: (context) => OffersCubit()..fetchSupplierAvailableOrders(),
+      child: const OffersView(),
+    ),
     const NotificationsScreen(),
     MultiBlocProvider(
       providers: [
@@ -42,7 +47,7 @@ class SupplierHomeView extends StatelessWidget {
               ServiceLocator.getIt.get<AuthenticationCubit>()..getUserData(),
         ),
         BlocProvider(
-          create: (context) =>  ServiceLocator.getIt.get<SettingsCubit>(),
+          create: (context) => ServiceLocator.getIt.get<SettingsCubit>(),
         ),
       ],
       child: const ProfileView(),
@@ -107,12 +112,12 @@ class SupplierOrdersView extends StatelessWidget {
                   itemCount: context.read<OrdersCubit>().supplierOrders.length,
                   itemBuilder: (context, index) => SupplierOrderItem(
                     index: index + 1,
-                    orderName: res[index].orderName, 
-                    orderId: res[index].orderId, 
+                    orderName: res[index].orderName,
+                    orderId: res[index].orderId,
                     category: res[index].category,
                     orderDetails: res[index].orderDetails,
                     orderDescription: res[index].orderDescription,
-                    orderDate: res[index].orderDate, 
+                    orderDate: res[index].orderDate,
                     clientId: res[index].userId,
                     onTap: () {
                       context.read<QuotationCubit>().orderNumber =

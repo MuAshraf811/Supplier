@@ -1,6 +1,5 @@
 
 import 'package:e_printer/app.dart';
-import 'package:e_printer/core/utils/configurations.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/service_locator.dart';
 import 'package:e_printer/core/utils/storage/shared_preferences.dart';
@@ -26,8 +25,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );  
-  //  FirebaseMessaging.onBackgroundMessage(_handleBackGroundFirebaseMessage); 
-  // await Configurations.initializeFCM();
+   FirebaseMessaging.onBackgroundMessage(_handleBackGroundFirebaseMessage); 
+ // await Configurations.initializeFCM();
    FlutterError.onError = (FlutterErrorDetails details){ 
     FlutterError.dumpErrorToConsole(details); 
     runApp(CustomErrorWidget(errorMessage: details));

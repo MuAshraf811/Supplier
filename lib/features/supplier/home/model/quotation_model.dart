@@ -10,12 +10,15 @@ class QuotationModel {
   final String quotationDate;
   final String supplierId;
   final String supplierName;
-
-  QuotationModel(
+   final String email; 
+final String mobile; 
+final String city;
+  QuotationModel( 
       {required this.quotationDescription,
       required this.quantity,
       required this.rate,
-      required this.amount,
+      required this.amount, 
+    required  this.email,required this.mobile,required this.city,
       required this.vat,
       required this.total,
       required this.orderNumber,
@@ -29,7 +32,10 @@ class QuotationModel {
         quantity: res["quantity"],
         rate: res["rate"],
         amount: res["amount"],
-        vat: res["vat"],
+        vat: res["vat"]??"", 
+        mobile: res["mobile"]??"", 
+     city: res["city"]??"", 
+     email: res["email"]??"",
         total: res["total"],
         orderNumber: res["orderNumber"],
         quotationDate:res["quotationDate"],

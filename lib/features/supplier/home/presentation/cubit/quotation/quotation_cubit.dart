@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
+import 'package:e_printer/core/utils/constants/storage_const.dart';
+import 'package:e_printer/core/utils/storage/shared_preferences.dart';
+import 'package:e_printer/features/supplier/Authentication/model/supplier_user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 part 'quotation_state.dart';
@@ -44,7 +47,11 @@ fetchOffers()async{
   void addquotationOffer({ required String supplierId, required String supplierName}) async{  
     try { 
       emit(AddingQuotationState());
-       final instance= FirebaseFirestore.instance.collection("quotations"); 
+       final instance= FirebaseFirestore.instance.collection("quotations");  
+              final DocumentSnapshot user= await FirebaseFirestore.instance.collection("Suppliers").doc(SharedPreferencesManager.getStringValue(key: StorageConstants.userDataId)).get();   
+
+           final userData =    SupplierUserModel.fromJson(user.data() as Map<String , dynamic>);
+log(userData.toString());
     await instance.add(
     { 
       "quotationDescription" : quotationDescriptionController.text, 
@@ -56,7 +63,11 @@ fetchOffers()async{
       "orderNumber" : orderNumber, 
       "quotationDate": AppConst.getDate(), 
       "supplierId": supplierId, 
-      "supplierName":supplierName
+      "supplierName":userData.companyName , 
+      "email": userData.email, 
+      "mobile": userData.mobile, 
+      "city": userData.mobile
+
     }
    );  
    emit(AddingQuotationSuccessState());
