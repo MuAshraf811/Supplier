@@ -33,6 +33,16 @@ final class ErrorLogInWithGoogleState extends AuthenticationState {
   final String error;
 
   ErrorLogInWithGoogleState({required this.error});
+} 
+
+final class LoadingLogInWithAppleState extends AuthenticationState {}
+
+final class SuccessLogInWithAppleState extends AuthenticationState {}
+
+final class ErrorLogInWithAppleState extends AuthenticationState {
+  final String error;
+
+  ErrorLogInWithAppleState({required this.error});
 }
 
 

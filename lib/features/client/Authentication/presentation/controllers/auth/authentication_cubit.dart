@@ -33,7 +33,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   late UserDataModel userPersonalData;
   String citySelection = "";
-  String profileCitySelection = ""; 
+  String profileCitySelection = "";
   bool isTextSecure = false;
   TextEditingController emailProfileController = TextEditingController();
   TextEditingController firstNameProfileController = TextEditingController();
@@ -43,15 +43,31 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   final profileFormKey = GlobalKey<FormState>();
 
-  void changePassword() async {} 
-  void deleteAccount()async{ 
-    try { 
-     
-   
+  logInwithApple() async {
+    try {
+      emit(LoadingLogInWithAppleState());
+      final provider = AppleAuthProvider();
 
+      final UserCredential res =
+          await FirebaseAuth.instance.signInWithProvider(provider);
+      if (res.credential == null) {
+        emit(ErrorLogInWithAppleState(
+            error: "Something went wrong , Please try again later"));
+      }
+      emit(SuccessLogInWithAppleState());
     } catch (e) {
+      log(e.toString());
+      emit(ErrorLogInWithAppleState(error: e.toString()));
     }
   }
+
+  void changePassword() async {}
+  void deleteAccount() async {
+    try {} catch (e) {
+      log(e.toString());
+    }
+  }
+
   void forgetPassword() async {
     emit(SendingPasswordResetEmailState());
     try {
@@ -97,15 +113,19 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         "first_name": firstNameRegisterController.text,
         "last_name": lastNameRegisterController.text,
         "email": emailRegisterController.text,
-        "password": passwordRegisterController.text, 
-        "role" : "client",
+        "password": passwordRegisterController.text,
+        "role": "client",
         "mobile_number": mobileNumberRegisterController.text,
         "city": citySelection,
       });
+      log("******* Adding User Function *******");
+      log(obj.path);
       SharedPreferencesManager.storeStringValue(
           key: StorageConstants.userDataId, value: obj.id);
       emit(AddingUserDataSuccessState());
     } catch (e) {
+      log("******* Adding User Function *******");
+      log(e.toString());
       AddingUserDataErrorState(error: e.toString());
     }
   }

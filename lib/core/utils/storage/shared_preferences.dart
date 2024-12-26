@@ -22,8 +22,8 @@ class SharedPreferencesManager {
     await _object!.setInt(key, value);
   }
 
-  static bool getBoolValue({required String key}) {
-    return _object!.getBool(key) ?? false;
+  static bool? getBoolValue({required String key}) {
+    return _object!.getBool(key) ;
   } 
 
   static String getStringValue({required String key}) {

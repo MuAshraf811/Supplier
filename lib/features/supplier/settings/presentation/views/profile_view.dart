@@ -2,7 +2,6 @@ import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/assets_constants.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
-import 'package:e_printer/core/utils/constants/storage_const.dart';
 import 'package:e_printer/core/utils/storage/shared_preferences.dart';
 import 'package:e_printer/core/utils/styles/text_styles.dart';
 import 'package:e_printer/core/utils/widgets/custom_dialog.dart';

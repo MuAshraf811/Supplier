@@ -1,4 +1,3 @@
-import 'package:e_printer/core/utils/constants/app_const.dart';
 import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/constants/storage_const.dart';
@@ -10,6 +9,8 @@ import 'package:e_printer/features/onboarding&splash/model/onboaeding_model.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../core/utils/constants/app_const.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});
@@ -51,25 +52,14 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   alignment: Alignment.centerRight,
                   child: InkWell(
                     onTap: () {
-                      SharedPreferencesManager.storeBoolValue(
-                          key: StorageConstants.isFirstTime, value: false);
+                      //                     if(SharedPreferencesManager.getBoolValue(
+                      //                         key: StorageConstants.isFirstTime)==null){
+                      // SharedPreferencesManager.storeBoolValue(
+                      //                         key: StorageConstants.isFirstTime, value: false);
+                      //                          }
 
-                      // if (SharedPreferencesManager.getBoolValue(
-                      //         key: AppConst.isUserLogged) &&
-                      //     SharedPreferencesManager.getBoolValue(
-                      //         key: AppConst.isSupplier)) {
-                      //   Navigator.pushReplacementNamed(
-                      //       context, RouteConstants.supplierHomeView);
-                      // } else if (SharedPreferencesManager.getBoolValue(
-                      //         key: AppConst.isUserLogged) &&
-                      //     !SharedPreferencesManager.getBoolValue(
-                      //         key: AppConst.isSupplier)) {
-                      //   Navigator.pushReplacementNamed(
-                      //       context, RouteConstants.homePage);
-                      // } else {
-                      //   Navigator.pushReplacementNamed(
-                      //       context, RouteConstants.userTypeView);
-                      // }
+                      Navigator.pushReplacementNamed(
+                          context, RouteConstants.userTypeView);
                     },
                     child: Text(
                       "Skip",

@@ -8,13 +8,7 @@
         android:label="e_printer"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"> 
-        <service
-    android:name="com.google.firebase.messaging.FirebaseMessagingService"
-    android:exported="true">
-    <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT" />
-    </intent-filter>
-</service>
+        
 
 <receiver
     android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"

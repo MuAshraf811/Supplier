@@ -34,7 +34,7 @@ class HomePageView extends StatelessWidget {
       providers: [
         BlocProvider<AuthenticationCubit>(
           create: (context) =>
-              ServiceLocator.getIt.get<AuthenticationCubit>()..getUserData(),
+              AuthenticationCubit()..getUserData(),
         ),
         BlocProvider(
           create: (context) =>  ServiceLocator.getIt.get<SettingsCubit>(),

@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,21 +46,29 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBheZpG2QCtBrBspDi0ns_OWWAGWkSNMYw',
+    appId: '1:583335541663:web:848c56d79894a07f219baa',
+    messagingSenderId: '583335541663',
+    projectId: 'supply-20735',
+    authDomain: 'supply-20735.firebaseapp.com',
+    storageBucket: 'supply-20735.firebasestorage.app',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCvUgJHg7OL8QOVvGVdPtRDfLPBdjN8iig',
-    appId: '1:820970179759:android:6a12d184328ff10bb9185a',
-    messagingSenderId: '820970179759',
-    projectId: 'supplier-a69d0',
-    storageBucket: 'supplier-a69d0.firebasestorage.app',
+    apiKey: 'AIzaSyBO5rUcDeWOAqr4mfx2HGiBpYc-hxGZ5Lk',
+    appId: '1:583335541663:android:99cc30195a6497b6219baa',
+    messagingSenderId: '583335541663',
+    projectId: 'supply-20735',
+    storageBucket: 'supply-20735.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDs-Ucpc9I6khkdtvqEWk3M2_vAgnd8wmc',
-    appId: '1:820970179759:ios:882f42a38222fa99b9185a',
-    messagingSenderId: '820970179759',
-    projectId: 'supplier-a69d0',
-    storageBucket: 'supplier-a69d0.firebasestorage.app',
-    iosClientId: '820970179759-g504u0euis0gmatd38tan45bht5rbl0l.apps.googleusercontent.com',
-    iosBundleId: 'com.example.ePrinter',
+    apiKey: 'AIzaSyCGTyCIqOHeV6IpsKRsDMymXPKeEKrw_QQ',
+    appId: '1:583335541663:ios:adb311e13a42ff55219baa',
+    messagingSenderId: '583335541663',
+    projectId: 'supply-20735',
+    storageBucket: 'supply-20735.firebasestorage.app',
+    iosBundleId: 'com.falcon.Supplier',
   );
 }

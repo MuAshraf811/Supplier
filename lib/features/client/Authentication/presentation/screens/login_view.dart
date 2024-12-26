@@ -65,21 +65,22 @@ class LoginView extends StatelessWidget {
                   return AppTextField(
                     label: "Enter Your Password",
                     type: TextInputType.visiblePassword,
-                    isSecured:   context.read<AuthenticationCubit>().isTextSecure, 
-                    maxLines: 1, 
+                    isSecured: context.read<AuthenticationCubit>().isTextSecure,
+                    maxLines: 1,
                     minLines: 1,
                     suffixIcon: Icons.remove_red_eye_rounded,
                     suffixSvg: InkWell(
                       onTap: () {
                         changeState(() {
-                            context.read<AuthenticationCubit>().isTextSecure = !  context.read<AuthenticationCubit>().isTextSecure;
+                          context.read<AuthenticationCubit>().isTextSecure =
+                              !context.read<AuthenticationCubit>().isTextSecure;
                         });
                       },
                       child: Icon(
                         !context.read<AuthenticationCubit>().isTextSecure
                             ? Icons.remove_red_eye_outlined
-                            : Icons.visibility_off_outlined, 
-                            color: ColorConsatnts.primary,
+                            : Icons.visibility_off_outlined,
+                        color: ColorConsatnts.primary,
                       ),
                     ),
                     controller: context
@@ -127,9 +128,11 @@ class LoginView extends StatelessWidget {
                     showCustomSnackBar(context, state.error, Colors.red,
                         duration: 8);
                   }
-                  if (state is SuccessLogInWithEmailState) { 
-                      SharedPreferencesManager.storeBoolValue(key: AppConst.isUserLogged, value: true); 
-                                        SharedPreferencesManager.storeBoolValue(key: AppConst.isSupplier, value: false);
+                  if (state is SuccessLogInWithEmailState) {
+                    SharedPreferencesManager.storeBoolValue(
+                        key: AppConst.isUserLogged, value: true);
+                    SharedPreferencesManager.storeBoolValue(
+                        key: AppConst.isSupplier, value: false);
                     Navigator.pushReplacementNamed(
                         context, RouteConstants.homePage);
                   }
@@ -170,7 +173,9 @@ class LoginView extends StatelessWidget {
                 },
               ),
               const VerticalSpacer(space: 16),
-              const RegisterQuestion(isSupplier: false,),
+              const RegisterQuestion(
+                isSupplier: false,
+              ),
               const VerticalSpacer(space: 32),
               const OrDivider(),
               const VerticalSpacer(space: 24),
@@ -229,9 +234,59 @@ class LoginView extends StatelessWidget {
                   );
                 },
               ),
-              const LogInWithContainer(
-                label: "LogIn with apple",
-                imagePath: AssetsConstants.iosIcon,
+              BlocConsumer<AuthenticationCubit, AuthenticationState>(
+                listenWhen: (previous, current) =>
+                    current is SuccessLogInWithAppleState ||
+                    current is ErrorLogInWithAppleState ||
+                    current is LoadingLogInWithAppleState,
+                buildWhen: (previous, current) =>
+                    current is SuccessLogInWithAppleState ||
+                    current is ErrorLogInWithAppleState ||
+                    current is LoadingLogInWithAppleState,
+                listener: (context, state) {
+                  if (state is ErrorLogInWithAppleState) {
+                    showCustomSnackBar(context, state.error, Colors.red,
+                        duration: 8);
+                  }
+                  if (state is SuccessLogInWithAppleState) {
+                    showCustomSnackBar(
+                        context, 'WElCOME', ColorConsatnts.primary,
+                        duration: 8);
+                    Navigator.pushReplacementNamed(
+                        context, RouteConstants.homePage);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is LoadingLogInWithAppleState) {
+                    return Container(
+                      width: double.infinity,
+                      height: 38.h,
+                      decoration: BoxDecoration(
+                          color: ColorConsatnts.white,
+                          border: Border.all(color: ColorConsatnts.primary),
+                          borderRadius: BorderRadius.circular(12.r)),
+                      child: Center(
+                        child: Transform.scale(
+                          scale: 0.9,
+                          child: CircularProgressIndicator.adaptive(
+                            backgroundColor: ColorConsatnts.primary,
+                            valueColor: AlwaysStoppedAnimation(
+                                ColorConsatnts.white.withOpacity(0.85)),
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  return InkWell(
+                    onTap: () {
+                      context.read<AuthenticationCubit>().logInwithApple();
+                    },
+                    child: const LogInWithContainer(
+                      label: "LogIn with apple",
+                      imagePath: AssetsConstants.iosIcon,
+                    ),
+                  );
+                },
               ),
             ],
           ),
