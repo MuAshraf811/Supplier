@@ -10,9 +10,10 @@ class CustomCarousel extends StatelessWidget {
     super.key,
   });
   static const List<String> _offerImages = [
-    AssetsConstants.offer0,
-    AssetsConstants.offer1,
-    AssetsConstants.offer2
+    "assets/images/1.jpeg",
+    "assets/images/2.jpeg",
+    "assets/images/3.jpeg",
+    "assets/images/4.jpeg",
   ];
   @override
   Widget build(BuildContext context) {

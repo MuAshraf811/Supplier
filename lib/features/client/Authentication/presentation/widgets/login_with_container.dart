@@ -19,7 +19,7 @@ class LogInWithContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 4.h),
+      margin: EdgeInsets.only(bottom: 8.h),
       width: double.infinity,
       height: 42.h,
       decoration: BoxDecoration(

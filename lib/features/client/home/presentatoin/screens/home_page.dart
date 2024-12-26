@@ -1,8 +1,11 @@
 import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
 import 'package:e_printer/core/utils/constants/app_const.dart';
+import 'package:e_printer/core/utils/constants/assets_constants.dart';
+import 'package:e_printer/core/utils/constants/color_consatnts.dart';
 import 'package:e_printer/core/utils/constants/route_constants.dart';
 import 'package:e_printer/core/utils/service_locator.dart';
 import 'package:e_printer/core/utils/widgets/spacers.dart';
+import 'package:e_printer/core/utils/widgets/svg_handler.dart';
 import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:e_printer/features/client/home/presentatoin/cubit/main_home_cubit.dart';
 import 'package:e_printer/features/client/orders/presentation/cubit/orders_cubit.dart';
@@ -33,11 +36,10 @@ class HomePageView extends StatelessWidget {
     MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationCubit>(
-          create: (context) =>
-              AuthenticationCubit()..getUserData(),
+          create: (context) => AuthenticationCubit()..getUserData(),
         ),
         BlocProvider(
-          create: (context) =>  ServiceLocator.getIt.get<SettingsCubit>(),
+          create: (context) => ServiceLocator.getIt.get<SettingsCubit>(),
         ),
       ],
       child: const ProfileView(),
@@ -70,8 +72,48 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const CustomAppBar(),
+        Row(
+          children: [
+            Container(
+              width: 260.w,
+              height: 40.h,
+              margin: EdgeInsets.only(bottom: 4.h, right: 16.w, left: 28.w),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6.r),
+                color: ColorConsatnts.white,
+                image: const DecorationImage(
+                  image: AssetImage(
+                    "assets/images/upper_adverse.jpeg",
+                  ),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, RouteConstants.chatView);
+              },
+              child: Container(
+                width: 32.w,
+                height: 32.h,
+                alignment: Alignment.center,
+                margin: EdgeInsets.only(bottom: 6.h, right: 12.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6.r),
+                  color: ColorConsatnts.white,
+                ),
+                child: const SvgHandler(
+                  imagePath: AssetsConstants.chatIcon,
+                  height: 24,
+                  width: 24,
+                  color: ColorConsatnts.primary,
+                ),
+              ),
+            ),
+          ],
+        ),
         const CustomCarousel(),
         const VerticalSpacer(space: 14),
         const CategorySection(),

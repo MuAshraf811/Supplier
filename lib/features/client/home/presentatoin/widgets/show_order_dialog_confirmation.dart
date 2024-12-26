@@ -39,9 +39,7 @@ showOrderConfirmation(
           // margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
           decoration: BoxDecoration(
             color: ColorConsatnts.white,
-            borderRadius: BorderRadius.circular(
-              4.r,
-            ),
+            borderRadius: BorderRadius.circular(4.r),
           ),
           child: BlocProvider<AuthenticationCubit>(
             create: (context) => AuthenticationCubit()..getUserData(),
@@ -181,25 +179,28 @@ showOrderConfirmation(
                       return AppButton(
                           text: S.of(context).confirm, onTap: () {});
                     }
-                    return BlocBuilder<AuthenticationCubit, AuthenticationState>( 
-                      buildWhen: (previous, current) => current is FetchingUserDataState||current is FetchingUserDataSuccessState,
-                      builder: (context, state) { 
-                        if (state is FetchingUserDataState){ 
-                           return Container(
-                        width: double.infinity,
-                        height: 46.h,
-                        decoration: BoxDecoration(
-                            color: ColorConsatnts.primary,
-                            borderRadius: BorderRadius.circular(12.r)),
-                        child: Center(
-                          child: Transform.scale(
-                            scale: 0.95,
-                            child: const CircularProgressIndicator.adaptive(
-                              backgroundColor: ColorConsatnts.white,
+                    return BlocBuilder<AuthenticationCubit,
+                        AuthenticationState>(
+                      buildWhen: (previous, current) =>
+                          current is FetchingUserDataState ||
+                          current is FetchingUserDataSuccessState,
+                      builder: (context, state) {
+                        if (state is FetchingUserDataState) {
+                          return Container(
+                            width: double.infinity,
+                            height: 46.h,
+                            decoration: BoxDecoration(
+                                color: ColorConsatnts.primary,
+                                borderRadius: BorderRadius.circular(12.r)),
+                            child: Center(
+                              child: Transform.scale(
+                                scale: 0.95,
+                                child: const CircularProgressIndicator.adaptive(
+                                  backgroundColor: ColorConsatnts.white,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      );
+                          );
                         }
                         return AppButton(
                           text: S.of(context).confirm,
@@ -251,7 +252,7 @@ class TitleWithValueText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          title, 
+          title,
           maxLines: 2,
           style:
               applySemiBoldStyle(fontSize: 16, fontColor: ColorConsatnts.black),

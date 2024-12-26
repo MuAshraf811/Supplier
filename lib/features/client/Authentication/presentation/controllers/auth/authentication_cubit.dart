@@ -11,12 +11,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 part 'authentication_state.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
+  AuthenticationCubit() : super(AuthenticationInitial());
+
   bool isMoreThan8 = false;
   bool isUpperCase = false;
   bool isSpecial = false;
   bool isNumber = false;
-
-  AuthenticationCubit() : super(AuthenticationInitial());
+  TextEditingController emailProfileController = TextEditingController();
+  TextEditingController firstNameProfileController = TextEditingController();
+  TextEditingController lastNameProfileController = TextEditingController();
+  TextEditingController mobileProfileController = TextEditingController();
+  TextEditingController emailResetController = TextEditingController();
   TextEditingController emailLogInController = TextEditingController();
   TextEditingController passwordLogInController = TextEditingController();
   TextEditingController emailRegisterController = TextEditingController();
@@ -30,18 +35,11 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   final registerFormKey = GlobalKey<FormState>();
   final logInFormKey = GlobalKey<FormState>();
   final forgetPasswordViewFormKey = GlobalKey<FormState>();
-
+  final profileFormKey = GlobalKey<FormState>();
   late UserDataModel userPersonalData;
   String citySelection = "";
   String profileCitySelection = "";
-  bool isTextSecure = false;
-  TextEditingController emailProfileController = TextEditingController();
-  TextEditingController firstNameProfileController = TextEditingController();
-  TextEditingController lastNameProfileController = TextEditingController();
-  TextEditingController mobileProfileController = TextEditingController();
-  TextEditingController emailResetController = TextEditingController();
-
-  final profileFormKey = GlobalKey<FormState>();
+  bool   isTextSecure = true;
 
   logInwithApple() async {
     try {
@@ -63,7 +61,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void changePassword() async {}
   void deleteAccount() async {
-    try {} catch (e) {
+    try {
+      
+    } catch (e) {
       log(e.toString());
     }
   }
@@ -124,7 +124,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           key: StorageConstants.userDataId, value: obj.id);
       emit(AddingUserDataSuccessState());
     } catch (e) {
-      log("******* Adding User Function *******");
+      log("******** Adding User Function ********");
       log(e.toString());
       AddingUserDataErrorState(error: e.toString());
     }

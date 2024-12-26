@@ -33,13 +33,13 @@ class LoginView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              const VerticalSpacer(space: 28),
+              const VerticalSpacer(space: 36),
               Text(
-                "LogIn Page",
+                "LogIn Page.",
                 style: applySemiBoldStyle(
                     fontSize: 18, fontColor: ColorConsatnts.black),
               ),
-              const VerticalSpacer(space: 24),
+              const VerticalSpacer(space: 22),
               Text(
                 "Hello again ! Let's log you in.",
                 style: applySemiBoldStyle(
@@ -59,7 +59,7 @@ class LoginView extends StatelessWidget {
                   return null;
                 },
               ),
-              const VerticalSpacer(space: 14),
+              const VerticalSpacer(space: 8),
               StatefulBuilder(
                 builder: (context, changeState) {
                   return AppTextField(
@@ -146,7 +146,8 @@ class LoginView extends StatelessWidget {
                   if (state is LoadingLogInWithEmailState) {
                     return Container(
                       width: double.infinity,
-                      height: 38.h,
+                      height: 38.h, 
+                      margin: EdgeInsets.only(bottom: 12.h),
                       decoration: BoxDecoration(
                           color: ColorConsatnts.primary,
                           borderRadius: BorderRadius.circular(12.r)),
@@ -205,7 +206,8 @@ class LoginView extends StatelessWidget {
                   if (state is LoadingLogInWithGoogleState) {
                     return Container(
                       width: double.infinity,
-                      height: 38.h,
+                      height: 38.h, 
+                      margin: EdgeInsets.only(bottom: 12.h),
                       decoration: BoxDecoration(
                           color: ColorConsatnts.white,
                           border: Border.all(color: ColorConsatnts.primary),
@@ -214,7 +216,7 @@ class LoginView extends StatelessWidget {
                         child: Transform.scale(
                           scale: 0.7,
                           child: CircularProgressIndicator.adaptive(
-                            backgroundColor: ColorConsatnts.white,
+                            backgroundColor: ColorConsatnts.primary,
                             valueColor: AlwaysStoppedAnimation(
                                 ColorConsatnts.primary.withOpacity(0.85)),
                           ),
@@ -264,7 +266,7 @@ class LoginView extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: ColorConsatnts.white,
                           border: Border.all(color: ColorConsatnts.primary),
-                          borderRadius: BorderRadius.circular(12.r)),
+                          borderRadius: BorderRadius.circular(12.r)), 
                       child: Center(
                         child: Transform.scale(
                           scale: 0.9,
@@ -282,7 +284,7 @@ class LoginView extends StatelessWidget {
                       context.read<AuthenticationCubit>().logInwithApple();
                     },
                     child: const LogInWithContainer(
-                      label: "LogIn with apple",
+                      label: "LogIn With Apple",
                       imagePath: AssetsConstants.iosIcon,
                     ),
                   );
