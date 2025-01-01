@@ -1,21 +1,22 @@
-import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
-import 'package:e_printer/core/utils/constants/route_constants.dart';
-import 'package:e_printer/core/utils/service_locator.dart';
-import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
-import 'package:e_printer/features/client/Authentication/presentation/screens/forget_password_view.dart';
-import 'package:e_printer/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
-import 'package:e_printer/features/client/home/presentatoin/screens/detailed_item_packaging.dart';
-import 'package:e_printer/features/client/home/presentatoin/screens/detailed_packaging_view.dart';
-import 'package:e_printer/features/client/home/presentatoin/screens/other_detailed_screen.dart';
-import 'package:e_printer/features/client/settings/presentation/views/account_view.dart';
-import 'package:e_printer/features/onboarding&splash/on_boarding_view.dart';
-import 'package:e_printer/features/onboarding&splash/user_type_view.dart';
-import 'package:e_printer/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
-import 'package:e_printer/features/supplier/Authentication/presentation/screens/login_view.dart';
-import 'package:e_printer/features/supplier/Authentication/presentation/screens/supplier_register_view.dart';
-import 'package:e_printer/features/supplier/home/presentation/cubit/supplier_nav_bar_cubit.dart';
-import 'package:e_printer/features/supplier/home/presentation/screens/filter_view.dart';
-import 'package:e_printer/features/supplier/home/presentation/screens/supplier_home_view.dart';
+import 'package:supplier/core/cubit/nav_bar_cubit.dart';
+import 'package:supplier/core/utils/constants/route_constants.dart';
+import 'package:supplier/core/utils/service_locator.dart';
+import 'package:supplier/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
+import 'package:supplier/features/client/Authentication/presentation/screens/complete_logIn_view.dart';
+import 'package:supplier/features/client/Authentication/presentation/screens/forget_password_view.dart';
+import 'package:supplier/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
+import 'package:supplier/features/client/home/presentatoin/screens/detailed_item_packaging.dart';
+import 'package:supplier/features/client/home/presentatoin/screens/detailed_packaging_view.dart';
+import 'package:supplier/features/client/home/presentatoin/screens/other_detailed_screen.dart';
+import 'package:supplier/features/client/settings/presentation/views/account_view.dart';
+import 'package:supplier/features/onboarding&splash/on_boarding_view.dart';
+import 'package:supplier/features/onboarding&splash/user_type_view.dart';
+import 'package:supplier/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
+import 'package:supplier/features/supplier/Authentication/presentation/screens/login_view.dart';
+import 'package:supplier/features/supplier/Authentication/presentation/screens/supplier_register_view.dart';
+import 'package:supplier/features/supplier/home/presentation/cubit/supplier_nav_bar_cubit.dart';
+import 'package:supplier/features/supplier/home/presentation/screens/filter_view.dart';
+import 'package:supplier/features/supplier/home/presentation/screens/supplier_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/client/Authentication/presentation/screens/login_view.dart';
@@ -102,7 +103,7 @@ class AppRouter {
           builder: (context) => BlocProvider<ChatCubit>(
             create: (context) => ServiceLocator.getIt.get<ChatCubit>()
               ..setUpScrollControllerConfigs()
-              ..getAllmessages(),
+              ,
             child: const ChatView(),
           ),
         );
@@ -146,6 +147,13 @@ class AppRouter {
           builder: (context) => BlocProvider<AuthenticationCubit>(
             create: (context) => AuthenticationCubit(),
             child: const RegisterView(),
+          ),
+        ); 
+        case RouteConstants.completeLoginView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<AuthenticationCubit>(
+            create: (context) => AuthenticationCubit(),
+            child: const CompleteLoginView(),
           ),
         );
       case RouteConstants.forgetPasswordView:

@@ -1,9 +1,9 @@
-import 'package:e_printer/core/utils/constants/assets_constants.dart';
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/constants/route_constants.dart';
-import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:e_printer/core/utils/widgets/svg_handler.dart';
-import 'package:e_printer/features/client/home/presentatoin/widgets/search_text_field.dart';
+import 'package:supplier/core/utils/constants/assets_constants.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/constants/route_constants.dart';
+import 'package:supplier/core/utils/widgets/spacers.dart';
+import 'package:supplier/core/utils/widgets/svg_handler.dart';
+import 'package:supplier/features/client/home/presentatoin/widgets/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

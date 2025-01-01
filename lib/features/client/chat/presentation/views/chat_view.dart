@@ -1,8 +1,8 @@
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/constants/storage_const.dart';
-import 'package:e_printer/core/utils/widgets/snack_bar.dart';
-import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:e_printer/features/client/chat/presentation/cubit/chat_cubit.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/constants/storage_const.dart';
+import 'package:supplier/core/utils/widgets/spacers.dart';
+import 'package:supplier/features/client/chat/model/message_prod_model.dart';
+import 'package:supplier/features/client/chat/presentation/cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,8 @@ import '../widgets/message_item.dart';
 class ChatView extends StatelessWidget {
   const ChatView({super.key});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
+    context.read<ChatCubit>().fetchMessages();
     return Scaffold(
       backgroundColor: ColorConsatnts.white,
       body: SafeArea(
@@ -26,44 +27,82 @@ class ChatView extends StatelessWidget {
               const CustomAppbar(
                 title: "SUPPLIER ADMIN",
               ),
-              Expanded(
-                child: BlocConsumer<ChatCubit, ChatState>( 
-                  listenWhen: (previous, current) => current is FetchingMessagesErrorState,
-                  buildWhen: (previous, current) => current is FetchingMessagesErrorState|| current is FetchingMessagesState|| current is FetchingMessagesSuccessState,
-                  listener: (context, state) { 
-                    if(state is FetchingMessagesErrorState){ 
-                    showCustomSnackBar(context, state.error, ColorConsatnts.red);
+              // Expanded(
+              //   child: BlocConsumer<ChatCubit, ChatState>(
+              //     listenWhen: (previous, current) => current is FetchingMessagesErrorState,
+              //     buildWhen: (previous, current) => current is FetchingMessagesErrorState|| current is FetchingMessagesState|| current is FetchingMessagesSuccessState,
+              //     listener: (context, state) {
+              //       if(state is FetchingMessagesErrorState){
+              //       showCustomSnackBar(context, state.error, ColorConsatnts.red);
 
-                    }
-                  },
-                  builder: (context, state) { 
-                    if (state is FetchingMessagesSuccessState){  
-                       return ListView.builder(   
-                        reverse: false,
-                      padding: EdgeInsets.only(top: 12.h),
-                      itemCount: context.read<ChatCubit>().allChatMessages!.length,
-                      controller:
-                          context.read<ChatCubit>().chatScrollController,
-                      itemBuilder: (context, index) => MessageItem(
-                        isSender: context
-                            .read<ChatCubit>()
-                            .allChatMessages![index]
-                            .userId==SharedPreferencesManager.getStringValue(key: StorageConstants.userId),
-                        message: context
-                            .read<ChatCubit>()
-                            .allChatMessages![index]
-                            .message,
-                        time: context.read<ChatCubit>().allChatMessages![index].time,
-                      ),
-                    );
-                     
-                    }
-                   return Center( 
-                        child: Transform.scale( scale: 0.8 , child: const CircularProgressIndicator.adaptive()),
+              //       }
+              //     },
+              //     builder: (context, state) {
+              //       if (state is FetchingMessagesSuccessState){
+              //          return ListView.builder(
+              //           reverse: false,
+              //         padding: EdgeInsets.only(top: 12.h),
+              //         itemCount: context.read<ChatCubit>().allChatMessages!.length,
+              //         controller:
+              //             context.read<ChatCubit>().chatScrollController,
+              //         itemBuilder: (context, index) => MessageItem(
+              //           isSender: context
+              //               .read<ChatCubit>()
+              //               .allChatMessages![index]
+              //               .userId==SharedPreferencesManager.getStringValue(key: StorageConstants.userDataId),
+              //           message: context
+              //               .read<ChatCubit>()
+              //               .allChatMessages![index]
+              //               .message,
+              //           time: context.read<ChatCubit>().allChatMessages![index].time,
+              //         ),
+              //       );
+
+              //       }
+              //      return Center(
+              //           child: Transform.scale( scale: 0.8 , child: const CircularProgressIndicator.adaptive()),
+              //         );
+              //     },
+              //   ),
+              // ),
+              Expanded(
+                child: StreamBuilder<List<MessageprodModel>>(
+                  stream: context.read<ChatCubit>().getMessagesStream(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(),
                       );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
+                      );
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Center(
+                        child: Text('No messages yet.'),
+                      );
+                    }
+
+                    final messages = snapshot.data!;
+                    return ListView.builder(
+                      reverse:
+                          true, // Optional: Display newest messages at the bottom.
+                      itemCount: messages.length,
+                      itemBuilder: (context, index) {
+                        final message = messages[index];
+                        return MessageItem(
+                          isSender: message.userId ==
+                              SharedPreferencesManager.getStringValue(
+                                  key: StorageConstants.userDataId),
+                          message: message.message,
+                          time: message.time,
+                        );
+                      },
+                    );
                   },
                 ),
               ),
+
               BlocProvider<ChatCubit>.value(
                 value: BlocProvider.of<ChatCubit>(context),
                 child: const ChatBottomBar(),

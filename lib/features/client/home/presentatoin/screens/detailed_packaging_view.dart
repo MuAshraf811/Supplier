@@ -1,9 +1,9 @@
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/constants/packaging_constants.dart';
-import 'package:e_printer/core/utils/constants/route_constants.dart';
-import 'package:e_printer/core/utils/styles/text_styles.dart';
-import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:e_printer/features/client/chat/presentation/widgets/chat_app_bar.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/constants/packaging_constants.dart';
+import 'package:supplier/core/utils/constants/route_constants.dart';
+import 'package:supplier/core/utils/styles/text_styles.dart';
+import 'package:supplier/core/utils/widgets/spacers.dart';
+import 'package:supplier/features/client/chat/presentation/widgets/chat_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; 
 
@@ -20,8 +20,11 @@ class DetailedPackagingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
+      backgroundColor: Colors.white, 
+            resizeToAvoidBottomInset: false,
+
+      body: SafeArea( 
+        
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14.w),
           child: Column(

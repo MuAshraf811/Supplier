@@ -1,7 +1,7 @@
-import 'package:e_printer/core/utils/constants/assets_constants.dart';
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/models/category_model.dart';
-import 'package:e_printer/generated/l10n.dart';
+import 'package:supplier/core/utils/constants/assets_constants.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/models/category_model.dart';
+import 'package:supplier/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../../../features/client/chat/model/message_model.dart';
@@ -11,7 +11,7 @@ class AppConst {
     static const isSupplier = "isSupplier";
 
 static const supaBaseStorageBacketName = "trade_license";
-static const supabaseUrl = "https://qbdocjfxxicowxabtaiq.supabase.co";
+static const supabaseUrl = "https://sedhaaxpmhjbkhnddiaz.supabase.co";
 
 static const socialMediaLinks =[ 
   "https://www.facebook.com/supplieruae1/", 

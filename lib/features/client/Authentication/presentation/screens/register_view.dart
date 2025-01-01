@@ -1,11 +1,12 @@
-import 'package:e_printer/core/utils/constants/assets_constants.dart';
-import 'package:e_printer/core/utils/widgets/custom_app_bar.dart';
-import 'package:e_printer/core/utils/widgets/snack_bar.dart';
-import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:e_printer/core/utils/widgets/terms_and_conditions_dialog.dart';
-import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
-import 'package:e_printer/features/client/Authentication/presentation/widgets/drop_down_text_field.dart';
-import 'package:e_printer/features/client/Authentication/presentation/widgets/or_divider.dart';
+import 'package:supplier/core/utils/constants/assets_constants.dart';
+import 'package:supplier/core/utils/constants/route_constants.dart';
+import 'package:supplier/core/utils/widgets/custom_app_bar.dart';
+import 'package:supplier/core/utils/widgets/snack_bar.dart';
+import 'package:supplier/core/utils/widgets/spacers.dart';
+import 'package:supplier/core/utils/widgets/terms_and_conditions_dialog.dart';
+import 'package:supplier/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
+import 'package:supplier/features/client/Authentication/presentation/widgets/drop_down_text_field.dart';
+import 'package:supplier/features/client/Authentication/presentation/widgets/or_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -255,10 +256,8 @@ class RegisterView extends StatelessWidget {
                       showCustomSnackBar(context, state.error, Colors.red,
                           duration: 8);
                       if (state is SuccessLogInWithGoogleState) {
-                        showTermsAndConditionsDialog(context, false);
-                        showCustomSnackBar(
-                            context, 'WElCOME', ColorConsatnts.primary,
-                            duration: 8);
+                        Navigator.pushReplacementNamed(
+                        context, RouteConstants.completeLoginView);
                       }
                     }
                   },
@@ -297,10 +296,61 @@ class RegisterView extends StatelessWidget {
                     );
                   },
                 ),
-                const LogInWithContainer(
-                  label: "Register With IOS",
-                  imagePath: AssetsConstants.iosIcon,
-                ),
+                 BlocConsumer<AuthenticationCubit, AuthenticationState>(
+                listenWhen: (previous, current) =>
+                    current is SuccessLogInWithAppleState ||
+                    current is ErrorLogInWithAppleState ||
+                    current is LoadingLogInWithAppleState|| current is NewUserStata,
+                buildWhen: (previous, current) =>
+                    current is SuccessLogInWithAppleState ||
+                    current is ErrorLogInWithAppleState ||
+                    current is LoadingLogInWithAppleState,
+                listener: (context, state) {
+                  if (state is ErrorLogInWithAppleState) {
+                    showCustomSnackBar(context, state.error, Colors.red,
+                        duration: 8);
+                  }
+                  if (state is SuccessLogInWithAppleState) {
+                   
+                    Navigator.pushReplacementNamed(
+                        context, RouteConstants.homePage);
+                  } else if (state is NewUserStata) {
+                    Navigator.pushReplacementNamed(
+                        context, RouteConstants.completeLoginView);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is LoadingLogInWithAppleState) {
+                    return Container(
+                      width: double.infinity,
+                      height: 38.h,
+                      decoration: BoxDecoration(
+                          color: ColorConsatnts.white,
+                          border: Border.all(color: ColorConsatnts.primary),
+                          borderRadius: BorderRadius.circular(12.r)), 
+                      child: Center(
+                        child: Transform.scale(
+                          scale: 0.9,
+                          child: CircularProgressIndicator.adaptive(
+                            backgroundColor: ColorConsatnts.primary,
+                            valueColor: AlwaysStoppedAnimation(
+                                ColorConsatnts.white.withOpacity(0.85)),
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  return InkWell(
+                    onTap: () {
+                      context.read<AuthenticationCubit>().logInwithApple();
+                    },
+                    child: const LogInWithContainer(
+                      label: "LogIn With Apple",
+                      imagePath: AssetsConstants.iosIcon,
+                    ),
+                  );
+                },
+              ),
                 const VerticalSpacer(space: 12),
               ],
             ),

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:e_printer/core/utils/url_launcher_handler.dart';
+import 'package:supplier/core/utils/url_launcher_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; 
 

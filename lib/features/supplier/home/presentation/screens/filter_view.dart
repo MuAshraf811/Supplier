@@ -1,8 +1,8 @@
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/styles/text_styles.dart';
-import 'package:e_printer/core/utils/widgets/app_button.dart';
-import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:e_printer/features/client/chat/presentation/widgets/chat_app_bar.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/styles/text_styles.dart';
+import 'package:supplier/core/utils/widgets/app_button.dart';
+import 'package:supplier/core/utils/widgets/spacers.dart';
+import 'package:supplier/features/client/chat/presentation/widgets/chat_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_printer/core/utils/constants/storage_const.dart';
-import 'package:e_printer/core/utils/storage/shared_preferences.dart';
-import 'package:e_printer/features/client/Authentication/model/user_data_model.dart';
+import 'package:supplier/core/utils/constants/storage_const.dart';
+import 'package:supplier/core/utils/storage/shared_preferences.dart';
+import 'package:supplier/features/client/Authentication/model/user_data_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -37,22 +37,51 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   final forgetPasswordViewFormKey = GlobalKey<FormState>();
   final profileFormKey = GlobalKey<FormState>();
   late UserDataModel userPersonalData;
-  String citySelection = "";
-  String profileCitySelection = "";
+  String citySelection = "Dubai";
+  String profileCitySelection = "Dubai";
   bool   isTextSecure = true;
-
+ void addUserToDataBaseWithOtherMethods() async {
+    try {
+      emit(AddingUserDataState());
+      final instance = FirebaseFirestore.instance.collection("Users");
+      final obj = await instance.add({
+        "first_name": firstNameRegisterController.text,
+        "last_name": lastNameRegisterController.text,
+        "email": "Registered With Third Party Account",
+        "password": "Registered With Third Party Account",
+        "role": "client",
+        "mobile_number": mobileNumberRegisterController.text,
+        "city": citySelection,
+      });
+      log("******* Adding User Function *******");
+      log(obj.path);
+      SharedPreferencesManager.storeStringValue(
+          key: StorageConstants.userDataId, value: obj.id);
+      emit(AddingUserDataSuccessState());
+    } catch (e) {
+      log("******** Adding User Function ********");
+      log(e.toString());
+      AddingUserDataErrorState(error: e.toString());
+    }
+  }
   logInwithApple() async {
     try {
       emit(LoadingLogInWithAppleState());
       final provider = AppleAuthProvider();
 
       final UserCredential res =
-          await FirebaseAuth.instance.signInWithProvider(provider);
+          await FirebaseAuth.instance.signInWithProvider(provider);  
+          log(res.additionalUserInfo!.isNewUser.toString()); 
+          log(res.additionalUserInfo!.toString());
+          if (res.additionalUserInfo?.isNewUser==true){  
+            emit(NewUserStata());
+
+          }
       if (res.credential == null) {
         emit(ErrorLogInWithAppleState(
             error: "Something went wrong , Please try again later"));
-      }
-      emit(SuccessLogInWithAppleState());
+      } else if(res.additionalUserInfo?.isNewUser==false){
+      emit(SuccessLogInWithAppleState());}
     } catch (e) {
       log(e.toString());
       emit(ErrorLogInWithAppleState(error: e.toString()));
