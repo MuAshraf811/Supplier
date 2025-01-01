@@ -1,4 +1,4 @@
-import 'package:e_printer/core/utils/models/detailed_category_model.dart';
+import 'package:supplier/core/utils/models/detailed_category_model.dart';
 
 class CategoryConstants {
   static final printing = [

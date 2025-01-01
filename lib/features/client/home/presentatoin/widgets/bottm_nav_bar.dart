@@ -1,6 +1,6 @@
-import 'package:e_printer/core/cubit/nav_bar_cubit.dart';
-import 'package:e_printer/core/utils/constants/assets_constants.dart';
-import 'package:e_printer/generated/l10n.dart';
+import 'package:supplier/core/cubit/nav_bar_cubit.dart';
+import 'package:supplier/core/utils/constants/assets_constants.dart';
+import 'package:supplier/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

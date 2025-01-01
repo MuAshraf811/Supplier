@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_printer/core/utils/constants/app_const.dart';
-import 'package:e_printer/core/utils/constants/storage_const.dart';
-import 'package:e_printer/core/utils/storage/shared_preferences.dart';
-import 'package:e_printer/features/supplier/Authentication/model/supplier_user_model.dart';
+import 'package:supplier/core/utils/constants/app_const.dart';
+import 'package:supplier/core/utils/constants/storage_const.dart';
+import 'package:supplier/core/utils/storage/shared_preferences.dart';
+import 'package:supplier/features/supplier/Authentication/model/supplier_user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 part 'quotation_state.dart';

@@ -1,13 +1,13 @@
-import 'package:e_printer/core/utils/constants/assets_constants.dart';
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/constants/route_constants.dart';
-import 'package:e_printer/core/utils/styles/text_styles.dart';
-import 'package:e_printer/core/utils/widgets/app_button.dart';
-import 'package:e_printer/core/utils/widgets/app_text_field.dart';
-import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
-import 'package:e_printer/features/client/Authentication/presentation/widgets/login_with_container.dart';
-import 'package:e_printer/features/client/Authentication/presentation/widgets/or_divider.dart';
+import 'package:supplier/core/utils/constants/assets_constants.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/constants/route_constants.dart';
+import 'package:supplier/core/utils/styles/text_styles.dart';
+import 'package:supplier/core/utils/widgets/app_button.dart';
+import 'package:supplier/core/utils/widgets/app_text_field.dart';
+import 'package:supplier/core/utils/widgets/spacers.dart';
+import 'package:supplier/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
+import 'package:supplier/features/client/Authentication/presentation/widgets/login_with_container.dart';
+import 'package:supplier/features/client/Authentication/presentation/widgets/or_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -240,7 +240,7 @@ class LoginView extends StatelessWidget {
                 listenWhen: (previous, current) =>
                     current is SuccessLogInWithAppleState ||
                     current is ErrorLogInWithAppleState ||
-                    current is LoadingLogInWithAppleState,
+                    current is LoadingLogInWithAppleState|| current is NewUserStata,
                 buildWhen: (previous, current) =>
                     current is SuccessLogInWithAppleState ||
                     current is ErrorLogInWithAppleState ||
@@ -251,11 +251,15 @@ class LoginView extends StatelessWidget {
                         duration: 8);
                   }
                   if (state is SuccessLogInWithAppleState) {
+                   
+                    Navigator.pushReplacementNamed(
+                        context, RouteConstants.homePage);
+                  }else  if (state is NewUserStata) {
                     showCustomSnackBar(
                         context, 'WElCOME', ColorConsatnts.primary,
                         duration: 8);
                     Navigator.pushReplacementNamed(
-                        context, RouteConstants.homePage);
+                        context, RouteConstants.completeLoginView);
                   }
                 },
                 builder: (context, state) {

@@ -1,16 +1,16 @@
-import 'package:e_printer/core/utils/constants/assets_constants.dart';
-import 'package:e_printer/core/utils/constants/category_constants.dart';
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/styles/text_styles.dart';
-import 'package:e_printer/core/utils/widgets/app_text_field.dart';
-import 'package:e_printer/core/utils/widgets/snack_bar.dart';
-import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:e_printer/core/utils/widgets/svg_handler.dart';
-import 'package:e_printer/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
-import 'package:e_printer/features/client/home/presentatoin/widgets/custom_drop_down.dart';
-import 'package:e_printer/features/client/home/presentatoin/widgets/custom_radio_button.dart';
-import 'package:e_printer/features/client/home/presentatoin/widgets/detailed_screen_order_button.dart';
-import 'package:e_printer/generated/l10n.dart';
+import 'package:supplier/core/utils/constants/assets_constants.dart';
+import 'package:supplier/core/utils/constants/category_constants.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/styles/text_styles.dart';
+import 'package:supplier/core/utils/widgets/app_text_field.dart';
+import 'package:supplier/core/utils/widgets/snack_bar.dart';
+import 'package:supplier/core/utils/widgets/spacers.dart';
+import 'package:supplier/core/utils/widgets/svg_handler.dart';
+import 'package:supplier/features/client/home/presentatoin/cubit/cubit/home_page_cubit.dart';
+import 'package:supplier/features/client/home/presentatoin/widgets/custom_drop_down.dart';
+import 'package:supplier/features/client/home/presentatoin/widgets/custom_radio_button.dart';
+import 'package:supplier/features/client/home/presentatoin/widgets/detailed_screen_order_button.dart';
+import 'package:supplier/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +21,8 @@ class DetailedCategoryItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<HomePageCubit>().initGroupVal(categoryItemIndex);
-    return Scaffold(
+    return Scaffold( 
+      resizeToAvoidBottomInset: false,
       backgroundColor: ColorConsatnts.white,
       body: SafeArea(
         child: Padding(

@@ -15,3 +15,10 @@ final class FetchingMessagesErrorState extends ChatState {
   FetchingMessagesErrorState({required this.error});
 }
 final class FetchingMessagesSuccessState extends ChatState {}
+
+
+final class FetchingChatMessagesSuccessState extends ChatState {
+  final List<MessageprodModel> messages;
+
+  FetchingChatMessagesSuccessState(this.messages);
+}

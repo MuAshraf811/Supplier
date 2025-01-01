@@ -1,5 +1,5 @@
-import 'package:e_printer/core/utils/widgets/snack_bar.dart';
-import 'package:e_printer/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
+import 'package:supplier/core/utils/widgets/snack_bar.dart';
+import 'package:supplier/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

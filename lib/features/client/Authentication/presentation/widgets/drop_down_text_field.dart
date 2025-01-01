@@ -1,7 +1,7 @@
-import 'package:e_printer/core/utils/constants/app_const.dart';
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/styles/text_styles.dart';
-import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
+import 'package:supplier/core/utils/constants/app_const.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/styles/text_styles.dart';
+import 'package:supplier/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

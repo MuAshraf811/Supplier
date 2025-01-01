@@ -1,6 +1,6 @@
-import 'package:e_printer/core/cubit/app_config_cubit.dart';
-import 'package:e_printer/core/routes/app_router.dart';
-import 'package:e_printer/generated/l10n.dart'; 
+import 'package:supplier/core/cubit/app_config_cubit.dart';
+import 'package:supplier/core/routes/app_router.dart';
+import 'package:supplier/generated/l10n.dart'; 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

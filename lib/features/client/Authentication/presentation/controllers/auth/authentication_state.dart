@@ -15,7 +15,9 @@ final class ErrorAuthenticationWithEmailState extends AuthenticationState {
   ErrorAuthenticationWithEmailState({required this.error});
 }
 
-final class LoadingLogInWithEmailState extends AuthenticationState {}
+final class LoadingLogInWithEmailState extends AuthenticationState {} 
+final class LoadingAddingUserState extends AuthenticationState {}
+
 
 final class SuccessLogInWithEmailState extends AuthenticationState {}
 
@@ -35,7 +37,9 @@ final class ErrorLogInWithGoogleState extends AuthenticationState {
   ErrorLogInWithGoogleState({required this.error});
 } 
 
-final class LoadingLogInWithAppleState extends AuthenticationState {}
+final class LoadingLogInWithAppleState extends AuthenticationState {} 
+final class NewUserStata extends AuthenticationState {}
+
 
 final class SuccessLogInWithAppleState extends AuthenticationState {}
 

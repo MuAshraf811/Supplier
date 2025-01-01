@@ -1,13 +1,13 @@
-import 'package:e_printer/core/utils/constants/app_const.dart';
-import 'package:e_printer/core/utils/constants/assets_constants.dart';
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/constants/route_constants.dart';
-import 'package:e_printer/core/utils/storage/shared_preferences.dart';
-import 'package:e_printer/core/utils/styles/text_styles.dart';
-import 'package:e_printer/core/utils/widgets/custom_dialog.dart';
-import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:e_printer/core/utils/widgets/svg_handler.dart';
-import 'package:e_printer/features/client/home/presentatoin/widgets/custom_drop_down.dart';
+import 'package:supplier/core/utils/constants/app_const.dart';
+import 'package:supplier/core/utils/constants/assets_constants.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/constants/route_constants.dart';
+import 'package:supplier/core/utils/storage/shared_preferences.dart';
+import 'package:supplier/core/utils/styles/text_styles.dart';
+import 'package:supplier/core/utils/widgets/custom_dialog.dart';
+import 'package:supplier/core/utils/widgets/spacers.dart';
+import 'package:supplier/core/utils/widgets/svg_handler.dart';
+import 'package:supplier/features/client/home/presentatoin/widgets/custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

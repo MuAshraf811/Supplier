@@ -1,10 +1,10 @@
-import 'package:e_printer/core/utils/constants/color_consatnts.dart';
-import 'package:e_printer/core/utils/widgets/app_button.dart';
-import 'package:e_printer/core/utils/widgets/app_text_field.dart';
-import 'package:e_printer/core/utils/widgets/custom_app_bar.dart';
-import 'package:e_printer/core/utils/widgets/snack_bar.dart';
-import 'package:e_printer/core/utils/widgets/spacers.dart';
-import 'package:e_printer/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/widgets/app_button.dart';
+import 'package:supplier/core/utils/widgets/app_text_field.dart';
+import 'package:supplier/core/utils/widgets/custom_app_bar.dart';
+import 'package:supplier/core/utils/widgets/snack_bar.dart';
+import 'package:supplier/core/utils/widgets/spacers.dart';
+import 'package:supplier/features/client/Authentication/presentation/controllers/auth/authentication_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

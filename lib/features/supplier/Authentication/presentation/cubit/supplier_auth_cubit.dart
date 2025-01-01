@@ -2,11 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_printer/core/utils/constants/storage_const.dart';
-import 'package:e_printer/core/utils/native/image_picker.dart';
-import 'package:e_printer/core/utils/storage/shared_preferences.dart';
-import 'package:e_printer/features/supplier/Authentication/data/remote_data_base.dart';
-import 'package:e_printer/features/supplier/Authentication/model/supplier_user_model.dart';
+import 'package:supplier/core/utils/constants/storage_const.dart';
+import 'package:supplier/core/utils/native/image_picker.dart';
+import 'package:supplier/core/utils/storage/shared_preferences.dart';
+import 'package:supplier/features/supplier/Authentication/data/remote_data_base.dart';
+import 'package:supplier/features/supplier/Authentication/model/supplier_user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
