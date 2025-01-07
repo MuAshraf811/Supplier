@@ -67,7 +67,8 @@ flutter:
     - assets/images/printing/
     - assets/images/Signage/
     - assets/images/Unifoarm/
-    - assets/jsons/Supplier Logo Final333-01.json
+    - assets/jsons/Supplier Logo Final333-01.json 
+    - assets/jsons/Main Scene.json
     - assets/images/Molded Fiber Products/
     - assets/images/Carton Products/
     - assets/images/Foam Products/

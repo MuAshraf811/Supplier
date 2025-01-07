@@ -9,6 +9,7 @@ import 'package:supplier/features/client/home/presentatoin/screens/detailed_item
 import 'package:supplier/features/client/home/presentatoin/screens/detailed_packaging_view.dart';
 import 'package:supplier/features/client/home/presentatoin/screens/other_detailed_screen.dart';
 import 'package:supplier/features/client/settings/presentation/views/account_view.dart';
+import 'package:supplier/features/onboarding&splash/first_view.dart';
 import 'package:supplier/features/onboarding&splash/on_boarding_view.dart';
 import 'package:supplier/features/onboarding&splash/user_type_view.dart';
 import 'package:supplier/features/supplier/Authentication/presentation/cubit/supplier_auth_cubit.dart';
@@ -55,6 +56,10 @@ class AppRouter {
       case RouteConstants.termsAndConditionsView:
         return MaterialPageRoute(
           builder: (context) => const TermsAndConditionsView(),
+        ); 
+         case RouteConstants.firstView:
+        return MaterialPageRoute(
+          builder: (context) => const FirstView(),
         );
       case RouteConstants.changePasswordView:
         return MaterialPageRoute(

@@ -18,8 +18,8 @@ void main() async {
   SharedPreferencesManager.init(); 
   ServiceLocator.setObjects();  
    await Supabase.initialize(
-    url: AppConst.supabaseUrl, // Replace with your Supabase project URL
-    anonKey: dotenv.env["SUPA_BASE_KEY"]??"NO KEY FOUND", // Replace with your Supabase Anon Key
+    url: AppConst.supabaseUrl, 
+   anonKey: dotenv.env["SUPA_BASE_KEY"]??"NO KEY FOUND", // Replace with your Supabase Anon Key
   ); 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

@@ -19,7 +19,9 @@ String orderNumber = "";
   TextEditingController quotationRateController = TextEditingController();
   TextEditingController quotationAmountController = TextEditingController();
   TextEditingController quotationVatController = TextEditingController();
-  TextEditingController quotationTotalController = TextEditingController();
+  TextEditingController quotationTotalController = TextEditingController(); 
+    TextEditingController deliverDateController = TextEditingController();
+
    void clearControllers(){ 
     quotationAmountController.clear(); 
     quotationDescriptionController.clear(); 
@@ -66,7 +68,8 @@ log(userData.toString());
       "supplierName":userData.companyName , 
       "email": userData.email, 
       "mobile": userData.mobile, 
-      "city": userData.mobile
+      "city": userData.mobile, 
+      "deliverDate": deliverDateController.text
 
     }
    );  

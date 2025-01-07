@@ -36,7 +36,7 @@ class SupplierHomeView extends StatelessWidget {
       child: const SupplierOrdersView(),
     ),
     BlocProvider<OffersCubit>(
-      create: (context) => OffersCubit()..fetchSupplierAvailableOrders(),
+      create: (context) => OffersCubit()..fetchSupplierAvailableOffers(),
       child: const OffersView(),
     ),
     const NotificationsScreen(),

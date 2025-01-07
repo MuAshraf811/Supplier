@@ -24,15 +24,15 @@ class SupplierLoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
+    
       backgroundColor: ColorConsatnts.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
         child: Form(
           key: context.read<SupplierAuthCubit>().logInFormKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
+          child: ListView(
+           
             children: [
               const VerticalSpacer(space: 28),
               Text(
