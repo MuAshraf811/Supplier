@@ -14,7 +14,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "supa_keys.env");
-
+/// SUPA_BASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjc2RrYnVnd3NwcHltcWZvenRtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTk1NjUwMCwiZXhwIjoyMDUxNTMyNTAwfQ.333LJShDsspzgq9epORxxP2CbLIyXElorPbhz4P55-c
   SharedPreferencesManager.init(); 
   ServiceLocator.setObjects();  
    await Supabase.initialize(
