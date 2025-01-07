@@ -12,8 +12,10 @@ part 'offers_state.dart';
 
 class OffersCubit extends Cubit<OffersState> {
   OffersCubit() : super(OffersInitial()); 
- late List<QuotationModel> supplierOffers ;
-  void fetchSupplierAvailableOrders() async {
+ late List<QuotationModel> supplierOffers ; 
+
+
+  void fetchSupplierAvailableOffers() async {
     try { 
        final String userId = SharedPreferencesManager.getStringValue(
         key: StorageConstants.userDataId,
@@ -22,7 +24,7 @@ class OffersCubit extends Cubit<OffersState> {
 
       // Query Firestore to fetch only documents matching the userId
       final QuerySnapshot<Map<String, dynamic>> response =
-          await FirebaseFirestore.instance.collection("accepted_offers").where("userId", isEqualTo: userId).get();
+          await FirebaseFirestore.instance.collection("accepted_offers").where("supplierId", isEqualTo: userId).get();
 
       // Map the documents to  model
       supplierOffers = response.docs

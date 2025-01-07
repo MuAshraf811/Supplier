@@ -11,7 +11,7 @@ class AppConst {
     static const isSupplier = "isSupplier";
 
 static const supaBaseStorageBacketName = "trade_license";
-static const supabaseUrl = "https://sedhaaxpmhjbkhnddiaz.supabase.co";
+static const supabaseUrl = "https://qcsdkbugwsppymqfoztm.supabase.co";
 
 static const socialMediaLinks =[ 
   "https://www.facebook.com/supplieruae1/", 
@@ -156,19 +156,19 @@ static const  socialMediaIcons = [
     return [
       [
         CategoryModel(
-            image: "assets/images/printing/offset-printing.jpeg",
+            image: "assets/images/printing/offsetN.jpeg",
             title: S.of(context).offset_print,
             index: 0),
         CategoryModel(
-            image: "assets/images/printing/carton box.jpeg",
+            image: "assets/images/printing/cartonBoxsN.jpeg",
             title: S.of(context).carton_boxes,
             index: 1),
         CategoryModel(
-            image: "assets/images/printing/paper box.jpeg",
+            image: "assets/images/printing/paperBoxsN.jpeg",
             title: S.of(context).paper_boxes,
             index: 2),
         CategoryModel(
-            image: "assets/images/printing/wrapping paper.jpeg",
+            image: "assets/images/printing/wrappingPaperN.jpeg",
             title: S.of(context).wrapping_paper,
             index: 3),
         CategoryModel(
@@ -176,15 +176,15 @@ static const  socialMediaIcons = [
             title: S.of(context).coffee_bags,
             index: 4),
         CategoryModel(
-            image: "assets/images/printing/shopping bag.jpeg",
+            image: "assets/images/printing/shoppingBagN.jpeg",
             title: S.of(context).shopping_bags,
             index: 5),
         CategoryModel(
-            image: "assets/images/printing/Paper Bag-01.png",
+            image: "assets/images/printing/PaperBagN.jpeg",
             title: S.of(context).paper_bags,
             index: 6),
         CategoryModel(
-            image: "assets/images/printing/canvas bag.jpeg",
+            image: "assets/images/printing/CanavasBagN.jpeg",
             title: S.of(context).canvas_bags,
             index: 7),
         CategoryModel(

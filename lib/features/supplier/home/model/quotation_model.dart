@@ -28,18 +28,18 @@ final String city;
 
   factory QuotationModel.fromJson(Map<String, dynamic> res) {
     return QuotationModel(
-        quotationDescription: res["quotationDescription"],
+        quotationDescription: res["quotationDescription"]??"",
         quantity: res["quantity"],
-        rate: res["rate"],
-        amount: res["amount"],
+        rate: res["rate"]??"",
+        amount: res["amount"]??"",
         vat: res["vat"]??"", 
         mobile: res["mobile"]??"", 
      city: res["city"]??"", 
      email: res["email"]??"",
-        total: res["total"],
-        orderNumber: res["orderNumber"],
-        quotationDate:res["quotationDate"],
-        supplierId: res["supplierId"],
-        supplierName: res["supplierId"]);
+        total: res["total"]??"",
+        orderNumber: res["orderNumber"]??"",
+        quotationDate:res["quotationDate"]??"",
+        supplierId: res["supplierId"]??"",
+        supplierName: res["supplierName"]??"");
   }
 }

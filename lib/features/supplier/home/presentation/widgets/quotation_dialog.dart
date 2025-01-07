@@ -135,6 +135,15 @@ showQuotationDialog(BuildContext context, QuotationCubit cubit) {
                     svg: AssetsConstants.sum,
                     icon: Icons.money,
                   ),
+                  const VerticalSpacer(space: 10), 
+                   TextWithTextField(
+                    text: "Deliver Date ",
+                    label: "Deliver date from this offer date ",
+                    conroller:
+                        context.read<QuotationCubit>().deliverDateController,
+                    svg: AssetsConstants.editIcon,
+                    icon: Icons.date_range,
+                  ),
                   const VerticalSpacer(space: 10),
                   const QuotationTermsAndCondition(),
                   const VerticalSpacer(space: 8),

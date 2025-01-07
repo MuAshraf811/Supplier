@@ -22,7 +22,6 @@ class DetailedCategoryItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<HomePageCubit>().initGroupVal(categoryItemIndex);
     return Scaffold( 
-      resizeToAvoidBottomInset: false,
       backgroundColor: ColorConsatnts.white,
       body: SafeArea(
         child: Padding(

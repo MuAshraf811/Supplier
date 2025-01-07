@@ -54,7 +54,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                   }
                 },
                 builder: (context, state) {
-                  if ( state is UploadingUserState) {
+                  if ( state is UploadingUserState || state is UploadingTradeLisenceState) {
                     return Container( 
                       margin: EdgeInsets.only(right: 24.w), 
                       width: 20.w, 

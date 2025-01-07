@@ -13,7 +13,9 @@ class RouteConstants {
   static const otherDetailedView = "/OtherDetailedView";
   static const detailedPackagingView= "/DetailedPackagingView";
   static const supplierAccountView = "/SupplierAccountView";
-  static const onBoardingView = "/";
+  static const firstView = "/";  
+    static const onBoardingView = "/onBordingView"; 
+
   static const termsAndConditionsView = "/TermsAndConditionsView";
   static const supplierHomeView = "/SupplierHomeView";
   static const supplierFilterView = "/SupplierFilterView";
