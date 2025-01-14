@@ -76,7 +76,8 @@ class SupplierAuthCubit extends Cubit<SupplierAuthState> {
      final  supllierId= await FirebaseFirestore.instance
           .collection("Suppliers")
           .add(supplierData.toMap()); 
-        await  SharedPreferencesManager.storeStringValue(key: StorageConstants.userDataId, value: supllierId.id);
+        await  SharedPreferencesManager.storeStringValue(
+            key: StorageConstants.userDataId, value: supllierId.id);
       emit(UploadingUserStateSuccessState());
     } catch (e) {  
       log(e.toString());
