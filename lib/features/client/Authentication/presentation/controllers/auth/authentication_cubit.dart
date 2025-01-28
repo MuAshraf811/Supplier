@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:supplier/core/cubit/app_config_cubit.dart';
+import 'package:supplier/core/utils/constants/app_const.dart';
 import 'package:supplier/core/utils/constants/storage_const.dart';
 import 'package:supplier/core/utils/storage/shared_preferences.dart';
 import 'package:supplier/features/client/Authentication/model/user_data_model.dart';
@@ -26,73 +28,104 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   TextEditingController passwordLogInController = TextEditingController();
   TextEditingController emailRegisterController = TextEditingController();
   TextEditingController passwordRegisterController = TextEditingController();
-  TextEditingController passwordConfirmationRegisterController =
-      TextEditingController();
+  TextEditingController passwordConfirmationRegisterController = TextEditingController();
   TextEditingController firstNameRegisterController = TextEditingController();
-  TextEditingController mobileNumberRegisterController =
-      TextEditingController();
+  TextEditingController mobileNumberRegisterController =   TextEditingController();
   TextEditingController lastNameRegisterController = TextEditingController();
-  final registerFormKey = GlobalKey<FormState>();
-  final logInFormKey = GlobalKey<FormState>();
-  final forgetPasswordViewFormKey = GlobalKey<FormState>();
-  final profileFormKey = GlobalKey<FormState>();
-  late UserDataModel userPersonalData;
+
+
+  // final registerFormKey = GlobalKey<FormState>();
+  // final logInFormKey = GlobalKey<FormState>();
+  // final forgetPasswordViewFormKey = GlobalKey<FormState>();
+  // final profileFormKey = GlobalKey<FormState>();
+  static late UserDataModel userPersonalData;
   String citySelection = "Dubai";
   String profileCitySelection = "Dubai";
-  bool   isTextSecure = true;
- void addUserToDataBaseWithOtherMethods() async {
+  bool isTextSecure = true;
+
+
+
+  Future<void>  addUserToDataBase() async {
     try {
       emit(AddingUserDataState());
+      final user = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+        email: emailRegisterController.text,
+        password: passwordRegisterController.text,);
+      try {
+        await SharedPreferencesManager.storeStringValue(
+            key: StorageConstants.userId, value: user.user!.uid );
+      } on Exception catch (e) {
+        log(e.toString());
+        AddingUserDataErrorState(error: e.toString());
+      }
+      final fcmToken = SharedPreferencesManager.getStringValue(key: StorageConstants.fcmToken);
+
       final instance = FirebaseFirestore.instance.collection("Users");
       final obj = await instance.add({
         "first_name": firstNameRegisterController.text,
         "last_name": lastNameRegisterController.text,
-        "email": "Registered With Third Party Account",
-        "password": "Registered With Third Party Account",
+        "email": emailRegisterController.text,
+        "password": passwordRegisterController.text,
         "role": "client",
         "mobile_number": mobileNumberRegisterController.text,
         "city": citySelection,
+        "uuid": user.user!.uid,
+        "fcmToken": fcmToken,
+        "notificationHistory":""
       });
-      log("******* Adding User Function *******");
+      log("******* addUserToDataBase *******");
       log(obj.path);
       SharedPreferencesManager.storeStringValue(
-          key: StorageConstants.userDataId, value: obj.id);
+          key: StorageConstants.userDataIdKey, value: obj.id);
       emit(AddingUserDataSuccessState());
     } catch (e) {
-      log("******** Adding User Function ********");
+      log("******** addUserToDataBase ********");
       log(e.toString());
       AddingUserDataErrorState(error: e.toString());
     }
   }
-  logInwithApple() async {
+
+  void addUserToDataBaseWithOtherMethods() async {
     try {
-      emit(LoadingLogInWithAppleState());
-      final provider = AppleAuthProvider();
+      emit(AddingUserDataState());
+      // final user = await FirebaseAuth.instance
+      //     .signInWithEmailAndPassword(
+      //   email: emailRegisterController.text,
+      //   password: passwordRegisterController.text,);
+      String currentUUID = SharedPreferencesManager.getStringValue(
+          key: StorageConstants.userId,);
 
-      final UserCredential res =
-          await FirebaseAuth.instance.signInWithProvider(provider);  
-          log(res.additionalUserInfo!.isNewUser.toString()); 
-          log(res.additionalUserInfo!.toString());
-          if (res.additionalUserInfo?.isNewUser==true){  
-            emit(NewUserStata());
+      final fcmToken = SharedPreferencesManager.getStringValue(key: StorageConstants.fcmToken);
 
-          }
-      if (res.credential == null) {
-        emit(ErrorLogInWithAppleState(
-            error: "Something went wrong , Please try again later"));
-      } else if(res.additionalUserInfo?.isNewUser==false){
-      emit(SuccessLogInWithAppleState());}
+      final instance =
+        FirebaseFirestore.instance.collection("Users");
+      final obj = await instance.add({
+        "first_name": firstNameRegisterController.text,
+        "last_name": lastNameRegisterController.text,
+        "email": emailRegisterController.text,
+        "password": "Registered With Third Party Account",
+        "role": "client",
+        "mobile_number": mobileNumberRegisterController.text,
+        "city": citySelection,
+        "uuid": currentUUID,
+        "fcmToken": fcmToken,
+      });
+      log("******* addUserToDataBaseWithOtherMethods Success *******");
+      log(obj.path);
+      SharedPreferencesManager.storeStringValue(
+          key: StorageConstants.userDataIdKey, value: obj.id);
+      emit(AddingUserDataSuccessState());
     } catch (e) {
+      log("******** addUserToDataBaseWithOtherMethods Failure ********");
       log(e.toString());
-      emit(ErrorLogInWithAppleState(error: e.toString()));
+      AddingUserDataErrorState(error: e.toString());
     }
   }
 
   void changePassword() async {}
   void deleteAccount() async {
-    try {
-      
-    } catch (e) {
+    try {} catch (e) {
       log(e.toString());
     }
   }
@@ -114,10 +147,11 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   void updateUserInfo() async {
     try {
       emit(UpdatingUserDataState());
-      final instance = FirebaseFirestore.instance.collection("Users");
+      final instance =
+        FirebaseFirestore.instance.collection("Users");
       await instance
           .doc(SharedPreferencesManager.getStringValue(
-              key: StorageConstants.userDataId))
+              key: StorageConstants.userDataIdKey))
           .update(
         {
           "first_name": firstNameProfileController.text,
@@ -134,39 +168,23 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
-  void addUserToDataBase() async {
-    try {
-      emit(AddingUserDataState());
-      final instance = FirebaseFirestore.instance.collection("Users");
-      final obj = await instance.add({
-        "first_name": firstNameRegisterController.text,
-        "last_name": lastNameRegisterController.text,
-        "email": emailRegisterController.text,
-        "password": passwordRegisterController.text,
-        "role": "client",
-        "mobile_number": mobileNumberRegisterController.text,
-        "city": citySelection,
-      });
-      log("******* Adding User Function *******");
-      log(obj.path);
-      SharedPreferencesManager.storeStringValue(
-          key: StorageConstants.userDataId, value: obj.id);
-      emit(AddingUserDataSuccessState());
-    } catch (e) {
-      log("******** Adding User Function ********");
-      log(e.toString());
-      AddingUserDataErrorState(error: e.toString());
-    }
-  }
-
-  void getUserData() async {
+  Future<void> getUserData() async {
     try {
       emit(FetchingUserDataState());
-      final instance = FirebaseFirestore.instance.collection("Users");
-      DocumentSnapshot<Map<String, dynamic>> res = await instance
-          .doc(SharedPreferencesManager.getStringValue(
-              key: StorageConstants.userDataId))
-          .get();
+      final userDataId = SharedPreferencesManager.getStringValue(
+          key: StorageConstants.userDataIdKey);
+      if (userDataId.isEmpty) {
+        log(userDataId);
+        log('User id not cached');
+        emit(FetchUserDataErrorState(error: "User Data fetch failed"));
+        return;
+      }
+
+      String collectionName = AppConfigCubit.isSupplier ? 'Suppliers' : 'Users';
+      final instance =
+      FirebaseFirestore.instance.collection(collectionName);
+      DocumentSnapshot<Map<String, dynamic>> res =
+          await instance.doc(userDataId).get();
       if (res.data() != null) {
         userPersonalData = UserDataModel.fromJson(res.data()!);
         emit(FetchingUserDataSuccessState());
@@ -176,16 +194,18 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         lastNameProfileController.text = userPersonalData.lastName;
         mobileProfileController.text = userPersonalData.mobileNumber;
       } else {
-        emit(FetchUserDataErrorState(error: "Cann't fetch your data"));
+        log(res.data().toString());
+        emit(FetchUserDataErrorState(error: "Couldn't fetch your data"));
       }
-    } catch (e) {
+    } catch (e,stack) {
       log("---------------");
       log(e.toString());
+      print(stack);
       emit(FetchUserDataErrorState(error: e.toString()));
     }
   }
 
-  registerWithEmail() async {
+  Future<void> registerWithEmail() async {
     try {
       emit(LoadingAuthenticationWithEmailState());
       final response = await FirebaseAuth.instance
@@ -200,22 +220,59 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
-  logInWithEmail() async {
+  Future<void> logInWithEmail() async {
+    // normal login
     try {
       emit(LoadingLogInWithEmailState());
-      final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final response = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
           email: emailLogInController.text,
           password: passwordLogInController.text);
+
       await SharedPreferencesManager.storeStringValue(
           key: StorageConstants.userId, value: response.user?.uid ?? "");
+      print('current logged user id..not data id?');
+      print(response.user?.uid);
 
+      String collectionName = AppConfigCubit.isSupplier ? 'Suppliers' : 'Users';
+
+      final instance =
+      FirebaseFirestore.instance.collection(collectionName);
+
+      final  res = await instance
+          .where("uuid",isEqualTo: response.user?.uid).get();
+
+      userPersonalData = UserDataModel.fromJson(res.docs.first.data());
+      profileCitySelection == userPersonalData.city;
+      emailProfileController.text = userPersonalData.email;
+      firstNameProfileController.text = userPersonalData.firstName;
+      lastNameProfileController.text = userPersonalData.lastName;
+      mobileProfileController.text = userPersonalData.mobileNumber;
+
+
+      SharedPreferencesManager.storeStringValue(
+          key: StorageConstants.userId,
+          value: response.user!.uid);
+
+      SharedPreferencesManager.storeStringValue(
+          key: StorageConstants.userDataIdKey,
+          value: res.docs.first.id);
+
+      final fcmToken = SharedPreferencesManager.getStringValue(key: StorageConstants.fcmToken);
+      instance.doc(res.docs.first.id).update(
+        {
+          "fcmToken": fcmToken,
+        },
+      );
+      print('current logged user data id');
+      print(res.docs.first.id);
       emit(SuccessLogInWithEmailState());
     } on FirebaseAuthException catch (e) {
       emit(ErrorLogInWithEmailState(error: e.message.toString()));
     }
   }
 
-  registerWithgoogle() async {
+  registerWithGoogle() async {
     try {
       emit(LoadingLogInWithGoogleState());
 
@@ -233,13 +290,109 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         idToken: googleAuth.idToken,
       );
 
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      emit(SuccessLogInWithGoogleState());
+      final userCred = await FirebaseAuth.instance.signInWithCredential(credential);
+
+      String collectionName = AppConfigCubit.isSupplier ? 'Suppliers' : 'Users';
+      final res = await FirebaseFirestore.instance
+          .collection(collectionName)
+      .where('email', isEqualTo: googleUser.email).get();
+
+      if(res.docs.isNotEmpty){
+
+        SharedPreferencesManager.storeStringValue(
+            key: StorageConstants.userId,
+            value: res.docs.first['uuid']);
+
+        SharedPreferencesManager.storeStringValue(
+            key: StorageConstants.userDataIdKey,
+            value: res.docs.first.id);
+
+        emit(SuccessLogInWithGoogleState());
+      }
+      else{
+        SharedPreferencesManager.storeStringValue(
+            key: StorageConstants.userId, value: userCred.user!.uid);
+        emailRegisterController.text = googleUser.email;
+
+        emit(NewUserState());
+      }
     } on FirebaseAuthException catch (e) {
       emit(ErrorLogInWithGoogleState(error: "Firebase Error: ${e.message}"));
     } on Exception catch (e) {
       emit(ErrorLogInWithGoogleState(
           error: "An error occurred: ${e.toString()}"));
     }
+  }
+
+  logInWithApple() async {
+    try {
+      emit(LoadingLogInWithAppleState());
+      final provider = AppleAuthProvider()
+        ..addScope('email')
+        ..addScope('fullName')
+        ..setCustomParameters({
+          'prompt': 'consent', 
+          'access_type': 'offline'
+        });
+
+      final UserCredential res = await FirebaseAuth.instance
+                          .signInWithProvider(provider);
+      
+      
+      final additionalInfo = res.additionalUserInfo?.profile;
+      if (additionalInfo != null) {
+        String? firstName = additionalInfo['given_name'];
+        String? lastName = additionalInfo['family_name'];
+        String? email = additionalInfo['email'];
+      
+        firstNameRegisterController.text = firstName??"N/A";
+        lastNameRegisterController.text = lastName??"N/A";
+        emailRegisterController.text = email??"N/A";
+      }
+      
+      String collectionName = AppConfigCubit.isSupplier ? 'Suppliers' : 'Users';
+      final userRes = await FirebaseFirestore.instance
+          .collection(collectionName)
+          .where('uuid', isEqualTo: res.user!.uid).get();
+
+      if (userRes.docs.isEmpty) {
+        SharedPreferencesManager.storeStringValue(
+            key: StorageConstants.userId, value: res.user!.uid);
+        emit(NewUserState());
+      }
+      if (res.credential == null) {
+        emit(ErrorLogInWithAppleState(
+            error: "Something went wrong , Please try again later"));
+      } else if (userRes.docs.isNotEmpty) {
+        SharedPreferencesManager.storeStringValue(
+            key: StorageConstants.userId,
+            value: res.user!.uid);
+
+        SharedPreferencesManager.storeStringValue(
+            key: StorageConstants.userDataIdKey,
+            value: userRes.docs.first.id);
+
+        emit(SuccessLogInWithAppleState());
+      }
+    } catch (e) {
+      log(e.toString());
+      emit(ErrorLogInWithAppleState(error: e.toString()));
+    }
+  }
+
+  void clearControllers() {
+    emailProfileController.clear();
+    firstNameProfileController.clear();
+    lastNameProfileController.clear();
+    mobileProfileController.clear();
+    emailResetController.clear();
+    emailLogInController.clear();
+    passwordLogInController.clear();
+    emailRegisterController.clear();
+    passwordRegisterController.clear();
+    passwordConfirmationRegisterController.clear();
+    firstNameRegisterController.clear();
+    mobileNumberRegisterController.clear();
+    lastNameRegisterController.clear();
   }
 }

@@ -34,7 +34,7 @@ showQuotationDialog(BuildContext context, QuotationCubit cubit) {
         body: BlocProvider<OrdersCubit>(
           create: (context) => OrdersCubit(),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 16.h),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             decoration: BoxDecoration(
               color: ColorConsatnts.white,
               borderRadius: BorderRadius.circular(
@@ -51,7 +51,7 @@ showQuotationDialog(BuildContext context, QuotationCubit cubit) {
                       Text(
                         "Quotation ",
                         style: applySemiBoldStyle(
-                            fontSize: 16, fontColor: ColorConsatnts.red),
+                            fontSize: 14, fontColor: ColorConsatnts.red),
                       ),
                       InkWell(
                           onTap: () {
@@ -74,7 +74,7 @@ showQuotationDialog(BuildContext context, QuotationCubit cubit) {
                   Text(
                     "Please Fill This Fields",
                     style: applyMediumStyle(
-                        fontSize: 16, fontColor: ColorConsatnts.black),
+                        fontSize: 14, fontColor: ColorConsatnts.black),
                   ),
                   const VerticalSpacer(space: 12),
                   AppTextField(
@@ -86,17 +86,19 @@ showQuotationDialog(BuildContext context, QuotationCubit cubit) {
                         .quotationDescriptionController,
                     maxLines: 8,
                     suffixColor: ColorConsatnts.grey,
-                    suffixSize: 22,
+                    suffixSize: 16,
                   ),
                   const VerticalSpacer(space: 10),
-                  TextWithTextField(
-                    text: "Quantity",
-                    label: "Quantity",
-                    conroller: context
-                        .read<QuotationCubit>()
-                        .quotationQuantityController,
-                    svg: AssetsConstants.count,
-                    icon: Icons.attach_money_outlined,
+                  FittedBox(
+                    child: TextWithTextField(
+                      text: "Quantity",
+                      label: "Quantity",
+                      conroller: context
+                          .read<QuotationCubit>()
+                          .quotationQuantityController,
+                      svg: AssetsConstants.count,
+                      icon: Icons.attach_money_outlined,
+                    ),
                   ),
                   const VerticalSpacer(space: 10),
                   TextWithTextField(
@@ -170,10 +172,8 @@ showQuotationDialog(BuildContext context, QuotationCubit cubit) {
                     },
                     builder: (context, state) {
                       if (state is AddingQuotationState) {
-                        return SizedBox(
-                          width: 32.w,
-                          height: 32.w,
-                          child: const CircularProgressIndicator.adaptive(
+                        return const Center(
+                          child: CircularProgressIndicator(
                             backgroundColor: ColorConsatnts.primary,
                           ),
                         );
@@ -187,7 +187,7 @@ showQuotationDialog(BuildContext context, QuotationCubit cubit) {
                               .currentState!
                               .validate()) {
                             context.read<QuotationCubit>().addquotationOffer(
-                                  supplierId: SharedPreferencesManager.getStringValue(key: StorageConstants.userDataId),
+                                  supplierId: SharedPreferencesManager.getStringValue(key: StorageConstants.userDataIdKey),
                                   supplierName: "Muhammed Ashraf",
                                 );
                           }

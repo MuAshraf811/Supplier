@@ -42,7 +42,7 @@ StreamSubscription? messageSubscription;
     return FirebaseFirestore.instance
         .collection("Chat")
         .doc(SharedPreferencesManager.getStringValue(
-            key: StorageConstants.userDataId))
+            key: StorageConstants.userDataIdKey))
         .collection("messages")
         .orderBy('time', descending: true)
         .snapshots()
@@ -75,7 +75,7 @@ StreamSubscription? messageSubscription;
       final res = await FirebaseFirestore.instance
           .collection("Chat")
           .doc(SharedPreferencesManager.getStringValue(
-              key: StorageConstants.userDataId))
+              key: StorageConstants.userDataIdKey))
           .collection("messages")
           .orderBy("time", descending: false)
           .get();
@@ -93,19 +93,19 @@ StreamSubscription? messageSubscription;
     }
   }
 
-  void sendAMessage() async {
+  void sendAMessage({String? customMsg}) async {
     try {
       MessageprodModel message = MessageprodModel(
-        message: messageController.text,
+        message: customMsg?? messageController.text,
         time:
             "${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}:${DateTime.now().second.toString().padLeft(2, '0')}",
         userId: SharedPreferencesManager.getStringValue(
-            key: StorageConstants.userDataId),
+            key: StorageConstants.userDataIdKey),
       );
       await FirebaseFirestore.instance
           .collection("Chat")
           .doc(SharedPreferencesManager.getStringValue(
-              key: StorageConstants.userDataId))
+              key: StorageConstants.userDataIdKey))
           .collection("messages")
           .add(
             message.toMap(),

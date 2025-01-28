@@ -37,24 +37,25 @@ class SupplierOrderItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            
               Text(
               "Client : ",
               style: applyBoldStyle(
-                  fontSize: 16, fontColor: ColorConsatnts.primary),
+                  fontSize: 14, fontColor: ColorConsatnts.primary),
             ),
               const SvgHandler(
                 imagePath: AssetsConstants.anonymousPerson,
                 color: ColorConsatnts.grey,
                 height: 26,
-                width: 26,
+                width: 24,
               ),
-            
+
             const HorizontalSpacer(space: 3),
             Text(
               clientId,
               style: applyMediumStyle(
-                  fontSize: 16, fontColor: ColorConsatnts.lightBlack),
+                  fontSize: 14, fontColor: ColorConsatnts.lightBlack).copyWith(
+                overflow: TextOverflow.ellipsis
+              ),
             )
           ],
         ),
@@ -77,46 +78,46 @@ class SupplierOrderItem extends StatelessWidget {
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(10.r))),
                 child: Text(
-                  index.toString(), 
-                   maxLines: 2, 
+                  index.toString(),
+                   maxLines: 2,
                   overflow: TextOverflow.clip,
                   style: applyBoldStyle(
                     fontSize: 14,
                     fontColor: ColorConsatnts.white,
                   ),
                 ),
-              ), 
+              ),
                 Padding(
                 padding: EdgeInsets.only(left: 4.w, top: 6.h),
                 child: Text(
-                  "Order Id : $orderId", 
-                  maxLines: 2, 
+                  "Order Id : $orderId",
+                  maxLines: 2,
                   overflow: TextOverflow.clip,
                   style: applyBoldStyle(
                     fontSize: 14,
                     fontColor: ColorConsatnts.black,
                   ),
                 ),
-              ), 
+              ),
               const VerticalSpacer(space: 4),
                 Padding(
                 padding: EdgeInsets.only(left: 8.w),
                 child: Text(
                   "Category : $category",
-                   maxLines: 2, 
+                   maxLines: 2,
                   overflow: TextOverflow.clip,
                   style: applyBoldStyle(
                     fontSize: 14,
                     fontColor: ColorConsatnts.red,
                   ),
                 ),
-              ), 
+              ),
               const VerticalSpacer(space: 2),
               Padding(
                 padding: EdgeInsets.only(left: 8.w),
                 child: Text(
-                  "Type : $orderName", 
-                   maxLines: 2, 
+                  "Type : $orderName",
+                   maxLines: 2,
                   overflow: TextOverflow.clip,
                   style: applyBoldStyle(
                     fontSize: 14,

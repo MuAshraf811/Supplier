@@ -9,6 +9,9 @@ import 'package:supplier/features/onboarding&splash/model/onboaeding_model.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../core/cubit/app_config_cubit.dart';
+import '../../core/utils/constants/app_const.dart';
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});
 
@@ -54,6 +57,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       // SharedPreferencesManager.storeBoolValue(
                       //                         key: StorageConstants.isFirstTime, value: false);
                       //                          }
+                      AppConfigCubit.isBoarded = true;
+                      SharedPreferencesManager.storeBoolValue(
+                          key: StorageConstants.isBoardedKey,
+                          value: true
+                      );
 
                       Navigator.pushReplacementNamed(
                           context, RouteConstants.userTypeView);
@@ -135,8 +143,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     if (_onBoardingController.page == 2) {
                       rebuild(
                         () {
+                          AppConfigCubit.isBoarded = true;
                           SharedPreferencesManager.storeBoolValue(
-                              key: StorageConstants.isFirstTime, value: false);
+                              key: StorageConstants.isBoardedKey, value: true);
                           Navigator.pushReplacementNamed(
                               context, RouteConstants.userTypeView);
                         },

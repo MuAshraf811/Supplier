@@ -1,5 +1,12 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supplier/core/cubit/app_config_cubit.dart';
+import 'package:supplier/core/utils/app_global.dart';
 import 'package:supplier/core/utils/configurations.dart';
+import 'core/bloc_observer/bloc_observer.dart';
+import 'core/utils/constants/storage_const.dart';
 import 'firebase_options.dart';
 import 'package:supplier/app.dart';
 import 'package:supplier/core/utils/constants/app_const.dart';
@@ -11,10 +18,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "supa_keys.env");
-/// SUPA_BASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjc2RrYnVnd3NwcHltcWZvenRtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTk1NjUwMCwiZXhwIjoyMDUxNTMyNTAwfQ.333LJShDsspzgq9epORxxP2CbLIyXElorPbhz4P55-c
+  Bloc.observer = MyBlocObserver();
+
   SharedPreferencesManager.init(); 
   ServiceLocator.setObjects();  
    await Supabase.initialize(
@@ -25,11 +35,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
 );
    FirebaseMessaging.onBackgroundMessage(_handleBackGroundFirebaseMessage); 
-  await Configurations.initializeFCM();
-   FlutterError.onError = (FlutterErrorDetails details){ 
-    FlutterError.dumpErrorToConsole(details); 
-    runApp(CustomErrorWidget(errorMessage: details));
-   };
+  await NotificationsManager().initialize();
+
+  AppConfigCubit.currentUserDataId = SharedPreferencesManager.getStringValue(key: StorageConstants.userDataIdKey);
+  AppConfigCubit.currentUserId = SharedPreferencesManager.getStringValue(key: StorageConstants.userDataIdKey);
+  AppConfigCubit.isLogged = SharedPreferencesManager.getBoolValue(key: StorageConstants.isUserLoggedKey)??false;
+  AppConfigCubit.isSupplier = SharedPreferencesManager.getBoolValue(key: StorageConstants.isSupplierKey)??false;
+  AppConfigCubit.isBoarded = SharedPreferencesManager.getBoolValue(key: StorageConstants.isBoardedKey)??false;
+  AppConfigCubit.isEnglish = SharedPreferencesManager.getBoolValue(key: StorageConstants.isEnglishKey)??true;
+
+  // runApp(DevicePreview(builder: (context) => const EPrinter(),));
   runApp(const EPrinter());
 }
 
@@ -37,3 +52,5 @@ void main() async {
 Future<void> _handleBackGroundFirebaseMessage(RemoteMessage message)async{ 
   await Firebase.initializeApp();
 }
+
+

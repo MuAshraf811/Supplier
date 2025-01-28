@@ -1,3 +1,5 @@
+import 'package:supplier/app.dart';
+import 'package:supplier/core/cubit/app_config_cubit.dart';
 import 'package:supplier/core/utils/constants/color_consatnts.dart';
 import 'package:supplier/core/utils/constants/route_constants.dart';
 import 'package:supplier/core/utils/styles/text_styles.dart';
@@ -12,6 +14,7 @@ class UserTypeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: ColorConsatnts.white,
       body: SafeArea(
@@ -23,7 +26,7 @@ class UserTypeView extends StatelessWidget {
                 offset: Offset(0, -72.h),
                 child: const LogoAnimation(),
               ),
-              const VerticalSpacer(space: 30),
+              const VerticalSpacer(space: 10),
               Text(
                 "REGISTRATION ROLE",
                 textAlign: TextAlign.center,
@@ -38,7 +41,8 @@ class UserTypeView extends StatelessWidget {
                 children: [
                   RoleContainer(
                     onTap: () { 
-                      
+
+                      AppConfigCubit.isSupplier = false;
                       Navigator.popAndPushNamed(
                           context, RouteConstants.logInView); 
                     },
@@ -48,8 +52,9 @@ class UserTypeView extends StatelessWidget {
                   ),
                   const HorizontalSpacer(space: 18),
                   RoleContainer(
-                    onTap: () { 
-                     
+                    onTap: () {
+                      AppConfigCubit.isSupplier = true;
+
                       Navigator.popAndPushNamed(
                           context, RouteConstants.supplierLogInView);
                     },
