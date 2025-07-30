@@ -42,7 +42,11 @@ StreamSubscription? messageSubscription;
     return FirebaseFirestore.instance
         .collection("Chat")
         .doc(SharedPreferencesManager.getStringValue(
+<<<<<<< HEAD
             key: StorageConstants.userDataIdKey))
+=======
+            key: StorageConstants.userDataId))
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
         .collection("messages")
         .orderBy('time', descending: true)
         .snapshots()
@@ -75,7 +79,11 @@ StreamSubscription? messageSubscription;
       final res = await FirebaseFirestore.instance
           .collection("Chat")
           .doc(SharedPreferencesManager.getStringValue(
+<<<<<<< HEAD
               key: StorageConstants.userDataIdKey))
+=======
+              key: StorageConstants.userDataId))
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
           .collection("messages")
           .orderBy("time", descending: false)
           .get();
@@ -93,6 +101,7 @@ StreamSubscription? messageSubscription;
     }
   }
 
+<<<<<<< HEAD
   void sendAMessage({String? customMsg}) async {
     try {
       MessageprodModel message = MessageprodModel(
@@ -101,11 +110,25 @@ StreamSubscription? messageSubscription;
             "${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}:${DateTime.now().second.toString().padLeft(2, '0')}",
         userId: SharedPreferencesManager.getStringValue(
             key: StorageConstants.userDataIdKey),
+=======
+  void sendAMessage() async {
+    try {
+      MessageprodModel message = MessageprodModel(
+        message: messageController.text,
+        time:
+            "${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}:${DateTime.now().second.toString().padLeft(2, '0')}",
+        userId: SharedPreferencesManager.getStringValue(
+            key: StorageConstants.userDataId),
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
       );
       await FirebaseFirestore.instance
           .collection("Chat")
           .doc(SharedPreferencesManager.getStringValue(
+<<<<<<< HEAD
               key: StorageConstants.userDataIdKey))
+=======
+              key: StorageConstants.userDataId))
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
           .collection("messages")
           .add(
             message.toMap(),

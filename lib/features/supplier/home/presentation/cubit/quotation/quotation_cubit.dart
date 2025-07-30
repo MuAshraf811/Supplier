@@ -56,6 +56,7 @@ fetchOffers()async{
                   .getStringValue(key: StorageConstants.userDataIdKey)).get();
 
            final userData =    SupplierUserModel.fromJson(user.data() as Map<String , dynamic>);
+<<<<<<< HEAD
           log(userData.toString());
           await instance.add(
           {
@@ -73,6 +74,25 @@ fetchOffers()async{
             "mobile": userData.mobile,
             "city": userData.mobile,
             "deliverDate": deliverDateController.text
+=======
+log(userData.toString());
+    await instance.add(
+    { 
+      "quotationDescription" : quotationDescriptionController.text, 
+      "quantity" : quotationQuantityController.text, 
+      "rate" : quotationRateController.text, 
+      "amount":quotationAmountController.text, 
+      "vat" : quotationVatController.text, 
+      "total": quotationTotalController.text, 
+      "orderNumber" : orderNumber, 
+      "quotationDate": AppConst.getDate(), 
+      "supplierId": supplierId, 
+      "supplierName":userData.companyName , 
+      "email": userData.email, 
+      "mobile": userData.mobile, 
+      "city": userData.mobile, 
+      "deliverDate": deliverDateController.text
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
 
           }
          );

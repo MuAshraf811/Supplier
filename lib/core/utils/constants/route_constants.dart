@@ -16,14 +16,23 @@ class RouteConstants {
   static const detailedPackagingView= "/DetailedPackagingView";
   static const supplierAccountView = "/SupplierAccountView";
   static const firstView = "/";  
+<<<<<<< HEAD
   static const onBoardingView = "/onBordingView";
+=======
+    static const onBoardingView = "/onBordingView"; 
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
 
   static const termsAndConditionsView = "/TermsAndConditionsView";
   static const supplierHomeView = "/SupplierHomeView";
   static const supplierFilterView = "/SupplierFilterView";
   static const supplierRegistererView = "/SupplierRegisterView"; 
   static const detailedItemPackagingView = "/DetailedItemPackaging"; 
+<<<<<<< HEAD
   static const supplierLogInView = "/SupplierLogInView";
   static const completeLoginView = "/CompleteLoginView";
   static const suppCompleteLoginView = "/suppCompleteLoginView";
+=======
+  static const supplierLogInView = "/SupplierLogInView"; 
+  static const completeLoginView = "/CompleteLoginView";
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
 }

@@ -93,7 +93,11 @@ class ChatView extends StatelessWidget {
                         return MessageItem(
                           isSender: message.userId ==
                               SharedPreferencesManager.getStringValue(
+<<<<<<< HEAD
                                   key: StorageConstants.userDataIdKey),
+=======
+                                  key: StorageConstants.userDataId),
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
                           message: message.message,
                           time: message.time,
                         );

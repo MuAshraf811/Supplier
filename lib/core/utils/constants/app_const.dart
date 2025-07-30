@@ -10,7 +10,10 @@ class AppConst {
 
 static const supaBaseStorageBacketName = "trade_license";
 static const supabaseUrl = "https://qcsdkbugwsppymqfoztm.supabase.co";
+<<<<<<< HEAD
 static const websiteUrl = 'https://www.supplieruae.com';
+=======
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
 
 static const socialMediaLinks =[ 
   "https://www.facebook.com/supplieruae1/", 

@@ -38,7 +38,11 @@ final class ErrorLogInWithGoogleState extends AuthenticationState {
 } 
 
 final class LoadingLogInWithAppleState extends AuthenticationState {} 
+<<<<<<< HEAD
 final class NewUserState extends AuthenticationState {}
+=======
+final class NewUserStata extends AuthenticationState {}
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
 
 
 final class SuccessLogInWithAppleState extends AuthenticationState {}

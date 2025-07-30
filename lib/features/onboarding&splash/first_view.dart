@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
@@ -49,3 +50,51 @@ class _FirstViewState extends State<FirstView> {
     );
   }
 }
+=======
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
+import 'package:supplier/core/utils/constants/assets_constants.dart';
+import 'package:supplier/core/utils/constants/color_consatnts.dart';
+import 'package:supplier/core/utils/constants/route_constants.dart';
+
+class FirstView extends StatefulWidget {
+  const FirstView({super.key});
+
+  @override
+  State<FirstView> createState() => _FirstViewState();
+}
+
+class _FirstViewState extends State<FirstView> { 
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      const Duration(seconds: 7),
+      () {
+        Navigator.pushNamed(context, RouteConstants.onBoardingView);
+      },
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: ColorConsatnts.white,
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: ColorConsatnts.white,
+          child: LottieBuilder.asset(
+            "assets/jsons/Main Scene.json", 
+            height: 400.h, 
+            width: 300.w, 
+            repeat: false, 
+
+          ),
+        ),
+      ),
+    );
+  }
+}
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9

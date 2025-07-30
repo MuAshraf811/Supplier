@@ -239,6 +239,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+<<<<<<< HEAD
 		<key>Toast-Toast.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -249,6 +250,8 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+=======
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
 		<key>abseil-xcprivacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -319,6 +322,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+<<<<<<< HEAD
 		<key>fluttertoast-fluttertoast_privacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -329,6 +333,8 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+=======
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
 		<key>gRPC-C++-gRPCCertificates-Cpp.xcscheme</key>
 		<dict>
 			<key>isShown</key>

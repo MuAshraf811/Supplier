@@ -200,12 +200,18 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RecaptchaInterop/RecaptchaInterop.framework"
+<<<<<<< HEAD
   install_framework "${BUILT_PRODUCTS_DIR}/Toast/Toast.framework"
+=======
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/app_links/app_links.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_native_splash/flutter_native_splash.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_pdfview/flutter_pdfview.framework"
+<<<<<<< HEAD
   install_framework "${BUILT_PRODUCTS_DIR}/fluttertoast/fluttertoast.framework"
+=======
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/image_picker_ios/image_picker_ios.framework"
@@ -242,12 +248,18 @@ if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RecaptchaInterop/RecaptchaInterop.framework"
+<<<<<<< HEAD
   install_framework "${BUILT_PRODUCTS_DIR}/Toast/Toast.framework"
+=======
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/app_links/app_links.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_native_splash/flutter_native_splash.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_pdfview/flutter_pdfview.framework"
+<<<<<<< HEAD
   install_framework "${BUILT_PRODUCTS_DIR}/fluttertoast/fluttertoast.framework"
+=======
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/image_picker_ios/image_picker_ios.framework"
@@ -284,12 +296,18 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RecaptchaInterop/RecaptchaInterop.framework"
+<<<<<<< HEAD
   install_framework "${BUILT_PRODUCTS_DIR}/Toast/Toast.framework"
+=======
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/app_links/app_links.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_native_splash/flutter_native_splash.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_pdfview/flutter_pdfview.framework"
+<<<<<<< HEAD
   install_framework "${BUILT_PRODUCTS_DIR}/fluttertoast/fluttertoast.framework"
+=======
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/image_picker_ios/image_picker_ios.framework"

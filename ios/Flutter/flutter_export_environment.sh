@@ -1,12 +1,21 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/Users/muhammed/development/flutter"
+<<<<<<< HEAD
 export "FLUTTER_APPLICATION_PATH=/Users/muhammed/Desktop/windows copy/Supplier"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.5"
 export "FLUTTER_BUILD_NUMBER=6"
+=======
+export "FLUTTER_APPLICATION_PATH=/Users/muhammed/Desktop/E_printer"
+export "COCOAPODS_PARALLEL_CODE_SIGN=true"
+export "FLUTTER_TARGET=lib/main.dart"
+export "FLUTTER_BUILD_DIR=build"
+export "FLUTTER_BUILD_NAME=1.0.0"
+export "FLUTTER_BUILD_NUMBER=1"
+>>>>>>> 7a8a466ee3b535c71d3b78387d13ea7dd5a7bcd9
 export "DART_OBFUSCATION=false"
 export "TRACK_WIDGET_CREATION=true"
 export "TREE_SHAKE_ICONS=false"
